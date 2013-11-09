@@ -140,7 +140,7 @@ public class ResidenteDAO extends BaseDAO {
       
       }*/
        
-       public Collection<Residente> buscarporcorreo(String correo) throws DAOExcepcion{
+       /*public Collection<Residente> buscarporcorreo(String correo) throws DAOExcepcion{
            String query = "SELECT idresidente,nombre,apellidos,email FROM residente WHERE email=?";
            Collection<Residente> lista = new ArrayList<Residente>();
            Connection con = null;
@@ -166,7 +166,7 @@ public class ResidenteDAO extends BaseDAO {
                this.cerrarConexion(con);
            }
            return lista;
-       }
+       }*/
        
        public Collection<Residente> listar() throws DAOExcepcion{
            Collection<Residente> c = new ArrayList<Residente>();
