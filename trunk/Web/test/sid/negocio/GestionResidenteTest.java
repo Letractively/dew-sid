@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class GestionResidenteTest {
     
-    //@Test
+    @Test
     public void insertarTest() throws DAOExcepcion{
         GestionResidente negocio = new GestionResidente();
         try{

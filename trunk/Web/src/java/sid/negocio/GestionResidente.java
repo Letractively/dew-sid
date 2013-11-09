@@ -68,10 +68,10 @@ public class GestionResidente { //aqui va la regla de negocio
 	eli.eliminar(idResidente);
   }
    
-  public Collection<Residente> buscarporcorreo(String correo) throws DAOExcepcion {
+  /*public Collection<Residente> buscarporcorreo(String correo) throws DAOExcepcion {
 	ResidenteDAO dao = new ResidenteDAO();
 	return dao.buscarporcorreo(correo);
-  }
+  }*/
    
    public Collection<Residente> listar() throws DAOExcepcion{
       ResidenteDAO dao = new ResidenteDAO();
