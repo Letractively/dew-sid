@@ -16,7 +16,6 @@ public class GestionResidenteTest {
         GestionResidente negocio = new GestionResidente();
         try{
            negocio.insertar("Jesus", "Alvarez", "40924578", "1980-10-02", "jesus25@hotmail.com", "287-6700"); //1980-10-89
-            
         }catch(DAOExcepcion e){
            Assert.fail("Fallo la insercion que " + e.getMessage());
         }
