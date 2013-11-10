@@ -18,7 +18,7 @@ public class GestionResidente { //aqui va la regla de negocio
         vo.setEmail(correo);
         vo.setPassword(pwd);
         
-        Collection<Residente> rs = dao.buscarporcorreo(correo);   //aqui ingreso el correo para buscarlo
+        Collection<Residente> rs = dao.buscarporcorreo(correo);  //aqui ingreso el correo para buscarlo
        // System.out.println(rs.size());
         
         if(rs.size()>0){                //Si en el array hay mas de un elemento quiere decir que hay un correo ya grabado y no debe grabar
