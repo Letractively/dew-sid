@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sid.modelo;
 
-/**
- *
- * @author proyecto
- */
 public class Vivienda {
     int idvivienda;
     String zona;
@@ -17,6 +9,10 @@ public class Vivienda {
     String tipo;
     String direccion;
     int idresidente;
+    
+    public Vivienda(){
+    
+    }
     
     public int getIdvivienda() {
         return idvivienda;
