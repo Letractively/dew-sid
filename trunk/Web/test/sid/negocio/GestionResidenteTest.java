@@ -11,13 +11,13 @@ import static org.junit.Assert.*;
 
 public class GestionResidenteTest {
     
-    @Test
+    //@Test
     public void insertarTest() throws DAOExcepcion{
         GestionResidente negocio = new GestionResidente();
         try{
-           negocio.insertar("Jesus", "Alvarez", "40924578", "1980-10-02", "jesus25@hotmail.com", "287-6700"); //1980-10-89
+           negocio.insertar("Cecilia", "Serna", "12345678", "1980-01-07", "anaperez5@hotmail.com", "6985454"); //1980-10-89
         }catch(DAOExcepcion e){
-           Assert.fail("Fallo la insercion que " + e.getMessage());
+           Assert.fail("Fallo la insercion: " + e.getMessage());
         }
     
     }
@@ -26,7 +26,7 @@ public class GestionResidenteTest {
     public void actualizarTest() throws DAOExcepcion{
         GestionResidente negocio = new GestionResidente();
         try{
-            negocio.actualizar(4, "Juan", "perez", "4463172", "1982-02-15", "peplucho@terra.com.pe", "2871055");
+            negocio.actualizar(5, "Jimmy", "Lopez", "12345678", "1980-01-07", "poemasmix@hotmail.com", "2871055");
         }catch(DAOExcepcion e){
             Assert.fail("Fallo la actualizacion: " + e.getMessage());
         }
@@ -37,7 +37,7 @@ public class GestionResidenteTest {
     public void eliminarTest() throws DAOExcepcion{
         GestionResidente negocio = new GestionResidente();
         try{
-            negocio.eliminar(3);
+            negocio.eliminar(6);
         }catch(DAOExcepcion x){
             Assert.fail("Error, no elimina: " + x.getMessage());
         }
@@ -76,5 +76,4 @@ public class GestionResidenteTest {
        }
     }*/
     
-
 }

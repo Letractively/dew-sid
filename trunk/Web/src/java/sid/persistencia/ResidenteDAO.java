@@ -22,8 +22,7 @@ public class ResidenteDAO extends BaseDAO {
 		try {
 			con  = ConexionDAO.obtenerConexion();
 			stmt = con.prepareStatement(query);
-                        //stmt.setInt(1, vo.getIdresidente());
-			stmt.setString(1, vo.getNombres());
+                        stmt.setString(1, vo.getNombres());
 			stmt.setString(2, vo.getApellidos());
                         stmt.setString(3, vo.getDni());
                         stmt.setString(4, vo.getFech_nac());
@@ -127,20 +126,7 @@ public class ResidenteDAO extends BaseDAO {
 		}
       }
        
-      /*public void buscar(String correo) throws DAOExcepcion{
-          String query = "SELECT * FROM residente WHERE email='?'";
-          Connection con = null;
-          PreparedStatement stmt = null;
-          try{
-              con = ConexionDAO.obtenerConexion();
-              stmt=con.prepareStatement(query)
-              stmt.setString(1, correo);
-              rs = stmt.executeQuery();
-          }
-      
-      }*/
-       
-       /*public Collection<Residente> buscarporcorreo(String correo) throws DAOExcepcion{
+      public Collection<Residente> buscarporcorreo(String correo) throws DAOExcepcion{
            String query = "SELECT idresidente,nombre,apellidos,email FROM residente WHERE email=?";
            Collection<Residente> lista = new ArrayList<Residente>();
            Connection con = null;
@@ -149,6 +135,7 @@ public class ResidenteDAO extends BaseDAO {
            try{
                con = ConexionDAO.obtenerConexion();
                stmt= con.prepareStatement(query);
+               stmt.setString(1, correo);
                rs  = stmt.executeQuery();
                while(rs.next()){
                    Residente vo = new Residente();
@@ -160,13 +147,45 @@ public class ResidenteDAO extends BaseDAO {
                }
            }catch(SQLException e){
                System.err.println(e.getMessage());
+               throw new DAOExcepcion(e.getMessage());
            }finally{
                this.cerrarStatement(stmt);
                this.cerrarResultSet(rs);
                this.cerrarConexion(con);
            }
+           
+           System.out.println(lista.size());
            return lista;
-       }*/
+       }
+       
+       /*public Residente obtener(String correo) throws DAOExcepcion {
+		Residente vo = new Residente();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			String query = "SELECT idresidente,nombre,apellidos,email FROM residente WHERE email=?";
+			con = ConexionDAO.obtenerConexion();
+			stmt = con.prepareStatement(query);
+			//stmt.setInt(1, correo);
+                        stmt.setString(1, correo);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				vo.setIdresidente(rs.getInt(1));
+				vo.setNombres(rs.getString(2));
+				vo.setApellidos(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		} finally {
+			this.cerrarResultSet(rs);
+			this.cerrarStatement(stmt);
+			this.cerrarConexion(con);
+		}
+		return vo;
+	}*/
+
        
        public Collection<Residente> listar() throws DAOExcepcion{
            Collection<Residente> c = new ArrayList<Residente>();
@@ -197,5 +216,4 @@ public class ResidenteDAO extends BaseDAO {
            return c;
        }
        
-
 }

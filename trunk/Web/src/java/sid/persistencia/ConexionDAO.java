@@ -16,7 +16,7 @@ public class ConexionDAO{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
-			con = DriverManager.getConnection("jdbc:mysql://localhost/condominio","root", "root");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/condominio","root", "abc123def");
                         
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

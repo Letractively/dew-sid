@@ -8,32 +8,30 @@ import sid.modelo.Residente;
 
 public class GestionResidente { //aqui va la regla de negocio
     
-    /*public Residente insertar(String nombre,String apellido,String dni,String fecha_nac,String email,String pwd)throws DAOExcepcion
-    {
+    public Residente insertar(String nombre,String apellido,String dni,String fecha_nac,String correo,String pwd)throws DAOExcepcion {
         ResidenteDAO dao = new ResidenteDAO();
         Residente    vo  = new Residente();
-        //vo.setIdresidente(idresidente);
         vo.setNombres(nombre);
         vo.setApellidos(apellido);
         vo.setDni(dni);
         vo.setFech_nac(fecha_nac);
-        vo.setEmail(email);
+        vo.setEmail(correo);
         vo.setPassword(pwd);
         
-        /*Collection<Residente> lista = dao.buscarporcorreo(email);//aqui ingreso el correo para buscarlo
-        if(lista.size()>0){
-            throw new DAOExcepcion("Este correo existe");   //Este es para mostrar un mensaje de exception
-        }else{
-            return dao.insertar(vo);
-        }*/
-        //return dao.insertar(vo);
-   //}*/
+        Collection<Residente> rs = dao.buscarporcorreo(correo);   //aqui ingreso el correo para buscarlo
+       // System.out.println(rs.size());
+        
+        if(rs.size()>0){                //Si en el array hay mas de un elemento quiere decir que hay un correo ya grabado y no debe grabar
+            throw new DAOExcepcion("este correo ya existe");   //Este es para mostrar un mensaje de exception
+        }else{                          //de lo contrario que grabe
+            return dao.insertar(vo);    
+        }
+     }
     
-   public Residente insertar(String nombre,String apellido,String dni,String fecha_nac,String email,String pwd)throws DAOExcepcion
+   /*public Residente insertar(String nombre,String apellido,String dni,String fecha_nac,String email,String pwd)throws DAOExcepcion
     {
         ResidenteDAO dao = new ResidenteDAO();
         Residente    vo  = new Residente();
-        //vo.setIdresidente(idresidente);
         vo.setNombres(nombre);
         vo.setApellidos(apellido);
         vo.setDni(dni);
@@ -41,7 +39,7 @@ public class GestionResidente { //aqui va la regla de negocio
         vo.setEmail(email);
         vo.setPassword(pwd);
         return dao.insertar(vo);//aqui es donde me retorna el objeto
-   }
+   }*/
     
    public Residente actualizar(int idresidente,String nombre,String apellido,String dni,String fecha_nac,String email,String pwd) throws DAOExcepcion{
      ResidenteDAO re = new ResidenteDAO();
@@ -68,10 +66,10 @@ public class GestionResidente { //aqui va la regla de negocio
 	eli.eliminar(idResidente);
   }
    
-  /*public Collection<Residente> buscarporcorreo(String correo) throws DAOExcepcion {
+  public Collection<Residente> buscarporcorreo(String correo) throws DAOExcepcion {
 	ResidenteDAO dao = new ResidenteDAO();
 	return dao.buscarporcorreo(correo);
-  }*/
+  }
    
    public Collection<Residente> listar() throws DAOExcepcion{
       ResidenteDAO dao = new ResidenteDAO();
