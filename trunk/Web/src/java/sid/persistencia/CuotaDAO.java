@@ -83,7 +83,7 @@ public class CuotaDAO extends BaseDAO{
     
     
        public Cuota actualizar(Cuota vo) throws DAOExcepcion{
-           String query = "UPDATE cuota SET idvivienda=?,periodo=?,anio=?,importe=?,fech_venc=?,estado=?,tipo_pago=?,fech_pago=? WHERE idcuota=?";
+           String query = "UPDATE cuota SET idvivienda=?,periodo=?,anio=?,importe=?,fech_venc=?,estado=?,tipo_pago=?,fech_pago=NOW() WHERE idcuota=?";
            Connection con = null;
            PreparedStatement stmt = null;
            try{
@@ -96,13 +96,24 @@ public class CuotaDAO extends BaseDAO{
                 stmt.setString(5, vo.getfech_venc());
                 stmt.setString(6, vo.getestado());
                 stmt.setString(7, vo.gettipo_pago());
-                stmt.setString(8, vo.getfech_pago());
-                stmt.setInt(9, vo.getIdCuotas());
+                //stmt.setString(8, vo.getfech_pago());
+                stmt.setInt(8, vo.getIdCuotas());
                 
                int i = stmt.executeUpdate();
                if(i!=1){
                    throw new SQLException("No se pudo actualizar");
                }
+               
+               //si actualizo, traemos la fecha de insercion del servidor
+               ResultSet rs = null;
+                con = ConexionDAO.obtenerConexion();
+                String string2 = "SELECT fech_pago FROM cuota where idcuota = ?" ;
+                stmt = con.prepareStatement(string2);
+                stmt.setInt(1, vo.getIdCuotas());
+                rs   = stmt.executeQuery();
+                while(rs.next()){
+                    vo.setfech_pago(rs.getString("fech_pago"));
+                }
            }catch(SQLException e){
                System.err.println(e.getMessage());
                throw new DAOExcepcion(e.getMessage());
@@ -175,6 +186,7 @@ public class CuotaDAO extends BaseDAO{
                    Cuota vo = new Cuota();
                    vo.setIdCuotas(rs.getInt("idcuota"));
                    vo.setanio(rs.getInt("anio"));
+                   vo.setperiodo(rs.getString("periodo"));
                    Residente residente = new Residente();
                    residente.setNombres(rs.getString("nombre"));
                    residente.setDni(rs.getString("dni"));
