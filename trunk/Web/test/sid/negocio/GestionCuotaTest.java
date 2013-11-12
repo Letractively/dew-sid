@@ -18,7 +18,7 @@ import sid.persistencia.DAOExcepcion;
  */
 public class GestionCuotaTest {
     
-    //@Test
+    @Test
     public void insertarTest() throws DAOExcepcion{
         GestionCuota negocio = new GestionCuota();
         try{
@@ -56,7 +56,7 @@ public class GestionCuotaTest {
     public void listarTest(){
         GestionCuota negocio = new GestionCuota();
         try{
-            Collection<Cuota> listado = negocio.listarpendientes(1);
+            Collection<Cuota> listado = negocio.listarpendientes(2);
             //System.out.println(listado.size());
             for(Cuota r:listado){
                 System.out.println(r.getestado());
