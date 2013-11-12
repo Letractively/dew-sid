@@ -31,11 +31,13 @@ public class GestionCuotaTest {
     
     }
     
-    //@Test
+    @Test
     public void actualizarTest() throws DAOExcepcion{
         GestionCuota negocio = new GestionCuota();
         try{
-            negocio.actualizar(1, "01", 2013, 245.32, "2013-10-11", "C", "E", "2013-11-11",1);
+            Cuota cuota = new Cuota();
+            cuota = negocio.actualizar(1, "01", 2013, 245.32, "2013-10-11", "C", "E", "2013-11-11",1);
+            System.out.print(cuota.getfech_pago());
         }catch(DAOExcepcion e){
             Assert.fail("Fallo la actualizacion: " + e.getMessage());
         }
