@@ -61,8 +61,14 @@ public class GestionCuotaTest {
             Collection<Cuota> listado = negocio.listarpendientes(2);
             //System.out.println(listado.size());
             for(Cuota r:listado){
-                System.out.println(r.getestado());
-                System.out.println(r.getimporte());
+                System.out.println("idcuota: " + String.valueOf(r.getIdCuotas()) +
+                        " año: " + String.valueOf(r.getanio()) +
+                        " periodo: " + String.valueOf(r.getperiodo()) +
+                        " nombre: " + String.valueOf(r.getResidente().getNombres()) +
+                        " DNI : " + String.valueOf(r.getResidente().getDni()) +
+                        " importe: " + String.valueOf(r.getimporte())     +                     
+//                        " direccion: " + r.getVivienda().getDireccion() +
+                        " fecha vencimiento: " + String.valueOf(r.getfech_venc()));
                 /*System.out.println(r.getDni());
                 System.out.println(r.getEmail());*/
             }
