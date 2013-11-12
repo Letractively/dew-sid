@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.servlet.jsp.jstl.sql.Result;
+import javax.servlet.jsp.jstl.sql.ResultSupport;
 import sid.modelo.Cuota;
 import sid.modelo.Residente;
 import sid.modelo.Vivienda;
@@ -27,6 +29,22 @@ public class CuotaDAO extends BaseDAO{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
+                    
+                    //verificar si existe la cuota
+                     con = ConexionDAO.obtenerConexion();
+                    String string2 = "SELECT idcuota FROM cuota where periodo = ? and anio = ? and idvivienda = ?" ;
+                    stmt = con.prepareStatement(string2);
+                    stmt.setString(1, vo.getperiodo());
+                    stmt.setInt(2, vo.getanio());
+                    stmt.setInt(3, vo.getidvivienda());
+                    rs   = stmt.executeQuery();
+                    
+                    Result result = ResultSupport.toResult(rs);
+                    if (result.getRowCount() > 0)
+                    {
+                      throw new SQLException("No se pudo insertar");
+                    }
+               
 			con  = ConexionDAO.obtenerConexion();
 			stmt = con.prepareStatement(query);
                         stmt.setInt(1, vo.getidvivienda());
