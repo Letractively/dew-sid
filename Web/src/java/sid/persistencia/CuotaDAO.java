@@ -42,7 +42,7 @@ public class CuotaDAO extends BaseDAO{
                     Result result = ResultSupport.toResult(rs);
                     if (result.getRowCount() > 0)
                     {
-                      throw new SQLException("No se pudo insertar");
+                      throw new SQLException("ya existe la cuota " + vo.getperiodo() + " con el año: " + String.valueOf(vo.getanio()) +" en el sistema. No se pudo insertar.");
                     }
                
 			con  = ConexionDAO.obtenerConexion();
