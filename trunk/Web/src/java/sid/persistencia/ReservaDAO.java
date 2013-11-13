@@ -50,7 +50,7 @@ public class ReservaDAO extends BaseDAO {
  
  public Collection<Reserva> buscarxfecha(String fecha) throws DAOExcepcion{
      String query = "SELECT idreserva,fecha,idespaciocomun,idresidente FROM reserva WHERE fecha=?";
-     Collection<Reserva> listado = new ArrayList<Reserva>();
+     Collection<Reserva> listado = new ArrayList<Reserva>();    //creamos un arreglo
      Connection con = null;
      PreparedStatement stmt = null;
      ResultSet rs = null;
@@ -75,7 +75,13 @@ public class ReservaDAO extends BaseDAO {
             this.cerrarResultSet(rs);
             this.cerrarStatement(stmt);
      }
-     System.out.println(listado.size());
+     int numero = listado.size();
+     if(numero!=0){
+         System.out.println("¡Error..! la fecha de reserva no esta disponible");
+     }else{
+         System.out.println("Reserva realizada con exito");
+     }
+     
      return listado;
  }
 

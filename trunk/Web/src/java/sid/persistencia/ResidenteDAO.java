@@ -154,8 +154,15 @@ public class ResidenteDAO extends BaseDAO {
                this.cerrarConexion(con);
            }
            
-           System.out.println(lista.size());
-           return lista;
+           int num = lista.size();
+           //System.out.println(num);
+           if(num!=0){
+               System.out.println("¡Error...!, no se registro, el correo ya esta registrado");
+           }else{
+               System.out.println("Datos Grabados exitosamente");
+           }
+           
+           return lista; 
        }
        
        /*public Residente obtener(String correo) throws DAOExcepcion {
