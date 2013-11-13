@@ -79,7 +79,12 @@ public Collection<Vivienda> buscarxnumero(String numero) throws DAOExcepcion{
         this.cerrarResultSet(rs);
         this.cerrarStatement(stmt);
    }
-   System.out.println(listav.size());
+   int num = listav.size();
+   if(num!=0){
+       System.out.println("¡Error...!,la vivienda ya ha sido registrada");
+   }else{
+       System.out.println("Vivienda registrada con exito");
+   }
    return listav;
 
 }

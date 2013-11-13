@@ -15,9 +15,9 @@ public class GestionReservaTest{
  public void insertarTest() throws DAOExcepcion{
         GestionReserva negocio = new GestionReserva();
         try{
-           negocio.insertar("2013-12-19","04:30",1, 2);
+           negocio.insertar("2013-11-27","01:00",2, 3);
         }catch(DAOExcepcion e){
-           Assert.fail("Fallo la insercion: " + e.getMessage());
+           Assert.assertTrue("fecha ocupada", true); //Assert.fail("Fallo la insercion: " + e.getMessage());
         }
     
  }

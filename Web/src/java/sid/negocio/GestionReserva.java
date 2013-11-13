@@ -20,7 +20,7 @@ public class GestionReserva {
       //
       Collection<Reserva> re = dao.buscarxfecha(fecha);
       if(re.size()>0){
-          throw new DAOExcepcion("La fecha ya esta reservada");
+          throw new DAOExcepcion("Reserva no disponible");
       }else{
         return dao.insertar(vo);
       }

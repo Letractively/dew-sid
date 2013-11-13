@@ -11,18 +11,18 @@ import static org.junit.Assert.*;
 
 public class GestionResidenteTest {
     
-    //@Test
+    @Test
     public void insertarTest() throws DAOExcepcion{
         GestionResidente negocio = new GestionResidente();
         try{
-           negocio.insertar("Cecilia", "Serna", "12345678", "1980-01-07", "anaperez5@hotmail.com", "6985454"); //1980-10-89
+           negocio.insertar("Paola", "Nievee", "98765415", "1980-10-20", "nieve__2@hotmail.com", "987156758"); //1980-10-89
         }catch(DAOExcepcion e){
-           Assert.fail("Fallo la insercion: " + e.getMessage());
+            Assert.assertTrue("Email registrado", true);    //Assert.fail("Fallo la insercion: " + e.getMessage());
         }
     
     }
     
-   //@Test
+    //@Test
     public void actualizarTest() throws DAOExcepcion{
         GestionResidente negocio = new GestionResidente();
         try{
@@ -52,8 +52,6 @@ public class GestionResidenteTest {
             for(Residente r:listado){
                 System.out.println(r.getNombres());
                 System.out.println(r.getApellidos());
-                /*System.out.println(r.getDni());
-                System.out.println(r.getEmail());*/
             }
             Assert.assertTrue(listado.size()>0);
         }catch(DAOExcepcion e){

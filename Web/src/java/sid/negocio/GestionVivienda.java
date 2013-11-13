@@ -20,7 +20,7 @@ public Vivienda insertar(String zona,String edificio,String numero,double metraj
     vo.setIdresidente(idresidente);
     Collection<Vivienda> rs = dao.buscarxnumero(numero);
     if(rs.size()>0){
-        throw new DAOExcepcion("Esa vivienda ya se registro");
+        throw new DAOExcepcion("vivienda registrada");
     }else{       
     return dao.insertar(vo);
     }
