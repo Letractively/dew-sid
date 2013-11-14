@@ -1,11 +1,11 @@
 package sid.negocio;
 
 import java.util.Collection;
-import org.junit.Assert;
 import sid.persistencia.DAOExcepcion;
 import sid.modelo.Residente;
 import sid.negocio.GestionResidente;
 
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
