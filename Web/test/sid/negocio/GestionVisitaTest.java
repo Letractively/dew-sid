@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  */
 public class GestionVisitaTest {
    
-     //@Test
+     @Test
      public void insertarTest() throws DAOExcepcion{
         GestionVisita visita = new GestionVisita();
         try{
@@ -51,7 +51,7 @@ public class GestionVisitaTest {
         }
     }
     
-    @Test
+    //@Test
     public void listarTest(){
         GestionVisita negocio = new GestionVisita();
         try{
