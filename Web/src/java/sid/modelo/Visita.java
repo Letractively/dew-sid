@@ -6,8 +6,6 @@
 
 package sid.modelo;
 
-import java.sql.Date;
-
 /**
  *
  * @author Uwe.Mayo
