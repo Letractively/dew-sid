@@ -51,11 +51,12 @@ public class VisitaDAO extends BaseDAO{
 				id = rs.getInt(1);
 			}
                             vo.setIdvisita(id);
+                        System.out.println("Se registró correctamente");
 			
                 } catch (SQLException e) {
 			System.err.println(e.getMessage());
 			throw new DAOExcepcion(e.getMessage());
-                } finally {
+                } finally {                        
 			this.cerrarResultSet(rs);
 			this.cerrarStatement(stmt);
 			this.cerrarConexion(con);
