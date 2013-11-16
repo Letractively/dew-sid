@@ -56,7 +56,10 @@ public class GestionCuota { //aqui va la regla de negocio
       return dao.listarpendientes(idresidente);
   }
     
-    
+    public Collection<Cuota> listarvencidas() throws DAOExcepcion{
+      CuotaDAO dao = new CuotaDAO();
+      return dao.listarvencidas();
+  }
     
     
 }
