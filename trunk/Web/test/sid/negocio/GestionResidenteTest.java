@@ -15,7 +15,12 @@ public class GestionResidenteTest {
     public void insertarTest() throws DAOExcepcion{
         GestionResidente negocio = new GestionResidente();
         try{
-           negocio.insertar("Ana", "perez", "98765415", "1980-10-20", "anacotrina@hotmail.com", "98596478"); //1980-10-89
+//           negocio.insertar("Paola", "Nievee", "98765415", "1980-10-20", "nieve__2@hotmail.com", "987156758"); //1980-10-89
+           
+           negocio.insertar("Juan", "Milla", "41216335", "1982-03-29", "karloms@gmail.com", "956252230"); //1980-10-89
+           negocio.insertar("Pedro", "Picapiedra", "00057845", "1978-12-15", "pedropica@hotmail.com", "998541256");
+           negocio.insertar("Son", "Goku", "45789865", "1994-05-09", "kakaroto@hotmail.com", "911812652");
+           negocio.insertar("Tulio", "Huaman", "02124578", "1978-09-31", "razetto@hotmail.com", "999995687");
         }catch(DAOExcepcion e){
             Assert.assertTrue("Email registrado", true); 
         }

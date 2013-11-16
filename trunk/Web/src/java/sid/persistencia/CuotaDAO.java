@@ -206,4 +206,46 @@ public class CuotaDAO extends BaseDAO{
            }
            return c;
        }
+       
+       
+       public Collection<Cuota> listarvencidas() throws DAOExcepcion{
+           Collection<Cuota> c = new ArrayList<Cuota>();
+           Connection con = null;
+           PreparedStatement stmt = null;
+           ResultSet rs = null;
+           try{
+               con = ConexionDAO.obtenerConexion();
+               String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
+                "red.dni, cuo.importe, cuo.fech_venc, viv.direccion " +
+                "FROM cuota as cuo " +
+                "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
+                "inner join residente as red on red.idresidente = viv.idresidente " +
+                "where fech_venc<now() ";
+               stmt = con.prepareStatement(query);
+               rs   = stmt.executeQuery();
+               while(rs.next()){
+                   Cuota vo = new Cuota();
+                   vo.setIdCuotas(rs.getInt("idcuota"));
+                   vo.setanio(rs.getInt("anio"));
+                   vo.setperiodo(rs.getString("periodo"));
+                   Residente residente = new Residente();
+                   residente.setNombres(rs.getString("nombre"));
+                   residente.setDni(rs.getString("dni"));
+                   vo.setResidente(residente);
+                   vo.setimporte(rs.getDouble("importe"));
+                   vo.setfech_venc(rs.getString("fech_venc"));
+                   Vivienda vivienda = new Vivienda();
+                   vivienda.setDireccion(rs.getString("direccion"));
+                   c.add(vo);
+              }
+           }catch(SQLException e){
+               System.err.println(e.getMessage());
+           }finally{
+               this.cerrarStatement(stmt);  //que es esto?
+               this.cerrarResultSet(rs);    //Este es el recordset (pero porq lo cierra?)
+               this.cerrarConexion(con);    //Esta es la conexion
+           }
+           return c;
+       }
 }
+
