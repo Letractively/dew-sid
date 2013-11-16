@@ -15,7 +15,7 @@ public class QuejaDAO extends BaseDAO {
     
 
     public Queja insertar(Queja vo) throws DAOExcepcion{
-		String query = "INSERT INTO queja(tipo_queja,motivo,fech_queja,idresidente, estado) VALUES (?,?,?,?,?,?)";
+		String query = "INSERT INTO queja(tipo_queja,motivo,fech_queja,idresidente, estado) VALUES (?,?,?,?,?)";
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -26,7 +26,7 @@ public class QuejaDAO extends BaseDAO {
 			stmt.setString(2, vo.getMotivo());
                         stmt.setString(3, vo.getFech_queja());
                         stmt.setInt(4, vo.getIdresidente());
-                        stmt.setString(5, vo.getMotivo());
+                        stmt.setString(5, vo.getEstado());
                         
 			int i = stmt.executeUpdate();
 			if (i != 1) {
@@ -57,7 +57,7 @@ public class QuejaDAO extends BaseDAO {
       
        
       public Collection<Queja> Listarquejas(int idresidente) throws DAOExcepcion{
-           String query = "SELECT idqueja,tipo_queja,motivo,fech_queja, estado FROM queja WHERE idqueja=?";
+           String query = "SELECT idresidente, idqueja,tipo_queja,motivo,fech_queja, estado FROM queja WHERE idqueja=?";
            Collection<Queja> lista = new ArrayList<Queja>();
            Connection con = null;
            PreparedStatement stmt = null;
