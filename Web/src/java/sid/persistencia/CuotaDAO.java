@@ -179,7 +179,7 @@ public class CuotaDAO extends BaseDAO{
                 "FROM cuota as cuo " +
                 "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
                 "inner join residente as red on red.idresidente = viv.idresidente " +
-                "where red.idresidente = " + String.valueOf(idresidente);
+                "where estado = 'P' and red.idresidente = " + String.valueOf(idresidente) + ";";
                stmt = con.prepareStatement(query);
                rs   = stmt.executeQuery();
                while(rs.next()){
