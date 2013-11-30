@@ -58,24 +58,24 @@ public class GestionQuejaTest {
     /**
      * Test of Listaquejas method, of class GestionQueja.
      */
-    @Test
-    public void testListaquejas() throws Exception {
-       GestionQueja negocio = new GestionQueja();
-        try{
-            Collection<Queja> listado = negocio.Listaquejas(1);
-            //System.out.println(listado.size());
-            for(Queja r:listado){
-                System.out.println("idqueja: " + String.valueOf(r.getIdqueja()) +
-                        " tipo_queja: " + String.valueOf(r.getTipo_queja()) +
-                        " motivo: " + String.valueOf(r.getMotivo()) +
-                        " fech_queja: " + String.valueOf(r.getFech_queja()) +
-                        " estado : " + String.valueOf(r.getEstado()));
-                /*System.out.println(r.getDni());
-                System.out.println(r.getEmail());*/
-            }
-            Assert.assertTrue(listado.size()>0);
-        }catch(DAOExcepcion e){
-            Assert.fail("Fallo el listado: " + e.getMessage());
-        }
-    }
+//    @Test
+//    public void testListaquejas() throws Exception {
+//       GestionQueja negocio = new GestionQueja();
+//        try{
+//            Collection<Queja> listado = negocio.Listaquejas(1);
+//            //System.out.println(listado.size());
+//            for(Queja r:listado){
+//                System.out.println("idqueja: " + String.valueOf(r.getIdqueja()) +
+//                        " tipo_queja: " + String.valueOf(r.getTipo_queja()) +
+//                        " motivo: " + String.valueOf(r.getMotivo()) +
+//                        " fech_queja: " + String.valueOf(r.getFech_queja()) +
+//                        " estado : " + String.valueOf(r.getEstado()));
+//                /*System.out.println(r.getDni());
+//                System.out.println(r.getEmail());*/
+//            }
+//            Assert.assertTrue(listado.size()>0);
+//        }catch(DAOExcepcion e){
+//            Assert.fail("Fallo el listado: " + e.getMessage());
+//        }
+//    }
 }

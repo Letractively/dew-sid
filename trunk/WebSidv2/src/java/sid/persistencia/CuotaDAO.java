@@ -125,6 +125,42 @@ public class CuotaDAO extends BaseDAO{
            return vo;
        }
        
+           public Cuota actualizarpago(Cuota vo) throws DAOExcepcion{
+           String query = "UPDATE cuota SET tipo_pago=?,fech_pago=NOW(), estado = 'C' WHERE idcuota=?";
+           Connection con = null;
+           PreparedStatement stmt = null;
+           try{
+                con = ConexionDAO.obtenerConexion();
+                stmt= con.prepareStatement(query);
+                stmt.setString(1, vo.gettipo_pago());
+                //stmt.setString(8, vo.getfech_pago());
+                stmt.setInt(2, vo.getIdCuotas());
+                
+               int i = stmt.executeUpdate();
+               if(i!=1){
+                   throw new SQLException("No se pudo actualizar");
+               }
+               
+               //si actualizo, traemos la fecha de insercion del servidor
+               ResultSet rs = null;
+                con = ConexionDAO.obtenerConexion();
+                String string2 = "SELECT fech_pago FROM cuota where idcuota = ?" ;
+                stmt = con.prepareStatement(string2);
+                stmt.setInt(1, vo.getIdCuotas());
+                rs   = stmt.executeQuery();
+                while(rs.next()){
+                    vo.setfech_pago(rs.getString("fech_pago"));
+                }
+           }catch(SQLException e){
+               System.err.println(e.getMessage());
+               throw new DAOExcepcion(e.getMessage());
+           }finally{
+               this.cerrarStatement(stmt);
+               this.cerrarConexion(con);
+           }
+           return vo;
+       }
+       
        /*public Residente eliminar(Residente vo) throws DAOExcepcion{
            String query = "DELETE FROM Residente WHERE idResidente=?";
            Connection con = null;
@@ -176,7 +212,7 @@ public class CuotaDAO extends BaseDAO{
            try{
                con = ConexionDAO.obtenerConexion();
                String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
-                "red.dni, cuo.importe, cuo.fech_venc, viv.direccion " +
+                "red.dni, cuo.importe, cuo.fech_venc, viv.direccion, cuo.idvivienda " +
                 "FROM cuota as cuo " +
                 "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
                 "inner join residente as red on red.idresidente = viv.idresidente " +
@@ -196,6 +232,8 @@ public class CuotaDAO extends BaseDAO{
                    vo.setfech_venc(rs.getString("fech_venc"));
                    Vivienda vivienda = new Vivienda();
                    vivienda.setDireccion(rs.getString("direccion"));
+                   vo.setVivienda(vivienda);
+                   vo.setidvivienda(rs.getInt("idvivienda"));
                    c.add(vo);
               }
            }catch(SQLException e){
@@ -237,6 +275,7 @@ public class CuotaDAO extends BaseDAO{
                    vo.setfech_venc(rs.getString("fech_venc"));
                    Vivienda vivienda = new Vivienda();
                    vivienda.setDireccion(rs.getString("direccion"));
+                   vo.setVivienda(vivienda);
                    c.add(vo);
               }
            }catch(SQLException e){

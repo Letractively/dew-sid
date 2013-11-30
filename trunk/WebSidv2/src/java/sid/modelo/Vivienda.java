@@ -13,6 +13,24 @@ public class Vivienda {
     public Vivienda(){
     
     }
+   
+     public Vivienda(int idvivienda,
+    String zona,
+    String edificio,
+    String numero,
+    double metraje,
+    String tipo,
+    String direccion,
+    int idresidente){
+         this.idvivienda = idvivienda;
+           this.zona = zona;
+           this.edificio = edificio;
+           this.numero = numero;
+           this.metraje = metraje;
+           this.tipo = tipo;
+           this.direccion = direccion;
+           this.idresidente = idresidente;
+    }
     
     public int getIdvivienda() {
         return idvivienda;
