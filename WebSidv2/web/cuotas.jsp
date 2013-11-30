@@ -81,23 +81,33 @@
                 <th><div>DIRECCION</div></th>
             </tr>
             </thead>
+            <%@page import="java.util.*, sid.negocio.GestionCuota, sid.modelo.Cuota" %>
             <tbody>
 
+                 <% 
+                GestionCuota negocio = new GestionCuota();
+                Collection<Cuota> listado = negocio.listarvencidas();
+                for(Cuota x: listado){
+            %>
                 <tr id="" class="letratablita">
-                  <td>01</td>
-                  <td>Maria</td>
-                  <td>mariadelpa@hotmail.com</td>
-                  <td>activo</td>
-                  <td>01</td>
-                  <td>Maria</td>
-                  <td>mariadelpa@hotmail.com</td>
-                  <td>activo</td>
+                  <td><% //out.println(); %></td>
+                  <td><% out.println(x.getIdCuotas()); %></td>
+                  <td><% out.println(x.getperiodo()); %></td>
+                  <td><% out.println(x.getanio()); %></td>
+                  <td><% out.println(x.getResidente().getNombres()); %></td>
+                  <td><% out.println(x.getResidente().getDni()); %></td>
+                  <td><% out.println(x.getimporte()); %></td>
+                  <td><% out.println(x.getfech_venc()); %></td>
+                  <td><% out.println(""); %></td>
                   <td class="">
                     <a data-original-title="Editar Residente" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
                     <i class="icon-edit icon-large"></i>
                     </a>
                   </td>
                 </tr>
+            <%
+                
+            }            %>
 
             </tbody>
             </table>
