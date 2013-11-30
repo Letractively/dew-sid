@@ -69,24 +69,32 @@
             <tbody>
             <% 
                 GestionResidente negocio = new GestionResidente();
-                Collection<Residente> listado = negocio.listar();
+                Collection<Residente> listado = negocio.listar();  
                 for(Residente x: listado){
+                String doc = x.getDni();
+                String docu;
+                if(doc=="D"){
+                    docu = "DNI";
+                }else{
+                    docu = "Pasaporte"; 
+                }
+            
             %>
                 <tr id="" class="letratablita">
-                  <td><% //out.println(); %></td>
-                  <td><% out.println(x.getNombres()); %></td>
+                  <td><% out.println(x.getIdresidente()); %></td>
+                  <td><% out.println(x.getNombres() + "," + x.getApellidos()); %></td>
                   <td><% out.println(x.getEmail()); %></td>
-                  <td><% out.println(x.getDni()); %></td>
-                  <td><% out.println(x.getFech_nac()); %></td>
+                  <td><% out.println(docu); %></td>
+                  <td><% //out.println(x.getFech_nac()); %></td>
                   <td class="">
-                    <a data-original-title="Editar Residente" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
+                    <a data-original-title="Editar Residente" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" code="<% out.println(x.getIdresidente()); %>" >
                     <i class="icon-edit icon-large"></i>
                     </a>
                   </td>
                 </tr>
             <%
-                
-            }            %>
+            }            
+            %>
             </tbody>
             </table>
             </div>
@@ -144,7 +152,7 @@
             </div>
             <!-- -->
             
-            <div class="modal hide fade" id="modalresidente_edita" style="display:none;" aria-hidden="true">
+            <div class="modal hide fade" id="modalmodificar" style="display:none;" aria-hidden="true">
             <div class="modal-header">
             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                     <h6 id="modal-formLabel">Editar Residente</h6>
@@ -198,6 +206,28 @@
 </html>
 
 <script type="text/javascript">
+    
+    $('.actualizar').on('click',function(){
+	var id   = $(this).attr('code');
+	var nom  = $(this).attr('nom');
+	var ape  = $(this).attr('ape');
+	var mail = $(this).attr('mail');
+	var pwd  = $(this).attr('pwd');
+	var fono = $(this).attr('fono');
+	var tipid= $(this).attr('tipid');
+	var dir  = $(this).attr('direc');
+	//aqui le pasamos los datos al formulario modal
+	$('#codeupdate').val(id);
+	$('#nomupdate').val(nom);
+	$('#apeupdate').val(ape);
+	$('#mailupdate').val(mail);
+	$('#pwdupdate').val(pwd);
+	$('#fonoupdate').val(fono);
+	$('#idenupdate').val(tipid);
+	$('#dirupdate').val(dir);
+	$('#modalmodificar').modal();	
+	
+    });
     $(document).ready(function(){
         
         $("#btn-save").click(function(){
