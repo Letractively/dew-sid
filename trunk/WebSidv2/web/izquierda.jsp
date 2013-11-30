@@ -72,8 +72,8 @@
             </li>
 <li class="">
                     <span class="glow"></span>
-                    <a href="juntas.jsp">
-                        <i class="icon-circle"></i>
+                    <a href="mensajeria.jsp">
+                        <i class="icon-envelope"></i>
                         <span>Mensajeria</span>
                     </a>
             </li>
