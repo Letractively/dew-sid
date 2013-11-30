@@ -128,7 +128,7 @@
             <h6 id="modal-formLabel">Otros Datos</h6>
             <div>
             <label for="nombre">Fecha nacimiento</label>
-            <input type="text" required placeholder="fechanac" id="apellido" name="fechanac">
+            <input type="text" required placeholder="fechanac" id="fechanac" name="fechanac">
             </div>
             <div>
             <label for="nombre">Datos de identificación</label>
@@ -139,7 +139,7 @@
             </select>
             </div>
             <div>
-            <label for="nombre">Password</label>
+            <label for="nombre">Password (*)</label>
             <input type="password" required placeholder="contrasena de cliente" id="direccion" name="contrasena">
             </div> 
 
@@ -187,7 +187,7 @@
             </select>
             </div>
             <div>
-            <label for="nombre">Password</label>
+            <label for="nombre">Password (*)</label>
             <input type="password" required placeholder="contrasena de cliente" id="pwdupdate" name="pwdupdate">
             </div> 
             <input type="hidden" id="codeupdate" name="codeupdate" value=""> 
@@ -230,6 +230,21 @@
     
     $(document).ready(function(){
         
+     /*var dates = $("#fechanac").datepicker({
+            //dateFormat: 'yy-mm-dd', //dd-mm-yy
+            showOn: "both",
+            buttonImage: "images/calendar.gif",
+            buttonImageOnly: true,
+            monthNamesShort: ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:-18",	
+            numberOfMonths: 1
+    });
+
+    $('#fechanac').keypress(function(){ return false;});
+    $('#fechanac').click(function(){ return false;});*/   
+        
         $("#btn-save").click(function(){
             
             var name = $("#nombre").val();
@@ -251,7 +266,9 @@
                         if(data=="ok"){
                             alert("datos grabados con éxito");
 			    $("#modalresidente").modal("hide");
-			    location.reload(true);	
+			    location.reload(true);
+                        }else if(data=="err"){
+                            alert("El correo ingresado ya existe");
                         }else{
                             alert("Error en la grabación");
                         }
