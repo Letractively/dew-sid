@@ -66,7 +66,7 @@ public class InsertarResidenteServlet extends javax.servlet.http.HttpServlet imp
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //processRequest(request, response);
-        
+       
         String nom = request.getParameter("nombre");
         String ape = request.getParameter("apellido");
         String pwd = request.getParameter("contrasena");
@@ -75,23 +75,21 @@ public class InsertarResidenteServlet extends javax.servlet.http.HttpServlet imp
         String fech= request.getParameter("fechanac");
         
         GestionResidente residente = new GestionResidente();
+        
         try{
             residente.insertar(nom, ape, doc, fech, mail, pwd);
             //response.sendRedirect(request.getContextPath() + "/PortadaServlet");
-            System.out.println("ok");
+            PrintWriter ou = response.getWriter();
+            ou.print("ok");
+          
             
         }catch(DAOExcepcion e){
            RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
            rd.forward(request, response);
-           
         }
         
     }
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";
