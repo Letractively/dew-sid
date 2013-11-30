@@ -85,9 +85,9 @@
                   <td><% out.println(x.getNombres() + "," + x.getApellidos()); %></td>
                   <td><% out.println(x.getEmail()); %></td>
                   <td><% out.println(docu); %></td>
-                  <td><% //out.println(x.getFech_nac()); %></td>
+                  <td><% out.println(x.getFech_nac()); %></td>
                   <td class="">
-                    <a data-original-title="Editar Residente" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" code="<% out.println(x.getIdresidente()); %>" >
+                    <a data-original-title="Editar Residente" data-placement="left" rel="tooltip" class="actualizar"  code="<% out.println(x.getIdresidente()); %>" pwd="<% out.println(x.getPassword()); %>" nom="<% out.println(x.getNombres()); %>" ape="<% out.println(x.getApellidos()); %>" mail="<% out.println(x.getEmail()); %>"   tipid="<% out.println(x.getDni()); %>" fech="<% out.println(x.getFech_nac()); %>" pwd="<% out.println(x.getPassword()); %>" href="#">
                     <i class="icon-edit icon-large"></i>
                     </a>
                   </td>
@@ -159,28 +159,28 @@
             </div>
                 <div style="" class="modal-body">
             <h6 id="modal-formLabel">Datos personales</h6>
-            <form id="frmnuevoresidente" style="" class="form-horizontal fill-up separate-sections">
+            <form id="frmuseredita" style="" class="form-horizontal fill-up separate-sections">
             <div>
             <label for="nombre">Nombre (*)</label>
-            <input type="text" required placeholder="nombre" id="nombre" name="nombre">
+            <input type="text" required placeholder="nombre" id="nomupdate" name="nomupdate">
             </div>
             <div>
             <label for="nombre">Apellidos</label>
-            <input type="text" required placeholder="apellid" id="apellido" name="apellido">
+            <input type="text" required placeholder="apellido" id="apeupdate" name="apeupdate">
             </div>
             <div>
             <label for="nombre">Email (*)</label>
-            <input type="text" required placeholder="email" id="email" name="email">
+            <input type="text" required placeholder="Email" id="mailupdate" name="mailupdate">
             </div>
             
             <h6 id="modal-formLabel">Otros Datos</h6>
             <div>
             <label for="nombre">Fecha nacimiento</label>
-            <input type="text" required placeholder="fechanac" id="apellido" name="fechanac">
+            <input type="text" required placeholder="Fecha nacimiento" id="fecupdate" name="fecupdate">
             </div>
             <div>
             <label for="nombre">Datos de identificación</label>
-            <select name="identificacion" id="identificacion">
+            <select name="idenupdate" id="idenupdate">
                <option value="">[Seleccione documento]</option>
                <option value="D">DNI</option>
                <option value="P">Pasaporte</option>
@@ -188,14 +188,14 @@
             </div>
             <div>
             <label for="nombre">Password</label>
-            <input type="password" required placeholder="contrasena de cliente" id="direccion" name="contrasena">
+            <input type="password" required placeholder="contrasena de cliente" id="pwdupdate" name="pwdupdate">
             </div> 
-
+            <input type="hidden" id="codeupdate" name="codeupdate" value=""> 
             </form>
             </div>
             <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
-            <button id="btn-save" class="btn btn-blue">Guardar</button>
+            <button id="btn-update" class="btn btn-blue">Editar</button>
             </div>
             </div>
 
@@ -213,21 +213,21 @@
 	var ape  = $(this).attr('ape');
 	var mail = $(this).attr('mail');
 	var pwd  = $(this).attr('pwd');
-	var fono = $(this).attr('fono');
+	var fecha = $(this).attr('fech');
 	var tipid= $(this).attr('tipid');
-	var dir  = $(this).attr('direc');
+	
 	//aqui le pasamos los datos al formulario modal
 	$('#codeupdate').val(id);
 	$('#nomupdate').val(nom);
 	$('#apeupdate').val(ape);
 	$('#mailupdate').val(mail);
-	$('#pwdupdate').val(pwd);
-	$('#fonoupdate').val(fono);
+        $('#pwdupdate').val(pwd);
+        $('#fecupdate').val(fecha);
 	$('#idenupdate').val(tipid);
-	$('#dirupdate').val(dir);
 	$('#modalmodificar').modal();	
 	
     });
+    
     $(document).ready(function(){
         
         $("#btn-save").click(function(){
@@ -261,6 +261,33 @@
             }
             
         });
+        
+        $('#btn-update').click(function(){
+		var name = $("#nomupdate").val();
+		var ape  = $("#mailupdate").val();
+		var pwd  = $("#pwdupdate").val();
+		if(name=='' || ape=='' || pwd==''){
+			alert('Ingrese datos requeridos');
+		}else{
+			datin = $('#frmuseredita').serialize();
+			$.ajax({
+				type:'post',
+				url:'ActualizarResidenteServlet',
+				data:datin,
+				success: function(data){
+					if(data=='okis'){
+						alert('datos actualizados con éxito');
+						/*$('#modalmodificar').modal('hide');
+						location.reload(true);*/
+					}else{
+						alert('ocurrió un error');
+					}
+				}
+			});
+		}
+		
+	});
+        
         
     });
     
