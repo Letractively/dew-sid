@@ -1,11 +1,3 @@
-<%-- 
-    Document   : mensajeria
-    Created on : Nov 29, 2013, 8:11:16 PM
-    Author     : Juan Carlos
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
 <head>
 <%@include file="tags.jsp" %>
@@ -44,7 +36,7 @@
             <div class="container-fluid padded">    
                 <div class="action-nav-normal">
                 <div class="span2 action-nav-button">
-                   <a title="" class="tip nuevo-mensaje" data-toggle="modal" href="#modalmensaje" data-original-title="Nuevo Mensaje">
+                   <a title="" class="tip nuevo-mensaje" data-toggle="modal" href="#modalmensajeria" data-original-title="Nuevo Mensaje">
                        <i class="icon-file-alt"></i>
                        <span>Nuevo Mensaje</span>
                    </a>   
@@ -65,10 +57,10 @@
             <table cellpadding="0" cellspacing="0" border="0" class="table dTable responsive">
             <thead>
             <tr>
-              <th><div>NÂ°</div></th>
+              <th><div>N°</div></th>
               <th><div>Titulo</div></th>
               <th><div>Contenido</div></th>
-              <th><div>Fecha de PublicaciÃ³n</div></th>
+              <th><div>Fecha de Publicación</div></th>
               
             </tr>
             </thead>
@@ -76,11 +68,11 @@
 
                 <tr id="" class="letratablita">
                   <td>01</td>
-                  <td>Maria</td>
-                  <td>mariadelpa@hotmail.com</td>
-                  <td>activo</td>
+                  <td>Feliz Navidad</td>
+                  <td>Mis buenos deseos en estas fiestas</td>
+                  <td>2013/12/25</td>
                   <td class="">
-                    <a data-original-title="Editar Residente" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
+                    <a data-original-title="Editar Mensaje" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
                     <i class="icon-edit icon-large"></i>
                     </a>
                   </td>
@@ -95,50 +87,34 @@
             </div>
             </div>
         
-            <div class="modal hide fade" id="modalresidente" style="display:none;" aria-hidden="true">
+            <div class="modal hide fade" id="modalmensajeria" style="display:none;" aria-hidden="true">
             <div class="modal-header">
-            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">Ã—</button>
-                    <h6 id="modal-formLabel">Ingreso de nuevo Residente</h6>
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                    <h6 id="modal-formLabel">Ingreso de Nuevo Mensaje</h6>
             </div>
                 <div style="" class="modal-body">
-            <h6 id="modal-formLabel">Datos personales</h6>
-            <form id="frmnuevoresidente" style="" class="form-horizontal fill-up separate-sections">
+            <h6 id="modal-formLabel">Datos</h6>
+            <form id="frmnuevomensaje" style="" class="form-horizontal fill-up separate-sections">
             <div>
-            <label for="nombre">Nombre (*)</label>
-            <input type="text" required placeholder="nombre" id="nombre" name="nombre">
+            <label for="nombre">Titulo (*)</label>
+            <input type="text" required placeholder="titulo" id="titulo" name="titulo">
             </div>
             <div>
-            <label for="nombre">Apellidos</label>
-            <input type="text" required placeholder="apellid" id="apellido" name="apellido">
+            <label for="nombre">Contenido</label>
+            <input type="text" required placeholder="contenido" id="apellido" name="contenido">
+            </div>
+                <div>
+            <label for="nombre">Fecha de Publicación</label>
+            <input type="text" required placeholder="fechapub" id="apellido" name="fechapub">
             </div>
             <div>
-            <label for="nombre">Email (*)</label>
-            <input type="text" required placeholder="email" id="email" name="email">
-            </div>
             
-            <h6 id="modal-formLabel">Otros Datos</h6>
-            <div>
-            <label for="nombre">Fecha nacimiento</label>
-            <input type="text" required placeholder="fechanac" id="apellido" name="fechanac">
-            </div>
-            <div>
-            <label for="nombre">Datos de identificaciÃ³n</label>
-            <select name="identificacion" id="identificacion">
-               <option value="">[Seleccione documento]</option>
-               <option value="D">DNI</option>
-               <option value="P">Pasaporte</option>
-            </select>
-            </div>
-            <div>
-            <label for="nombre">Password</label>
-            <input type="password" required placeholder="contrasena de cliente" id="direccion" name="contrasena">
-            </div> 
 
             </form>
             </div>
             <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
-            <button id="btn-save" class="btn btn-blue">Guardar</button>
+            <button id="btn-enviar" class="btn btn-blue">Enviar</button>
             </div>
             </div>
 
@@ -152,19 +128,16 @@
 <script type="text/javascript">
     $(document).ready(function(){
         
-        $("#btn-save").click(function(){
+        $("#btn-enviar").click(function(){
             
-            var name = $("#nombre").val();
-            var ape  = $("#apellido").val();
-            var pwd  = $("#contrasena").val();
-            var doc  = $("#identificacion").val();
-            var mail = $("#email").val();
-            var fech = $("fechanac").val();
+            var titulo = $("#titulo").val();
+            var contenido  = $("#contenido").val();
+            var fechpub = $("fechapub").val();
 
             if(name=='' || ape=='' || pwd==''){
                 alert('Ingrese datos requeridos');
             }else{
-                data = $("#frmnuevoresidente").serialize();
+                data = $("#frmnuevomensaje").serialize();
                 $.ajax({
                     type:'post',
                     url :'InsertarResidenteServlet',
@@ -173,7 +146,7 @@
                         if(data=='ok'){
                             alert('Datos grabados');
                         }else{
-                            alert('Error en la grabaciÃ³n');
+                            alert('Error en la grabación');
                         }
                     }
 
