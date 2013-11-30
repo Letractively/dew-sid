@@ -6,26 +6,21 @@ package sid.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import sid.negocio.GestionCuota;
-import sid.modelo.Cuota;
+import sid.negocio.GestionQueja;
 import sid.persistencia.DAOExcepcion;
+
 /**
  *
- * @author proyecto
+ * @author usuario
  */
-@WebServlet(name = "CuotaServlet", urlPatterns = {"/CuotaServlet"})
-public class CuotaServlet extends HttpServlet {
+@WebServlet(name = "InsertarQuejaServlet", urlPatterns = {"/InsertarQuejaServlet"})
+public class InsertarQuejaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -37,8 +32,24 @@ public class CuotaServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet InsertarQuejaServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet InsertarQuejaServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {            
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,19 +65,7 @@ public class CuotaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-/*
-        try {
-            HttpSession sesion = request.getSession();
-            Collection<Cuota> arraycuota;
-            arraycuota = new GestionCuota().listarvencidas();
-            sesion.setAttribute("id", arraycuota);
-        } catch (DAOExcepcion ex) {
-            Logger.getLogger(CuotaServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		*/
-               
-                	
-
+        processRequest(request, response);
     }
 
     /**
@@ -79,22 +78,19 @@ public class CuotaServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+         //processRequest(request, response);
        
-        int idvivienda = Integer.parseInt(request.getParameter("idvivienda")) ;
-        int idcuota    = Integer.parseInt(request.getParameter("idcuota"));
-        String tipopago = request.getParameter("identificacion");
+        String tipoqueja = request.getParameter("cmbTipoQueja");
+        String fecha = request.getParameter("datFechaOcurrencia");
+        String motivo = request.getParameter("txtMotivo");
         
-        GestionCuota cuota = new GestionCuota();
-        Cuota objcuota = new Cuota();
-        objcuota.setIdCuotas(idcuota);
-        objcuota.setidvivienda(idvivienda);
-       
+        GestionQueja queja = new GestionQueja();
         
         try{
-            cuota.actualizarpago(tipopago, idvivienda,idcuota);
-           
+            queja.insertQueja(tipoqueja, motivo, fecha, 1, "G");
+            //response.sendRedirect(request.getContextPath() + "/PortadaServlet");
             PrintWriter ou = response.getWriter();
             ou.print("ok");
           
@@ -103,6 +99,7 @@ public class CuotaServlet extends HttpServlet {
            RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
            rd.forward(request, response);
         }
+        
     }
 
     /**

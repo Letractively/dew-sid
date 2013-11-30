@@ -23,9 +23,9 @@ public class GestionQueja { //aqui va la regla de negocio
     
  
    
-   public Collection<Queja> Listaquejas(int idresidente) throws DAOExcepcion{
+   public Collection<Queja> listarQuejas() throws DAOExcepcion{
       QuejaDAO dao = new QuejaDAO();
-      return dao.Listarquejas(idresidente);
+      return dao.listarQuejas();
   }
        
 }

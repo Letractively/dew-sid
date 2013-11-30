@@ -2,24 +2,7 @@
 <head>
 <%@include file="tags.jsp" %>
 
-<script>
-   $(document).ready(function () { 
-       
-       $.ajax({
-                    type: "post",
-                    url: "CuotaServlet", //this is my servlet
-                    data: "nimela",
-                    success: function(data){      
-                            
-                    }
-                });
-   });
-   
-   function vercuotas(){
-       //lista todas las cuotas
-       
-   }
-</script>
+
 </head>
 
 <body>
@@ -52,17 +35,22 @@
                 </div>
             </div>
     
-         <form action="CuotasServlet" method="get">
-		<textarea name="txtid"></textarea>
-		<input type="submit" value="Continuar"/>
-	</form>
-
+          <div class="container-fluid padded">    
+                <div class="action-nav-normal">
+                <div class="span2 action-nav-button">
+                   <a title="" class="tip nueva-residente" data-toggle="modal" href="#modalresidente" data-original-title="Nuevo Residente">
+                       <i class="icon-file-alt"></i>
+                       <span>Nuevo Residente</span>
+                   </a>   
+                </div>
+                </div>
+    	   </div>
            
             <div class="container-fluid padded">
             <div class="row-fluid">
             <div class="span12">
             <div class="box">
-            <div class="box-header"><span class="title">Listado de Cuotas</span></div>
+            <div class="box-header"><span class="title">Listado de Cuotas pendientes</span></div>
             <div class="box-content">
                     <!-- find me in partials/data_tables_custom -->
 
@@ -78,7 +66,9 @@
               <th><div>DNI</div></th>
                 <th><div>IMPORTE</div></th>
                 <th><div>FECHA VENCIMIENTO</div></th>
+                <th><div>IDV</div></th>
                 <th><div>DIRECCION</div></th>
+                <th><div>Opciones</div></th>
             </tr>
             </thead>
             <%@page import="java.util.*, sid.negocio.GestionCuota, sid.modelo.Cuota" %>
@@ -86,11 +76,10 @@
 
                  <% 
                 GestionCuota negocio = new GestionCuota();
-                Collection<Cuota> listado = negocio.listarvencidas();
+                Collection<Cuota> listado = negocio.listarpendientes(1);
                 for(Cuota x: listado){
             %>
                 <tr id="" class="letratablita">
-                  <td><% //out.println(); %></td>
                   <td><% out.println(x.getIdCuotas()); %></td>
                   <td><% out.println(x.getperiodo()); %></td>
                   <td><% out.println(x.getanio()); %></td>
@@ -98,9 +87,11 @@
                   <td><% out.println(x.getResidente().getDni()); %></td>
                   <td><% out.println(x.getimporte()); %></td>
                   <td><% out.println(x.getfech_venc()); %></td>
-                  <td><% out.println(""); %></td>
+                  <td><% out.println(x.getidvivienda()); %></td>
+                  <td><% out.println(x.getVivienda().getDireccion()); %></td>
+                  
                   <td class="">
-                    <a data-original-title="Editar Residente" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
+                    <a data-original-title="Realizar Pago" data-placement="left" rel="tooltip" class="ingresar" vfechavenc="<% out.println(x.getfech_venc()); %>" vimporte="<% out.println(x.getimporte()); %>" vvivienda="<% out.println(x.getVivienda().getDireccion()); %>" vperiodo="<% out.println(x.getperiodo()); %>"  vidvivienda="<% out.println(x.getidvivienda()); %>" vidcuota="<% out.println(x.getIdCuotas()); %>"   data-toggle="modal" href="#modalpagocuota" data-original-title="Nuevo pago" >
                     <i class="icon-edit icon-large"></i>
                     </a>
                   </td>
@@ -118,51 +109,52 @@
             </div>
             </div>
         
-            <div class="modal hide fade" id="modalresidente" style="display:none;" aria-hidden="true">
+            <div class="modal hide fade" id="modalpagocuota" style="display:none;" aria-hidden="true">
             <div class="modal-header">
             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h6 id="modal-formLabel">Ingreso de nuevo Residente</h6>
+                    <h6 id="modal-formLabel">Registrar pago de Cuota</h6>
             </div>
-                <div style="" class="modal-body">
-            <h6 id="modal-formLabel">Datos personales</h6>
-            <form id="frmnuevoresidente" style="" class="form-horizontal fill-up separate-sections">
+           <div style="" class="modal-body">
+            <h6 id="modal-formLabel">Registro de pago de cuota</h6>
+            <form id="frmactualiza" style="" class="form-horizontal fill-up separate-sections">
             <div>
-            <label for="nombre">Nombre (*)</label>
-            <input type="text" required placeholder="nombre" id="nombre" name="nombre">
-            </div>
-            <div>
-            <label for="nombre">Apellidos</label>
-            <input type="text" required placeholder="apellid" id="apellido" name="apellido">
-            </div>
-            <div>
-            <label for="nombre">Email (*)</label>
-            <input type="text" required placeholder="email" id="email" name="email">
-            </div>
+            <label for="nombre">NroCuota</label>
+            <input type="text" required placeholder="nombre" id="idcuota" name="idcuota" readonly="true">
             
-            <h6 id="modal-formLabel">Otros Datos</h6>
-            <div>
-            <label for="nombre">Fecha nacimiento</label>
-            <input type="text" required placeholder="fechanac" id="apellido" name="fechanac">
             </div>
             <div>
-            <label for="nombre">Datos de identificación</label>
+            <label for="nombre">Vivienda</label>
+            <input type="text" required placeholder="apellid" id="vivienda" name="vivienda" readonly="true">
+            </div>
+            <div>
+            <input type="hidden" required placeholder="apellid" id="idvivienda" name="idvivienda" readonly="true">
+            </div>
+            <div>                
+            <label for="nombre">Periodo</label>
+            <input type="text" required placeholder="email" id="periodo" name="periodo" readonly="true">
+            </div>
+            <div>
+            <label for="nombre">Importe</label>
+            <input type="text" required placeholder="fechanac" id="importe" name="importe" readonly="true">
+            
+            <label for="nombre">Fecha de vencimiento</label>
+            <input type="text" required placeholder="fechanac" id="fechavenc" name="fechavenc" readonly="true">
+            </div>
+                
+            <div>
+            <label for="nombre">Tipo de pago</label>
             <select name="identificacion" id="identificacion">
-               <option value="">[Seleccione documento]</option>
-               <option value="D">DNI</option>
-               <option value="P">Pasaporte</option>
+               <option value="E">Efectivo</option>
+               <option value="P">Cheque</option>
+               <option value="T">Tarjeta</option>
             </select>
             </div>
-            <div>
-            <label for="nombre">Password</label>
-            <input type="password" required placeholder="contrasena de cliente" id="direccion" name="contrasena">
-            </div> 
-
-            </form>
-            </div>
+                
             <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
-            <button id="btn-save" class="btn btn-blue">Guardar</button>
+            <button id="btn-update" class="btn btn-blue">Realizar pago</button>
             </div>
+            </form>
             </div>
 
 
@@ -173,26 +165,35 @@
 </html>
 
 <script type="text/javascript">
+      $('.ingresar').on('click',function(){
+	var idvivienda   = $(this).attr('vidvivienda');
+	var idcuota  = $(this).attr('vidcuota');
+        var periodo  = $(this).attr('vperiodo');
+        var vivienda  = $(this).attr('vvivienda');
+        var importe  = $(this).attr('vimporte');
+        var fechavenc  = $(this).attr('vfechavenc');
+	
+	//aqui le pasamos los datos al formulario modal
+	$('#idvivienda').val(idvivienda);
+	$('#idcuota').val(idcuota);	
+        $('#periodo').val(periodo);	
+        $('#vivienda').val(vivienda);	
+        $('#importe').val(importe);	
+        $('#fechavenc').val(fechavenc);	
+	
+    });
+    
     $(document).ready(function(){
         
-        $("#btn-save").click(function(){
-            
-            var name = $("#nombre").val();
-            var ape  = $("#apellido").val();
-            var pwd  = $("#contrasena").val();
-            var doc  = $("#identificacion").val();
-            var mail = $("#email").val();
-            var fech = $("fechanac").val();
-
-            if(name=='' || ape=='' || pwd==''){
-                alert('Ingrese datos requeridos');
-            }else{
-                data = $("#frmnuevoresidente").serialize();
+        $("#btn-update").click(function(){
+                        
+                data = $("#frmactualiza").serialize();
                 $.ajax({
                     type:'post',
-                    url :'InsertarResidenteServlet',
+                    url :'CuotaServlet',
                     data:data,
                     success:function(data){
+                        alert(data);
                         if(data=='ok'){
                             alert('Datos grabados');
                         }else{
@@ -201,7 +202,7 @@
                     }
 
                 });
-            }
+            
             
         });
         
