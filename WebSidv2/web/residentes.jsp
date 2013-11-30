@@ -60,24 +60,33 @@
               <th><div>N°</div></th>
               <th><div>Nombre</div></th>
               <th><div>Correo</div></th>
-              <th><div>Estado</div></th>
+              <th><div>Tipo document</div></th>
+              <th><div>Fecha Nacimiento</div></th>
               <th><div>Opciones</div></th>
             </tr>
             </thead>
+            <%@page import="java.util.*, sid.negocio.GestionResidente, sid.modelo.Residente" %>
             <tbody>
-
+            <% 
+                GestionResidente negocio = new GestionResidente();
+                Collection<Residente> listado = negocio.listar();
+                for(Residente x: listado){
+            %>
                 <tr id="" class="letratablita">
-                  <td>01</td>
-                  <td>Maria</td>
-                  <td>mariadelpa@hotmail.com</td>
-                  <td>activo</td>
+                  <td><% //out.println(); %></td>
+                  <td><% out.println(x.getNombres()); %></td>
+                  <td><% out.println(x.getEmail()); %></td>
+                  <td><% out.println(x.getDni()); %></td>
+                  <td><% out.println(x.getFech_nac()); %></td>
                   <td class="">
                     <a data-original-title="Editar Residente" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
                     <i class="icon-edit icon-large"></i>
                     </a>
                   </td>
                 </tr>
-
+            <%
+                
+            }            %>
             </tbody>
             </table>
             </div>
@@ -86,7 +95,7 @@
             </div>
             </div>
             </div>
-        
+            <!-- -->
             <div class="modal hide fade" id="modalresidente" style="display:none;" aria-hidden="true">
             <div class="modal-header">
             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
@@ -133,7 +142,54 @@
             <button id="btn-save" class="btn btn-blue">Guardar</button>
             </div>
             </div>
+            <!-- -->
+            
+            <div class="modal hide fade" id="modalresidente_edita" style="display:none;" aria-hidden="true">
+            <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                    <h6 id="modal-formLabel">Editar Residente</h6>
+            </div>
+                <div style="" class="modal-body">
+            <h6 id="modal-formLabel">Datos personales</h6>
+            <form id="frmnuevoresidente" style="" class="form-horizontal fill-up separate-sections">
+            <div>
+            <label for="nombre">Nombre (*)</label>
+            <input type="text" required placeholder="nombre" id="nombre" name="nombre">
+            </div>
+            <div>
+            <label for="nombre">Apellidos</label>
+            <input type="text" required placeholder="apellid" id="apellido" name="apellido">
+            </div>
+            <div>
+            <label for="nombre">Email (*)</label>
+            <input type="text" required placeholder="email" id="email" name="email">
+            </div>
+            
+            <h6 id="modal-formLabel">Otros Datos</h6>
+            <div>
+            <label for="nombre">Fecha nacimiento</label>
+            <input type="text" required placeholder="fechanac" id="apellido" name="fechanac">
+            </div>
+            <div>
+            <label for="nombre">Datos de identificación</label>
+            <select name="identificacion" id="identificacion">
+               <option value="">[Seleccione documento]</option>
+               <option value="D">DNI</option>
+               <option value="P">Pasaporte</option>
+            </select>
+            </div>
+            <div>
+            <label for="nombre">Password</label>
+            <input type="password" required placeholder="contrasena de cliente" id="direccion" name="contrasena">
+            </div> 
 
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
+            <button id="btn-save" class="btn btn-blue">Guardar</button>
+            </div>
+            </div>
 
 </div>
     
@@ -162,10 +218,12 @@
                     url :'InsertarResidenteServlet',
                     data:data,
                     success:function(data){
-                        if(data=='ok'){
-                            alert('Datos grabados');
+                        if(data=="ok"){
+                            alert("datos grabados con éxito");
+			    $("#modalresidente").modal("hide");
+			    location.reload(true);	
                         }else{
-                            alert('Error en la grabación');
+                            alert("Error en la grabación");
                         }
                     }
 
