@@ -70,7 +70,13 @@
                         <span>Juntas</span>
                     </a>
             </li>
-
+<li class="">
+                    <span class="glow"></span>
+                    <a href="juntas.jsp">
+                        <i class="icon-circle"></i>
+                        <span>Mensajeria</span>
+                    </a>
+            </li>
 
         </ul>
 
