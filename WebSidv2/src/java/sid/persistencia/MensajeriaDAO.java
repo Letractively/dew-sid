@@ -66,7 +66,7 @@ public class MensajeriaDAO extends BaseDAO {
         ResultSet rs = null;
         try {
             con = ConexionDAO.obtenerConexion();
-            String query = "select idmensajeria,titulo,contenido,fech_public,idresidente from mensajeria order by fech_public";
+            String query = "select idmensajeria,titulo,contenido,fech_public,idresidente, estado from mensajeria order by fech_public";
             stmt = con.prepareStatement(query);
             rs = stmt.executeQuery();
             while (rs.next()) {
