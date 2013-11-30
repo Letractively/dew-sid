@@ -76,6 +76,7 @@ public class MensajeriaDAO extends BaseDAO {
                 vo.setContenido(rs.getString("contenido"));
                 vo.setFech_public(rs.getString("fech_public"));
                 vo.setId_Residente(rs.getInt("idresidente"));
+                vo.setEstado(rs.getInt("estado"));
                 c.add(vo);
             }
 

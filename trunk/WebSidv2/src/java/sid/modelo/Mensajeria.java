@@ -18,9 +18,18 @@ public class Mensajeria {
     private String contenido;
     private String fech_public;
     private int id_Residente;
+    private int estado;
     private Collection<Mensajeria> mensajeria = new ArrayList<Mensajeria>();
 
     public Mensajeria() {
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     public Mensajeria(int id_Mensajeria, String titulo, String contenido, String fech_public, int id_Residente) {
