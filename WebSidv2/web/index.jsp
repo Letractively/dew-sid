@@ -25,7 +25,7 @@
 
       <a class="brand" href="#">Administrador Condominio Casa&deas</a>
 
-      <!-- the new toggle buttons -->
+      <!-- the new toggle buttons  -->
 
       <ul class="nav pull-right">
 
