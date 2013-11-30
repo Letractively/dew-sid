@@ -201,7 +201,7 @@ public class ResidenteDAO extends BaseDAO {
            ResultSet rs = null;
            try{
                con = ConexionDAO.obtenerConexion();
-               String query = "SELECT idresidente,nombre,apellidos,dni,email FROM residente";
+               String query = "SELECT idresidente,nombre,apellidos,dni,fecha_nac,email,password FROM residente";
                stmt = con.prepareStatement(query);
                rs   = stmt.executeQuery();
                while(rs.next()){
@@ -210,7 +210,9 @@ public class ResidenteDAO extends BaseDAO {
                    vo.setNombres(rs.getString("nombre"));
                    vo.setApellidos(rs.getString("apellidos"));
                    vo.setDni(rs.getString("dni"));
+                   vo.setFech_nac(rs.getString("fecha_nac"));
                    vo.setEmail(rs.getString("email"));
+                   vo.setPassword(rs.getString("password"));
                    c.add(vo);
               }
            }catch(SQLException e){

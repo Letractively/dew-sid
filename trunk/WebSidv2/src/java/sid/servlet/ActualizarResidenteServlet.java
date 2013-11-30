@@ -6,27 +6,24 @@ package sid.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sid.modelo.Residente;
 
 import sid.negocio.GestionResidente;
 import sid.persistencia.DAOExcepcion;
 
-
 /**
  *
- * @author vladimir
+ * @author proyecto
  */
-@WebServlet(name = "InsertarResidenteServlet", urlPatterns = {"/InsertarResidenteServlet"}) 
-public class InsertarResidenteServlet extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
+@WebServlet(name = "ActualizarResidenteServlet", urlPatterns = {"/ActualizarResidenteServlet"})
+public class ActualizarResidenteServlet extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
 
-    /**
+    /** 
      * Processes requests for both HTTP
      * <code>GET</code> and
      * <code>POST</code> methods.
@@ -44,7 +41,7 @@ public class InsertarResidenteServlet extends javax.servlet.http.HttpServlet imp
     /**
      * Handles the HTTP
      * <code>GET</code> method.
-     
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -67,36 +64,31 @@ public class InsertarResidenteServlet extends javax.servlet.http.HttpServlet imp
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //processRequest(request, response);
-       
-        String nom = request.getParameter("nombre");
-        String ape = request.getParameter("apellido");
-        String pwd = request.getParameter("contrasena");
-        String doc = request.getParameter("identificacion");
-        String mail= request.getParameter("email");
-        String fech= request.getParameter("fechanac");
+       // processRequest(request, response);
+        
+        String id   = request.getParameter("codeupdate");
+        //System.out.println(id);
+        int     code = Integer.parseInt(id);                     //request.getParameter("codeupdate");
+        String nom   = request.getParameter("nomupdate");
+        String ape   = request.getParameter("apeupdate");
+        String pwd   = request.getParameter("pwdupdate");
+        String doc   = request.getParameter("idenupdate");
+        String mail  = request.getParameter("mailupdate");
+        String fech  = request.getParameter("fecupdate");
         
         GestionResidente residente = new GestionResidente();
-        
-        PrintWriter ou = response.getWriter();
-        
         try{
-            Collection<Residente> rs = residente.buscarporcorreo(mail);
-            
-            if(rs.size()>0){                
-                ou.print("err");            
-            }else{                          
-                residente.insertar(nom, ape, doc, fech, mail, pwd); 
-                ou.print("ok");
-            }
-                        
+            residente.actualizar(code, nom, ape, doc, fech, mail, pwd);
+            PrintWriter ou = response.getWriter();
+            ou.print("okis");
         }catch(DAOExcepcion e){
            RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
            rd.forward(request, response);
-           ou.print("errores");
         }
         
+        
     }
+
     
     @Override
     public String getServletInfo() {
