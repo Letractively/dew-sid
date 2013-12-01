@@ -78,7 +78,7 @@ public class EliminarResidenteServlet extends javax.servlet.http.HttpServlet imp
         
     }
 
-    /***
+    /*****
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
