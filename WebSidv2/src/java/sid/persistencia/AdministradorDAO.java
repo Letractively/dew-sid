@@ -25,7 +25,7 @@ public Administrador validar(String email,String password) throws DAOExcepcion, 
         stmt= con.prepareStatement(query);
         //stmt.setInt(1, id);
         stmt.setString(1, email);
-        stmt.setString(2, password);
+        stmt.setString(2, password);//
         rs = stmt.executeQuery();
         
         if(rs.next()){
@@ -52,5 +52,5 @@ public Administrador validar(String email,String password) throws DAOExcepcion, 
     
 }
     
-    
+    //SELECT id,nombre,apellido,email,estado FROM administrador WHERE email='vflores_web@hotmail.com' AND password='654321' AND perfil=1
 }

@@ -10,13 +10,15 @@ import sid.persistencia.ReservaDAO;
 
 public class GestionReserva {
  
-  public Reserva insertar(String fecha,String hora,int idespaciocomun,int idresidente) throws DAOExcepcion{
+  public Reserva insertar(String fecha,String hora,int tiempo,int idespaciocomun,int idresidente,int estado) throws DAOExcepcion{
       ReservaDAO dao = new ReservaDAO();
       Reserva vo = new Reserva();
       vo.setFecha(fecha);
       vo.setHora(hora);
+      vo.setTiempo(tiempo);
       vo.setIdespaciocomun(idespaciocomun);
       vo.setIdresidente(idresidente);
+      vo.setEstado(estado);
       //
       Collection<Reserva> re = dao.buscarxfecha(fecha);
       if(re.size()>0){
@@ -24,6 +26,7 @@ public class GestionReserva {
       }else{
         return dao.insertar(vo);
       }
+      
   }
     
 

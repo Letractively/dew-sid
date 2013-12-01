@@ -14,7 +14,7 @@ import sid.persistencia.DAOExcepcion;
 public class ReservaDAO extends BaseDAO {
     
  public Reserva insertar(Reserva vo) throws DAOExcepcion{
-     String query= "INSERT INTO reserva(fecha,hora,idespaciocomun,idresidente)VALUES(?,?,?,?)";
+     String query= "INSERT INTO reserva(fecha,hora,tiempo,idespaciocomun,idresidente,estado)VALUES(?,?,?,?,?,?)";
      Connection con = null;
      PreparedStatement stmt = null;
      ResultSet rs = null;
@@ -23,8 +23,10 @@ public class ReservaDAO extends BaseDAO {
          stmt= con.prepareStatement(query);
          stmt.setString(1, vo.getFecha());
          stmt.setString(2, vo.getHora());
-         stmt.setInt(3, vo.getIdespaciocomun());
-         stmt.setInt(4, vo.getIdresidente());
+         stmt.setInt(3,vo.getTiempo());
+         stmt.setInt(4, vo.getIdespaciocomun());
+         stmt.setInt(5, vo.getIdresidente());
+         stmt.setInt(6, vo.getEstado());
          int i = stmt.executeUpdate();
          if(i!=1){
              throw new DAOExcepcion("No se pudo intertar");
