@@ -71,25 +71,26 @@
                 GestionResidente negocio = new GestionResidente();
                 Collection<Residente> listado = negocio.listar();  
                 for(Residente x: listado){
-                String doc = x.getDni();
+                String tipodoc = x.getDni();
                 String docu;
-                if(doc=="D"){
-                    docu = "DNI";
+                if(tipodoc=="P"){
+                    docu = "Pasaporte";
                 }else{
-                    docu = "Pasaporte"; 
+                    docu = "DNI"; 
                 }
             
             %>
-                <tr id="" class="letratablita">
+                <tr id="row_<% out.println(x.getIdresidente()); %>" class="letratablita">
                   <td><% out.println(x.getIdresidente()); %></td>
                   <td><% out.println(x.getNombres() + "," + x.getApellidos()); %></td>
                   <td><% out.println(x.getEmail()); %></td>
                   <td><% out.println(docu); %></td>
                   <td><% out.println(x.getFech_nac()); %></td>
                   <td class="">
-                    <a data-original-title="Editar Residente" data-placement="left" rel="tooltip" class="actualizar"  code="<% out.println(x.getIdresidente()); %>" pwd="<% out.println(x.getPassword()); %>" nom="<% out.println(x.getNombres()); %>" ape="<% out.println(x.getApellidos()); %>" mail="<% out.println(x.getEmail()); %>"   tipid="<% out.println(x.getDni()); %>" fech="<% out.println(x.getFech_nac()); %>" pwd="<% out.println(x.getPassword()); %>" href="#">
+                    <a data-original-title="Editar" data-placement="left" rel="tooltip" class="actualizar"  code="<% out.println(x.getIdresidente()); %>" pwd="<% out.println(x.getPassword()); %>" nom="<% out.println(x.getNombres()); %>" ape="<% out.println(x.getApellidos()); %>" mail="<% out.println(x.getEmail()); %>"   tipid="<% out.println(x.getDni()); %>" fech="<% out.println(x.getFech_nac()); %>" pwd="<% out.println(x.getPassword()); %>" href="#">
                     <i class="icon-edit icon-large"></i>
                     </a>
+                    <a href="#" onclick="eliminar(<% out.println(x.getIdresidente()); %>);" class="delete" rel="tooltip" data-placement="right" data-original-title="Eliminar"><i class="icon-remove icon-large"></i></a>
                   </td>
                 </tr>
             <%
@@ -294,8 +295,8 @@
 				success: function(data){
 					if(data=='okis'){
 						alert('datos actualizados con éxito');
-						/*$('#modalmodificar').modal('hide');
-						location.reload(true);*/
+						$('#modalmodificar').modal('hide');
+						location.reload(true);
 					}else{
 						alert('ocurrió un error');
 					}
@@ -307,5 +308,24 @@
         
         
     });
+    
+    function eliminar(code){
+	if(confirm("¿Desea eliminar residente?")){
+		$.ajax({
+			type:'post',
+			url:'EliminarResidenteServlet',
+			data:'id=' + code,
+			success: function(data){
+                            if(data=="okis"){
+                                location.reload(true);
+                               //$("#row_" + code).remove();
+                               //alert('Se elimino cliente');	
+                            }else{
+                               alert("error al eliminar");	
+                            }
+			}
+		});
+	}
+   }
     
 </script>

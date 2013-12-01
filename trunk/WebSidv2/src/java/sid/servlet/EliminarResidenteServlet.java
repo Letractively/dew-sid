@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sid.servlet;
 
 import java.io.IOException;
@@ -18,12 +14,12 @@ import sid.persistencia.DAOExcepcion;
 
 /**
  *
- * @author proyecto
+ * @author Vladimir HttpServlet
  */
-@WebServlet(name = "ActualizarResidenteServlet", urlPatterns = {"/ActualizarResidenteServlet"})
-public class ActualizarResidenteServlet extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
+@WebServlet(name = "EliminarResidenteServlet", urlPatterns = {"/EliminarResidenteServlet"})
+public class EliminarResidenteServlet extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
 
-    /** 
+    /**
      * Processes requests for both HTTP
      * <code>GET</code> and
      * <code>POST</code> methods.
@@ -50,7 +46,7 @@ public class ActualizarResidenteServlet extends javax.servlet.http.HttpServlet i
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**
@@ -64,38 +60,31 @@ public class ActualizarResidenteServlet extends javax.servlet.http.HttpServlet i
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // processRequest(request, response);
-        PrintWriter ou = response.getWriter();
+        //processRequest(request, response);
+        PrintWriter out = response.getWriter();
         
-        String codigo   = request.getParameter("codeupdate"); //Aqui esta el problema, que nose porq no me esta convirtiendo la data
-        ou.print(codigo);
-        int     code = Integer.parseInt(codigo);                     
-        String nom   = request.getParameter("nomupdate");
-        String ape   = request.getParameter("apeupdate");
-        String pwd   = request.getParameter("pwdupdate");
-        String doc   = request.getParameter("idenupdate");
-        String mail  = request.getParameter("mailupdate");
-        String fech  = request.getParameter("fecupdate");
-        
+        String id = request.getParameter("id");
+        int cod  = Integer.parseInt(id);
+        //out.print(cod);
         GestionResidente residente = new GestionResidente();
         try{
-            residente.actualizar(code, nom, ape, doc, fech, mail, pwd);
-            ou.print("okis");
+            residente.eliminar(cod);
+            out.print("okis");
         }catch(DAOExcepcion e){
-           RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
-           rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+            rd.forward(request, response);
         }
         
         
     }
 
-    
+    /***
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private String trim(String parameter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
