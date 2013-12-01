@@ -9,11 +9,13 @@ public class Vivienda {
     String tipo;
     String direccion;
     int idresidente;
+    String descripciontipo;
     
     public Vivienda(){
     
     }
-   
+
+
      public Vivienda(int idvivienda,
     String zona,
     String edificio,
@@ -95,4 +97,13 @@ public class Vivienda {
     public void setIdresidente(int idresidente) {
         this.idresidente = idresidente;
     }
+    
+    public String getDescripciontipo() {
+        return descripciontipo;
+    }
+
+    public void setDescripciontipo(String descripciontipo) {
+        this.descripciontipo = descripciontipo;
+    }
+   
 }
