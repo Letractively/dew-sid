@@ -39,10 +39,9 @@ public class GestionCuota { //aqui va la regla de negocio
      return re.actualizar(vo);
    }
    
-      public Cuota actualizarpago(String tipopago, int idvivienda, int  idcuota)throws DAOExcepcion{
+      public Cuota actualizarpago(String tipopago, int  idcuota)throws DAOExcepcion{
      CuotaDAO re = new CuotaDAO();
      Cuota    vo = new Cuota();
-      vo.setidvivienda(idvivienda);
       vo.setIdCuotas(idcuota);
       vo.settipo_pago(tipopago);
      return re.actualizarpago(vo);
