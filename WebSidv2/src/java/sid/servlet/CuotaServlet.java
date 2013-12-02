@@ -6,10 +6,6 @@ package sid.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +21,7 @@ import sid.persistencia.DAOExcepcion;
  * @author proyecto
  */
 @WebServlet(name = "CuotaServlet", urlPatterns = {"/CuotaServlet"})
-public class CuotaServlet extends HttpServlet {
+public class CuotaServlet extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet  {
 
     /**
      * Processes requests for both HTTP
@@ -54,20 +50,32 @@ public class CuotaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-/*
-        try {
-            HttpSession sesion = request.getSession();
-            Collection<Cuota> arraycuota;
-            arraycuota = new GestionCuota().listarvencidas();
-            sesion.setAttribute("id", arraycuota);
-        } catch (DAOExcepcion ex) {
-            Logger.getLogger(CuotaServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		*/
-               
-                	
 
-    }
+        try {
+            String accion   = request.getParameter("accion").toString();
+            if ("1".equals(accion)){
+                 int idresidente    = Integer.parseInt(request.getParameter("idresidente"));
+                 HttpSession sesion = request.getSession();
+                 sesion.setAttribute("vidresidente", idresidente);
+                 
+                 
+              }
+             
+            
+            else if ("2".equals(accion)){
+                 int idvivienda    = Integer.parseInt(request.getParameter("idvivienda"));
+                 HttpSession sesion = request.getSession();
+                 sesion.setAttribute("vidvivienda", idvivienda);
+             } 
+            
+            
+        }
+        catch (Exception e) {
+            
+            
+         }
+        }
+    
 
     /**
      * Handles the HTTP
@@ -81,30 +89,42 @@ public class CuotaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //processRequest(request, response);
-       
-        int idvivienda = Integer.parseInt(request.getParameter("idvivienda")) ;
-        int idcuota    = Integer.parseInt(request.getParameter("idcuota"));
-        String tipopago = request.getParameter("identificacion");
         
-        GestionCuota cuota = new GestionCuota();
-        Cuota objcuota = new Cuota();
-        objcuota.setIdCuotas(idcuota);
-        objcuota.setidvivienda(idvivienda);
+        //aca registro el pago
+       String accion   = request.getParameter("accion");
        
-        
-        try{
-            cuota.actualizarpago(tipopago, idvivienda,idcuota);
-           
-            PrintWriter ou = response.getWriter();
-            ou.print("ok");
-          
-            
-        }catch(DAOExcepcion e){
-           RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
-           rd.forward(request, response);
-        }
-    }
+       if ("1".equals(accion)){
+                 int idresidente    = Integer.parseInt(request.getParameter("idresidente"));
+                 HttpSession sesion = request.getSession();
+                 request.getSession().removeAttribute("vidresidente");
+                 sesion.setAttribute("vidresidente", idresidente);
+                 
+                 PrintWriter ou = response.getWriter();
+                 ou.print("ok");
 
+              }
+       else if ("3".equals(accion)){
+            int idcuota    = Integer.parseInt(request.getParameter("idcuota"));
+            String tipopago = request.getParameter("identificacion");
+
+            GestionCuota cuota = new GestionCuota();
+
+            try{
+                Cuota objcuota = new Cuota();
+                objcuota = cuota.actualizarpago(tipopago,idcuota);
+
+                PrintWriter ou = response.getWriter();
+                ou.print("ok");
+
+
+            }catch(DAOExcepcion e){
+               RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+               rd.forward(request, response);
+            }
+        }
+       
+    
+    }
     /**
      * Returns a short description of the servlet.
      *
