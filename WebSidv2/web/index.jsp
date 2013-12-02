@@ -60,7 +60,7 @@
             <span class="add-on" href="#">
               <i class="icon-user"></i>
             </span>
-                <input type="text" placeholder="email" name="correo">
+                <input type="text" placeholder="email" name="correo" id="correo">
             </div>
             </div>
             <div id="cnttexto">
@@ -68,8 +68,20 @@
             <span class="add-on" href="#">
               <i class="icon-key"></i>
             </span>
-                <input type="password" placeholder="password" name="contrasena">
+                <input type="password" placeholder="password" name="contrasena" id="contrasena">
             </div>
+            </div>
+            <div id="cnttexto">
+                <div class="cntizlogin">
+                   Perfil de:
+                </div>
+                <div class="cntderlogin">
+                   <select name="perfil" id="perfil">
+                        <option value="">[Seleccionar]</option>
+                        <option value="A">Administrador</option>
+                        <option value="R">Residente</option>
+                    </select> 
+                </div>
             </div>
           <div>
             <input type="submit" class="btn btn-black" id="btenvia" value="Entrar">
@@ -90,3 +102,25 @@
 
 </body>
 </html>
+<script type="text/javascript">
+$(document).ready(function(){
+    var mailto = $("#correo").val();
+    var pwd    = $("#contrasena").val();
+    //var per  = $("#perfil").val();
+    //alert(per);
+    //if ($('#perfil option:selected').text() != "[Seleccionar]"){
+	var per = $("#perfil").val();
+	//full_text = full_text + " ";
+   // }
+                
+    $("#btenvia").click(function(){
+        //alert('--' + mailto + '---');
+        /*if(mail=="" || pwd=="" || per==""){
+            alert("Debe ingresar datos de acceso");
+        }else{
+            
+        }*/
+    });
+    
+}); 
+</script>

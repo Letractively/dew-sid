@@ -9,9 +9,9 @@ import sid.modelo.Administrador;
 
 public class GestionAdministrador{
 
-public Administrador validar(String email,String password) throws DAOExcepcion,LoginException{
+public Administrador validar(String email,String password, String perfil) throws DAOExcepcion,LoginException{
    AdministradorDAO dao = new AdministradorDAO();
-   return dao.validar(email, password);
+   return dao.validar(email, password, perfil);
 }
     
     

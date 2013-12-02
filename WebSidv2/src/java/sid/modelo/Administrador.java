@@ -6,20 +6,19 @@ public class Administrador {
     private String apellido;
     private String email;
     private String password;
-    private int administrar;
+    private String perfil;
     private int estado;
     
     public Administrador(){
     
     }
 
-    public Administrador(int id, String nombre, String apellido, String email, String password, int administrar, int estado) {
+    public Administrador(int id, String nombre, String apellido, String email, String password, int estado) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
-        this.administrar = administrar;
         this.estado = estado;
     }
 
@@ -63,12 +62,12 @@ public class Administrador {
         this.password = password;
     }
 
-    public int getAdministrar() {
-        return administrar;
+    public String getPerfil() {
+        return perfil;
     }
 
-    public void setAdministrar(int administrar) {
-        this.administrar = administrar;
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
     public int getEstado() {
@@ -78,8 +77,8 @@ public class Administrador {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-    
-    
+
+        
     
     
 }

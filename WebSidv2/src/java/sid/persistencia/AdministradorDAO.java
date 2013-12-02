@@ -14,8 +14,8 @@ import sid.persistencia.ConexionDAO;
 
 public class AdministradorDAO extends BaseDAO{
 
-public Administrador validar(String email,String password) throws DAOExcepcion, LoginException{
-    String query = "SELECT id,nombre,apellido,email,estado FROM administrador WHERE email=? AND password=?";
+public Administrador validar(String email,String password,String perfil) throws DAOExcepcion, LoginException{
+    String query   = "SELECT id,nombre,apellido,email,perfil,estado FROM administrador WHERE email=? AND password=? AND perfil=?";
     Connection con         = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
@@ -26,6 +26,7 @@ public Administrador validar(String email,String password) throws DAOExcepcion, 
         //stmt.setInt(1, id);
         stmt.setString(1, email);
         stmt.setString(2, password);//
+        stmt.setString(3, perfil);
         rs = stmt.executeQuery();
         
         if(rs.next()){
@@ -33,6 +34,7 @@ public Administrador validar(String email,String password) throws DAOExcepcion, 
             vo.setNombre(rs.getString("nombre"));
             vo.setApellido(rs.getString("apellido"));
             vo.setEmail(rs.getString("email"));
+            vo.setPerfil(rs.getString("perfil"));
             vo.setEstado(rs.getInt("estado"));
         }else{
             throw new LoginException("No existe");
