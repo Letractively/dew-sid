@@ -71,10 +71,11 @@ public class LoginServlet extends HttpServlet {
         //processRequest(request, response);
         String correo = request.getParameter("correo");
         String pass   = request.getParameter("contrasena");
+        String perfl= request.getParameter("perfil");
         
         GestionAdministrador negocio = new GestionAdministrador();
         try{
-            Administrador vo = negocio.validar(correo, pass);
+            Administrador vo = negocio.validar(correo, pass, perfl);
             HttpSession session = request.getSession();
             session.setAttribute("USUARIO_ACTUAL", vo);
             

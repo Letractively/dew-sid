@@ -11,3 +11,5 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display
 .anchito{width:900px;}
 .colortabla{color:#FFF;font-weight:bold;}
 .letratablita{font:12px 'Open Sans',HelveticaNeue,Helvetica,Arial;}
+.cntizlogin{float:left;width:85px;color:#636363;padding:1em 0 1em 0;}
+.cntderlogin{float:left;width:220px;}
