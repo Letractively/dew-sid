@@ -25,5 +25,10 @@ public Vivienda insertar(String zona,String edificio,String numero,double metraj
     return dao.insertar(vo);
     }
 }    
+
+ public Collection<Vivienda> listarviviendaporresidente(int idresidente) throws DAOExcepcion{
+      ViviendaDAO dao = new ViviendaDAO();
+      return dao.listarviviendaporresidente(idresidente);
+  }
     
 }
