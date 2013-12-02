@@ -69,8 +69,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        String correo = request.getParameter("correo");
-        String pass   = request.getParameter("contrasena");
+        String correo = request.getParameter("email");
+        String pass   = request.getParameter("password");
         String perfl= request.getParameter("perfil");
         
         GestionAdministrador negocio = new GestionAdministrador();
@@ -92,11 +92,11 @@ public class LoginServlet extends HttpServlet {
         
     }
 
-    /**
+   /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
-     */
+   */
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -73,6 +73,7 @@ public class InsertarResidenteServlet extends javax.servlet.http.HttpServlet imp
         String ape = request.getParameter("apellido");
         String pwd = request.getParameter("contrasena");
         String doc = request.getParameter("identificacion");
+        String nro = request.getParameter("numdoc");
         String mail= request.getParameter("email");
         String fech= request.getParameter("fechanac");
         
@@ -86,7 +87,7 @@ public class InsertarResidenteServlet extends javax.servlet.http.HttpServlet imp
             if(rs.size()>0){                
                 ou.print("err");            
             }else{                          
-                residente.insertar(nom, ape, doc, fech, mail, pwd); 
+                residente.insertar(nom, ape, doc, nro, fech, mail, pwd);    //residente.insertar(nom, ape, doc, fech, mail, pwd); 
                 ou.print("ok");
             }
                         

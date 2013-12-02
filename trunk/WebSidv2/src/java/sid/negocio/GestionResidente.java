@@ -8,12 +8,13 @@ import sid.modelo.Residente;
 
 public class GestionResidente { //aqui va la regla de negocio
     
-    public Residente insertar(String nombre,String apellido,String dni,String fecha_nac,String correo,String pwd)throws DAOExcepcion {
+    public Residente insertar(String nombre,String apellido,String tipodoc,String nro,String fecha_nac,String correo,String pwd)throws DAOExcepcion {
         ResidenteDAO dao = new ResidenteDAO();
         Residente    vo  = new Residente();
         vo.setNombres(nombre);
         vo.setApellidos(apellido);
-        vo.setDni(dni);
+        vo.setTipodoc(tipodoc);
+        vo.setNro(nro);
         vo.setFech_nac(fecha_nac);
         vo.setEmail(correo);
         vo.setPassword(pwd);
@@ -27,13 +28,14 @@ public class GestionResidente { //aqui va la regla de negocio
         }
      }
     
-     public Residente actualizar(int idresidente,String nombre,String apellido,String dni,String fecha_nac,String email,String pwd) throws DAOExcepcion{
+     public Residente actualizar(int idresidente,String nombre,String apellido,String tipodoc,String nro,String fecha_nac,String email,String pwd) throws DAOExcepcion{
      ResidenteDAO re = new ResidenteDAO();
      Residente    vo = new Residente();
      vo.setIdresidente(idresidente);
      vo.setNombres(nombre);
      vo.setApellidos(apellido);
-     vo.setDni(dni);
+     vo.setTipodoc(tipodoc);
+     vo.setNro(nro);
      vo.setFech_nac(fecha_nac);
      vo.setEmail(email);
      vo.setPassword(pwd);

@@ -212,7 +212,7 @@ public class CuotaDAO extends BaseDAO{
            try{
                con = ConexionDAO.obtenerConexion();
                String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
-                "red.dni, cuo.importe, cuo.fech_venc, viv.direccion, cuo.idvivienda " +
+                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.direccion, cuo.idvivienda " +
                 "FROM cuota as cuo " +
                 "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
                 "inner join residente as red on red.idresidente = viv.idresidente " +
@@ -226,7 +226,7 @@ public class CuotaDAO extends BaseDAO{
                    vo.setperiodo(rs.getString("periodo"));
                    Residente residente = new Residente();
                    residente.setNombres(rs.getString("nombre"));
-                   residente.setDni(rs.getString("dni"));
+                   residente.setTipodoc(rs.getString("tipodoc"));
                    vo.setResidente(residente);
                    vo.setimporte(rs.getDouble("importe"));
                    vo.setfech_venc(rs.getString("fech_venc"));
@@ -255,7 +255,7 @@ public class CuotaDAO extends BaseDAO{
            try{
                con = ConexionDAO.obtenerConexion();
                String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
-                "red.dni, cuo.importe, cuo.fech_venc, viv.direccion " +
+                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.direccion " +
                 "FROM cuota as cuo " +
                 "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
                 "inner join residente as red on red.idresidente = viv.idresidente " +
@@ -269,7 +269,7 @@ public class CuotaDAO extends BaseDAO{
                    vo.setperiodo(rs.getString("periodo"));
                    Residente residente = new Residente();
                    residente.setNombres(rs.getString("nombre"));
-                   residente.setDni(rs.getString("dni"));
+                   residente.setTipodoc(rs.getString("tipodoc"));
                    vo.setResidente(residente);
                    vo.setimporte(rs.getDouble("importe"));
                    vo.setfech_venc(rs.getString("fech_venc"));

@@ -74,12 +74,13 @@ public class ActualizarResidenteServlet extends javax.servlet.http.HttpServlet i
         String ape   = request.getParameter("apeupdate");
         String pwd   = request.getParameter("pwdupdate");
         String doc   = request.getParameter("idenupdate");
+        String nrodoc= request.getParameter("numdocupdate");
         String mail  = request.getParameter("mailupdate");
         String fech  = request.getParameter("fecupdate");
         
         GestionResidente residente = new GestionResidente();
         try{
-            residente.actualizar(code, nom, ape, doc, fech, mail, pwd);
+            residente.actualizar(code, nom, ape, doc, nrodoc, fech, mail, pwd); //residente.actualizar(code, nom, ape, doc, fech, mail, pwd);
             ou.print("okis");
         }catch(DAOExcepcion e){
            RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
