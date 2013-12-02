@@ -89,7 +89,46 @@ public Collection<Vivienda> buscarxnumero(String numero) throws DAOExcepcion{
 
 }
 
+public Collection<Vivienda> listarviviendaporresidente(int idvivienda) throws DAOExcepcion{
+    String query = "select idvivienda, zona, edificio, numero, metraje, tipo, " +
+        "case " +
+        "when tipo = 'R' then 'Rustico' " +
+        "when tipo = 'U' then 'Urbano' end as descripciontipo, " +
+        "direccion, idresidente from vivienda where idresidente =?";
+    Collection<Vivienda> listav = new ArrayList<Vivienda>();
+    Connection con = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    try{
+        con = ConexionDAO.obtenerConexion();
+        stmt= con.prepareStatement(query);
+        stmt.setInt(1, idvivienda);
+        rs = stmt.executeQuery();
+        while(rs.next()){
+            Vivienda vo = new Vivienda();
+            vo.setIdvivienda(rs.getInt("idvivienda"));
+            vo.setZona(rs.getString("zona"));
+            vo.setEdificio(rs.getString("edificio"));
+            vo.setNumero(rs.getString("numero"));
+            vo.setMetraje(rs.getDouble("metraje"));
+            vo.setTipo(rs.getString("tipo"));
+            vo.setDescripciontipo(rs.getString("descripciontipo"));
+            vo.setDireccion(rs.getString("direccion"));
+             vo.setIdresidente(rs.getInt("idresidente"));
+            listav.add(vo);
+     }
+   }catch(SQLException e){
+       System.err.println(e.getMessage());
+       throw new DAOExcepcion(e.getMessage());
+   }finally{
+        this.cerrarConexion(con);
+        this.cerrarResultSet(rs);
+        this.cerrarStatement(stmt);
+   }
+   
+   return listav;
 
+}
     
     
 }
