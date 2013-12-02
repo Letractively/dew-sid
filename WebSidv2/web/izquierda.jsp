@@ -38,6 +38,14 @@
                         <span>Cuotas</span>
                     </a>
             </li>
+            
+            <li class="">
+                    <span class="glow"></span>
+                    <a href="registrocuotas.jsp">
+                        <i class="icon-money"></i>
+                        <span>Registro de Cuotas</span>
+                    </a>
+            </li>
 				
             <li class="">
                     <span class="glow"></span>
