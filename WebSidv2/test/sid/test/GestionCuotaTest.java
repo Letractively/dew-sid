@@ -76,7 +76,7 @@ public class GestionCuotaTest {
                         " año: " + String.valueOf(r.getanio()) +
                         " periodo: " + String.valueOf(r.getperiodo()) +
                         " nombre: " + String.valueOf(r.getResidente().getNombres()) +
-                        " DNI : " + String.valueOf(r.getResidente().getDni()) +
+                        " Nro Doc : " + String.valueOf(r.getResidente().getNro()) +
                         " importe: " + String.valueOf(r.getimporte())     +                     
 //                        " direccion: " + r.getVivienda().getDireccion() +
                         " fecha vencimiento: " + String.valueOf(r.getfech_venc()));
@@ -100,7 +100,7 @@ public class GestionCuotaTest {
                         " año: " + String.valueOf(r.getanio()) +
                         " periodo: " + String.valueOf(r.getperiodo()) +
                         " nombre: " + String.valueOf(r.getResidente().getNombres()) +
-                        " DNI : " + String.valueOf(r.getResidente().getDni()) +
+                        " Nro Doc : " + String.valueOf(r.getResidente().getNro()) +
                         " importe: " + String.valueOf(r.getimporte())     +                     
 //                        " direccion: " + r.getVivienda().getDireccion() +
                         " fecha vencimiento: " + String.valueOf(r.getfech_venc()));

@@ -10,11 +10,11 @@
   <!-- Always force latest IE rendering engine or request Chrome Frame -->
   <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 
-  <!-- Use title if it's in the page YAML frontmatter -->
   <title>..:: Administrador del Sistema de Condominios ::..</title>
 
   <link href="css/application.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="js/application.js" type="text/javascript"></script>
+  <script src="js/functions.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -54,13 +54,13 @@
       </div>
 
       <div class="box-content padded">
-        <form action="LoginServlet" method="post">
+          <form action="LoginServlet" method="post" id="frmlogin">
             <div id="cnttexto">  
             <div class="input-prepend">
             <span class="add-on" href="#">
               <i class="icon-user"></i>
             </span>
-                <input type="text" placeholder="email" name="correo" id="correo">
+                <input type="text" placeholder="email" name="email" id="email">
             </div>
             </div>
             <div id="cnttexto">
@@ -68,7 +68,7 @@
             <span class="add-on" href="#">
               <i class="icon-key"></i>
             </span>
-                <input type="password" placeholder="password" name="contrasena" id="contrasena">
+                <input type="password" placeholder="password" name="password" id="password">
             </div>
             </div>
             <div id="cnttexto">
@@ -87,9 +87,8 @@
             <input type="submit" class="btn btn-black" id="btenvia" value="Entrar">
             <span style="color:red;">${MENSAJE}</span>
           </div>
-
         </form>
-
+            <div class="alert-error alert"></div>
         
       </div>
 
@@ -103,24 +102,30 @@
 </body>
 </html>
 <script type="text/javascript">
-$(document).ready(function(){
-    var mailto = $("#correo").val();
-    var pwd    = $("#contrasena").val();
-    //var per  = $("#perfil").val();
-    //alert(per);
-    //if ($('#perfil option:selected').text() != "[Seleccionar]"){
-	var per = $("#perfil").val();
-	//full_text = full_text + " ";
-   // }
-                
-    $("#btenvia").click(function(){
-        //alert('--' + mailto + '---');
-        /*if(mail=="" || pwd=="" || per==""){
-            alert("Debe ingresar datos de acceso");
-        }else{
-            
-        }*/
-    });
+$(document).ready(function(e){
+  $('#btenvia').click(function(){
+    var error = 0;
+    if($('#email').val()=="") {
+      $('#email').focus();
+      Growl.error({title: 'Validación', text: 'Ingresar un Email'}); 
+      error = 1;
+      return false;
+    }else if($('#password').val()==""){
+      Growl.error({title: 'Validación', text: 'Ingresar un Password'});
+      $('#password').focus();
+      error = 1;
+      return false;
+    }else if($('#perfil').val()==""){
+      Growl.error({title: 'Validación', text: 'Seleccione perfil'});
+      error=1;
+      return false;
+    }
     
-}); 
+   if(error==0){
+      $("#frmlogin").submit();
+   }
+ 	
+   });
+	
+});
 </script>

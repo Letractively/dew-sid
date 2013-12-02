@@ -60,7 +60,7 @@
               <th><div>N°</div></th>
               <th><div>Nombre</div></th>
               <th><div>Correo</div></th>
-              <th><div>Tipo document</div></th>
+              <th><div>Numero documento</div></th>
               <th><div>Fecha Nacimiento</div></th>
               <th><div>Opciones</div></th>
             </tr>
@@ -71,23 +71,23 @@
                 GestionResidente negocio = new GestionResidente();
                 Collection<Residente> listado = negocio.listar();  
                 for(Residente x: listado){
-                String tipodoc = x.getDni();
+                String tipodoc = x.getTipodoc();
                 String docu;
-                if(tipodoc=="P"){
+                /*if(tipodoc=="P"){
                     docu = "Pasaporte";
                 }else{
                     docu = "DNI"; 
-                }
+                }*/
             
             %>
                 <tr id="row_<% out.println(x.getIdresidente()); %>" class="letratablita">
                   <td><% out.println(x.getIdresidente()); %></td>
                   <td><% out.println(x.getNombres() + "," + x.getApellidos()); %></td>
                   <td><% out.println(x.getEmail()); %></td>
-                  <td><% out.println(docu); %></td>
+                  <td><% out.println(x.getNro()); %></td>
                   <td><% out.println(x.getFech_nac()); %></td>
                   <td class="">
-                    <a data-original-title="Editar" data-placement="left" rel="tooltip" class="actualizar"  code="<% out.println(x.getIdresidente()); %>" pwd="<% out.println(x.getPassword()); %>" nom="<% out.println(x.getNombres()); %>" ape="<% out.println(x.getApellidos()); %>" mail="<% out.println(x.getEmail()); %>"   tipid="<% out.println(x.getDni()); %>" fech="<% out.println(x.getFech_nac()); %>" pwd="<% out.println(x.getPassword()); %>" href="#">
+                    <a data-original-title="Editar" data-placement="left" rel="tooltip" class="actualizar"  code="<% out.println(x.getIdresidente()); %>" pwd="<% out.println(x.getPassword()); %>" nom="<% out.println(x.getNombres()); %>" ape="<% out.println(x.getApellidos()); %>" mail="<% out.println(x.getEmail()); %>"   tipid="<% out.println(x.getTipodoc()); %>" nrodoc="<% out.println(x.getNro()); %>"   fech="<% out.println(x.getFech_nac()); %>" pwd="<% out.println(x.getPassword()); %>" href="#">
                     <i class="icon-edit icon-large"></i>
                     </a>
                     <a href="#" onclick="eliminar(<% out.println(x.getIdresidente()); %>);" class="delete" rel="tooltip" data-placement="right" data-original-title="Eliminar"><i class="icon-remove icon-large"></i></a>
@@ -119,7 +119,7 @@
             </div>
             <div>
             <label for="nombre">Apellidos</label>
-            <input type="text" required placeholder="apellid" id="apellido" name="apellido">
+            <input type="text" required placeholder="apellido" id="apellido" name="apellido">
             </div>
             <div>
             <label for="nombre">Email (*)</label>
@@ -138,6 +138,10 @@
                <option value="D">DNI</option>
                <option value="P">Pasaporte</option>
             </select>
+            </div>
+            <div>
+            <label for="nombre">Nro Documento</label>
+            <input type="password" required placeholder="Nro documento" id="direccion" name="numdoc">
             </div>
             <div>
             <label for="nombre">Password (*)</label>
@@ -188,6 +192,10 @@
             </select>
             </div>
             <div>
+            <label for="nombre">Nro Documento</label>
+            <input type="text" required placeholder="Nro documento" id="numdocupdate" name="numdocupdate">
+            </div>
+            <div>
             <label for="nombre">Password (*)</label>
             <input type="password" required placeholder="contrasena de cliente" id="pwdupdate" name="pwdupdate">
             </div> 
@@ -214,8 +222,9 @@
 	var ape  = $(this).attr('ape');
 	var mail = $(this).attr('mail');
 	var pwd  = $(this).attr('pwd');
-	var fecha = $(this).attr('fech');
+	var fecha= $(this).attr('fech');
 	var tipid= $(this).attr('tipid');
+        var ndoc = $(this).attr('nrodoc');
 	
 	//aqui le pasamos los datos al formulario modal
 	$('#codeupdate').val(id);
@@ -225,6 +234,7 @@
         $('#pwdupdate').val(pwd);
         $('#fecupdate').val(fecha);
 	$('#idenupdate').val(tipid);
+        $('#numdocupdate').val(ndoc);
 	$('#modalmodificar').modal();	
 	
     });
@@ -252,6 +262,7 @@
             var ape  = $("#apellido").val();
             var pwd  = $("#contrasena").val();
             var doc  = $("#identificacion").val();
+            var ndoc = $("#numdoc").val();
             var mail = $("#email").val();
             var fech = $("fechanac").val();
 

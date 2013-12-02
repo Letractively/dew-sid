@@ -15,7 +15,7 @@ public class ResidenteDAO extends BaseDAO {
     
 
     public Residente insertar(Residente vo) throws DAOExcepcion{
-		String query = "INSERT INTO residente(nombre,apellidos,dni,fecha_nac,email,password) VALUES (?,?,?,?,?,?)";
+		String query = "INSERT INTO residente(nombre,apellidos,tipodoc,nro,fecha_nac,email,password) VALUES (?,?,?,?,?,?,?)";
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -24,10 +24,11 @@ public class ResidenteDAO extends BaseDAO {
 			stmt = con.prepareStatement(query);
                         stmt.setString(1, vo.getNombres());
 			stmt.setString(2, vo.getApellidos());
-                        stmt.setString(3, vo.getDni());
-                        stmt.setString(4, vo.getFech_nac());
-                        stmt.setString(5, vo.getEmail());
-                        stmt.setString(6, vo.getPassword());
+                        stmt.setString(3, vo.getTipodoc());
+                        stmt.setString(4, vo.getNro());
+                        stmt.setString(5, vo.getFech_nac());
+                        stmt.setString(6, vo.getEmail());
+                        stmt.setString(7, vo.getPassword());
                         
 			int i = stmt.executeUpdate();
 			if (i != 1) {
@@ -56,7 +57,7 @@ public class ResidenteDAO extends BaseDAO {
     
           
     public Residente actualizar(Residente vo) throws DAOExcepcion{
-           String query = "UPDATE residente SET nombre=?,apellidos=?,dni=?,fecha_nac=?,email=?,password=? WHERE idresidente=?";
+           String query = "UPDATE residente SET nombre=?,apellidos=?,tipodoc=?,nro=?,fecha_nac=?,email=?,password=? WHERE idresidente=?";
            Connection con = null;
            PreparedStatement stmt = null;
            try{
@@ -64,11 +65,12 @@ public class ResidenteDAO extends BaseDAO {
                stmt= con.prepareStatement(query);
                stmt.setString(1, vo.getNombres());
                stmt.setString(2, vo.getApellidos());
-               stmt.setString(3, vo.getDni());
-               stmt.setString(4, vo.getFech_nac());
-               stmt.setString(5, vo.getEmail());
-               stmt.setString(6, vo.getPassword());
-               stmt.setInt(7, vo.getIdresidente());
+               stmt.setString(3, vo.getTipodoc());
+               stmt.setString(4, vo.getNro());
+               stmt.setString(5, vo.getFech_nac());
+               stmt.setString(6, vo.getEmail());
+               stmt.setString(7, vo.getPassword());
+               stmt.setInt(8, vo.getIdresidente());
                int i = stmt.executeUpdate();
                if(i!=1){
                    throw new SQLException("No se pudo actualizar");
@@ -201,7 +203,7 @@ public class ResidenteDAO extends BaseDAO {
            ResultSet rs = null;
            try{
                con = ConexionDAO.obtenerConexion();
-               String query = "SELECT idresidente,nombre,apellidos,dni,fecha_nac,email,password FROM residente";
+               String query = "SELECT idresidente,nombre,apellidos,tipodoc,nro,fecha_nac,email,password FROM residente";
                stmt = con.prepareStatement(query);
                rs   = stmt.executeQuery();
                while(rs.next()){
@@ -209,7 +211,8 @@ public class ResidenteDAO extends BaseDAO {
                    vo.setIdresidente(rs.getInt("idresidente"));
                    vo.setNombres(rs.getString("nombre"));
                    vo.setApellidos(rs.getString("apellidos"));
-                   vo.setDni(rs.getString("dni"));
+                   vo.setTipodoc(rs.getString("tipodoc"));
+                   vo.setNro(rs.getString("nro"));
                    vo.setFech_nac(rs.getString("fecha_nac"));
                    vo.setEmail(rs.getString("email"));
                    vo.setPassword(rs.getString("password"));
