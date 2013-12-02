@@ -23,10 +23,10 @@
                         <div class="pull-left header">
                             <h3 class="title">
                                 <i class="icon-user"></i>
-                                Cuotas
+                                Cuotas Pendientes
                             </h3>
                             <h5>
-                               Listado de Residentes
+                               Listado de Cuotas pendientes
                             </h5>
                         </div>
 
@@ -35,17 +35,7 @@
                 </div>
             </div>
     
-          <div class="container-fluid padded">    
-                <div class="action-nav-normal">
-                <div class="span2 action-nav-button">
-                   <a title="" class="tip nueva-residente" data-toggle="modal" href="#modalresidente" data-original-title="Nuevo Residente">
-                       <i class="icon-file-alt"></i>
-                       <span>Nuevo Residente</span>
-                   </a>   
-                </div>
-                </div>
-    	   </div>
-           
+                   
             <div class="container-fluid padded">
             <div class="row-fluid">
             <div class="span12">
