@@ -129,7 +129,7 @@
                 GestionResidente negocio = new GestionResidente();
                 Collection<Residente> listado = negocio.listar();  
                 for(Residente x: listado){
-                String tipodoc = x.getDni();
+                String tipodoc = x.getTipodoc();
                 String docu;
                 if(tipodoc=="P"){
                     docu = "Pasaporte";
