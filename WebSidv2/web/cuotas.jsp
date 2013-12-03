@@ -74,7 +74,7 @@
                   <td><% out.println(x.getperiodo()); %></td>
                   <td><% out.println(x.getanio()); %></td>
                   <td><% out.println(x.getResidente().getNombres()); %></td>
-                  <td><% out.println(x.getResidente().getDni()); %></td>
+                  <td><% out.println(x.getResidente().getNro()); %></td>
                   <td><% out.println(x.getimporte()); %></td>
                   <td><% out.println(x.getfech_venc()); %></td>
                   <td><% out.println(x.getidvivienda()); %></td>
@@ -142,7 +142,7 @@
                 
             <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
-            <button id="btn-update" class="btn btn-blue">Realizar pago</button>
+            <button id="btn-bla" class="btn btn-blue">Realizar pago</button>
             </div>
             </form>
             </div>
@@ -162,6 +162,7 @@
         var vivienda  = $(this).attr('vvivienda');
         var importe  = $(this).attr('vimporte');
         var fechavenc  = $(this).attr('vfechavenc');
+        
 	
 	//aqui le pasamos los datos al formulario modal
 	$('#idvivienda').val(idvivienda);
@@ -175,20 +176,16 @@
     
     $(document).ready(function(){
         
-        $("#btn-update").click(function(){
-                        
-                data = $("#frmactualiza").serialize();
+        $("#btn-bla").click(function(){
+            alert($('#identificacion').val() + '-' + $('#idcuota').val().toString().trim());
+                //data = $("#frmactualiza").serialize();
                 $.ajax({
                     type:'post',
                     url :'CuotaServlet',
-                    data:data,
+                    data:{accion:"3",idcuotas:$('#idcuota').val().toString().trim(),identificacions:$('#identificacion').val()},
                     success:function(data){
                         alert(data);
-                        if(data=='ok'){
-                            alert('Datos grabados');
-                        }else{
-                            alert('Error en la grabación');
-                        }
+                        
                     }
 
                 });

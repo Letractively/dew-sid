@@ -6,6 +6,7 @@ package sid.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -104,22 +105,27 @@ public class CuotaServlet extends javax.servlet.http.HttpServlet implements java
 
               }
        else if ("3".equals(accion)){
-            int idcuota    = Integer.parseInt(request.getParameter("idcuota"));
-            String tipopago = request.getParameter("identificacion");
+            int idcuota    = Integer.parseInt(request.getParameter("idcuotas"));
+            String tipopago = request.getParameter("identificacions");
 
             GestionCuota cuota = new GestionCuota();
 
             try{
                 Cuota objcuota = new Cuota();
                 objcuota = cuota.actualizarpago(tipopago,idcuota);
+                
+                //obtenemos la fecha de pago
+                HttpSession sesion = request.getSession();
+                 request.getSession().removeAttribute("vidresidente");
+                 sesion.setAttribute("fecha_pago", objcuota.getfech_pago());
 
                 PrintWriter ou = response.getWriter();
-                ou.print("ok");
+                ou.print("ok" + ";" + Date.valueOf(objcuota.getfech_pago()).toLocaleString() );
 
 
             }catch(DAOExcepcion e){
-               RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
-               rd.forward(request, response);
+//               RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+//               rd.forward(request, response);
             }
         }
        
