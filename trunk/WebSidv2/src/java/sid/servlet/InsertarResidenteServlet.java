@@ -13,6 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import sid.modelo.Residente;
 
 import sid.negocio.GestionResidente;
@@ -68,7 +72,6 @@ public class InsertarResidenteServlet extends javax.servlet.http.HttpServlet imp
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //processRequest(request, response);
-       
         String nom = request.getParameter("nombre");
         String ape = request.getParameter("apellido");
         String pwd = request.getParameter("contrasena");

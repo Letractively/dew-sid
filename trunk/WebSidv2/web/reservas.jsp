@@ -171,7 +171,7 @@
             </select>
             </div>
             <div>
-                <input type="text" id="codresidente" name="codresidente" value="<% out.print(obj.getIdresidente()); %>"> 
+                <input type="hidden" id="codresidente" name="codresidente" value="<% out.print(obj.getIdresidente()); %>"> 
             </div>
             </form>
             </div>
@@ -242,9 +242,9 @@ $(document).ready(function(e){
       var horar  = $("#horar").val();
       var nhoras = $("#nhoras").val();
       var idres  = $("#codresidente").val();
-     if(idespa==''|| fechr=='' || horar==''){
+      if(idespa==''|| fechr=='' || horar==''){
          alert("Ingrese datos requeridos");
-     }else{
+      }else{
          data = $("#frmnuevareserva").serialize();
          $.ajax({
              type:'post',
@@ -252,12 +252,14 @@ $(document).ready(function(e){
              data:data,
              success:function(data){
                  if(data=="ok"){
-                     alert("Reserva realizada con exito");
-                     $("#modalreserva").modal("hide");
-                     location.reload(true);
-                 }else{
-                     alert("Error al reservar");
-                 }
+                    alert("Reserva realizada con exito");
+		    $("#modalresidente").modal("hide");
+		    location.reload(true);
+                  }else if(data=="err"){
+                    alert("¡Error!..La fecha esta reservada");
+                  }else{
+                    alert("Error en la reserva");
+                  }
              }
          })
      }
@@ -267,7 +269,7 @@ $(document).ready(function(e){
 });
 //
 function deletefile(code){
-    if(confirm("¿Desea eliminar residente?")){
+    if(confirm("¿Desea eliminar la reserva?")){
 	$.ajax({
 		type:'post',
 		url:'EliminarReservaServlet',
