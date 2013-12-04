@@ -24,7 +24,7 @@
                                 Reserva de espacio común
                             </h3>
                             <h5>
-                               Listado de Reservas
+                               Listado de mis Reservas
                             </h5>
                         </div>
 
@@ -48,7 +48,7 @@
             <div class="row-fluid">
             <div class="span12">
             <div class="box">
-            <div class="box-header"><span class="title">Listado de Reservas</span></div>
+            <div class="box-header"><span class="title">Mis Reservas</span></div>
             <div class="box-content">
                     <!-- find me in partials/data_tables_custom -->
 
@@ -58,7 +58,6 @@
             <thead>
             <tr>
               <th><div>N° reserva</div></th>
-              <th><div>Residente</div></th>
               <th><div>Espacio comun</div></th>
               <th><div>Fecha</div></th>
               <th><div>Hora</div></th>
@@ -67,25 +66,38 @@
               <th><div>Opciones</div></th>
             </tr>
             </thead>
-            <%@page import="java.util.*, sid.negocio.GestionResidente, sid.modelo.Residente" %>
+            <%@page import="java.util.*, sid.negocio.GestionReserva, sid.modelo.Reserva, sid.negocio.GestionEspacioComun, sid.modelo.EspacioComun" %>
             <tbody>
-            
-                <tr id="row_" class="letratablita">
-                  <td>50</td>
-                  <td>Juan perez</td>
-                  <td>Gymnasio</td>
-                  <td>2013-12-01</td>
-                  <td>05:25</td>
-                  <td>2</td>
-                  <td>Usado</td>
+            <%  
+                int code = obj.getIdresidente();
+                GestionReserva re = new GestionReserva();
+                Collection<Reserva> listado = re.misreservas(code);
+                String estado;
+                for(Reserva r:listado){
+                int state = r.getEstado();
+                if(state==1){
+                    estado = "Activar";
+                }else{
+                    estado = "Usada";
+                }
+            %>
+                <tr id="row_<% out.println(r.getIdreserva()); %>" class="letratablita">
+                  <td><% out.println(r.getIdreserva()); %></td>
+                  <td><% out.println(r.getNomespacio()); %></td>
+                  <td><% out.println(r.getFecha()); %></td>
+                  <td><% out.println(r.getHora()); %></td>
+                  <td><% out.println(r.getTiempo()); %></td>
+                  <td><% out.println(estado); %></td>
                   <td class="">
-                    <a data-original-title="Editar" data-placement="left" rel="tooltip" class="actualizar"  code="" href="#">
+                    <!--<a data-original-title="Editar" data-placement="left" rel="tooltip" class="actualizar"  code="" href="#">
                     <i class="icon-edit icon-large"></i>
-                    </a>
-                    <a href="#" onclick="" class="delete" rel="tooltip" data-placement="right" data-original-title="Eliminar"><i class="icon-remove icon-large"></i></a>
+                    </a>-->
+                    <a href="#" onclick="deletefile(<% out.println(r.getIdreserva()); %>);" class="delete" rel="tooltip" data-placement="right" data-original-title="Eliminar"><i class="icon-remove icon-large"></i></a>
                   </td>
                 </tr>
-            
+             <%
+             }
+             %>
             </tbody>
             </table>
             </div>
@@ -102,13 +114,20 @@
             </div>
                 <div style="" class="modal-body">
             <h6 id="modal-formLabel">Datos de reserva</h6>
-            <form id="frmnuevoresidente" style="" class="form-horizontal fill-up separate-sections">
+            <form id="frmnuevareserva" style="" class="form-horizontal fill-up separate-sections">
             <div>
             <label for="nombre">Espacio comun</label>
             <select name="espaciocomun" id="espaciocomun">
-               <option value="">[Seleccione espacio comun]</option>
-               <option value="D">Gymansio</option>
-               <option value="P">Cancha</option>
+               <option value="">[Seleccione]</option>
+               <% 
+                GestionEspacioComun esp = new GestionEspacioComun();
+                Collection<EspacioComun> lista = esp.listado();
+                for(EspacioComun r:lista){
+               %>
+               <option value="<%out.println(r.getIdespaciocomun());%>"><% out.println(r.getNombre()); %></option>
+               <%
+                }
+               %>
             </select>
             </div>
             <div>
@@ -117,9 +136,31 @@
             </div>
             <div>
             <label for="nombre">Hora reserva</label>
-            <select name="nhoras" id="nhoras">
-               <option value="11">11:00</option>
-               <option value="12">12:00</option>
+            <select name="horar" id="horar">
+            <option value="00:00">00:00</option>
+            <option value="01:00">01:00</option>							
+            <option value="02:00">02:00</option>									
+            <option value="03:00">03:00</option>
+            <option value="04:00">04:00</option>
+            <option value="05:00">05:00</option>
+            <option value="06:00">06:00</option>
+            <option value="07:00">07:00</option>
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+            <option value="21:00">21:00</option>
+            <option value="22:00">22:00</option>
+            <option value="23:00">23:00</option>
             </select>
             </div>
             <div>
@@ -128,6 +169,9 @@
                <option value="2">2</option>
                <option value="4">4</option>
             </select>
+            </div>
+            <div>
+                <input type="text" id="codresidente" name="codresidente" value="<% out.print(obj.getIdresidente()); %>"> 
             </div>
             </form>
             </div>
@@ -190,3 +234,54 @@
 
 </body>
 </html>
+<script type="text/javascript">
+$(document).ready(function(e){    
+    $("#btn-save").click(function(){
+      var idespa = $("#espaciocomun").val();
+      var fechr  = $("fechar").val();
+      var horar  = $("#horar").val();
+      var nhoras = $("#nhoras").val();
+      var idres  = $("#codresidente").val();
+     if(idespa==''|| fechr=='' || horar==''){
+         alert("Ingrese datos requeridos");
+     }else{
+         data = $("#frmnuevareserva").serialize();
+         $.ajax({
+             type:'post',
+             url: 'RealizarReservaServlet',
+             data:data,
+             success:function(data){
+                 if(data=="ok"){
+                     alert("Reserva realizada con exito");
+                     $("#modalreserva").modal("hide");
+                     location.reload(true);
+                 }else{
+                     alert("Error al reservar");
+                 }
+             }
+         })
+     }
+        
+        
+    });
+});
+//
+function deletefile(code){
+    if(confirm("¿Desea eliminar residente?")){
+	$.ajax({
+		type:'post',
+		url:'EliminarReservaServlet',
+		data:'id=' + code,
+		success: function(data){
+                   if(data=="okis"){
+                   location.reload(true);
+                  //$("#row_" + code).remove();
+                  //alert('Se elimino cliente');	
+                  }else{
+                    alert("error al eliminar");	
+                  }
+		}
+	});
+     }
+}    
+</script>

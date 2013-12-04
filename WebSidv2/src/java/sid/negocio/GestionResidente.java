@@ -2,16 +2,22 @@ package sid.negocio;
 
 import java.sql.SQLException;
 import java.util.Collection;
+import javax.security.auth.login.LoginException;
 import sid.persistencia.ResidenteDAO;
 import sid.persistencia.DAOExcepcion;
 import sid.modelo.Residente;
 
 public class GestionResidente { //aqui va la regla de negocio
     
+    public Residente validar(String email,String password, String perfil) throws DAOExcepcion,LoginException{
+        ResidenteDAO dao = new ResidenteDAO();
+        return dao.validar(email, password, perfil);
+    }
+    
     public Residente insertar(String nombre,String apellido,String tipodoc,String nro,String fecha_nac,String correo,String pwd)throws DAOExcepcion {
         ResidenteDAO dao = new ResidenteDAO();
         Residente    vo  = new Residente();
-        vo.setNombres(nombre);
+        vo.setNombre(nombre);
         vo.setApellidos(apellido);
         vo.setTipodoc(tipodoc);
         vo.setNro(nro);
@@ -32,7 +38,7 @@ public class GestionResidente { //aqui va la regla de negocio
      ResidenteDAO re = new ResidenteDAO();
      Residente    vo = new Residente();
      vo.setIdresidente(idresidente);
-     vo.setNombres(nombre);
+     vo.setNombre(nombre);
      vo.setApellidos(apellido);
      vo.setTipodoc(tipodoc);
      vo.setNro(nro);
@@ -63,8 +69,6 @@ public class GestionResidente { //aqui va la regla de negocio
       ResidenteDAO dao = new ResidenteDAO();
       return dao.listar();
   }
-    
-    
     
     
 }

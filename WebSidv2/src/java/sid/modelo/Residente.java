@@ -2,27 +2,29 @@ package sid.modelo;
 
 public class Residente {
     private int idresidente;
-    private String nombres;
+    private String nombre;
     private String apellidos;
     private String tipodoc;
     private String nro;
     private String fech_nac;
     private String email;
     private String password;
+    private String perfil;
 
     public Residente() {
         
     }
 
-    public Residente(int idresidente, String nombres, String apellidos, String tipodoc, String nro, String fech_nac, String email, String password) {
+    public Residente(int idresidente, String nombres, String apellidos, String tipodoc, String nro, String fech_nac, String email, String password,String perfil) {
         this.idresidente = idresidente;
-        this.nombres = nombres;
+        this.nombre = nombre;
         this.apellidos = apellidos;
         this.tipodoc = tipodoc;
         this.nro = nro;
         this.fech_nac = fech_nac;
         this.email = email;
         this.password = password;
+        this.perfil = perfil;
     }
 
     public int getIdresidente() {
@@ -33,12 +35,12 @@ public class Residente {
         this.idresidente = idresidente;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellidos() {
@@ -88,8 +90,14 @@ public class Residente {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }
     
        
-
-      
 }

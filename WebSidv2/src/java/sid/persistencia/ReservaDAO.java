@@ -86,9 +86,74 @@ public class ReservaDAO extends BaseDAO {
      
      return listado;
  }
-
-
-
+ 
+ public Collection<Reserva> listareservas() throws DAOExcepcion{
+     Collection<Reserva> lista = new ArrayList<Reserva>();
+     Connection con = null;
+     PreparedStatement stmt = null;
+     ResultSet rs = null;
+     try{
+         con = ConexionDAO.obtenerConexion();
+         String query = "SELECT r.idreserva,r.fecha,r.hora,r.tiempo,r.idespaciocomun,r.idresidente,e.nombre as espacio,r.estado FROM reserva r,espaciocomun e WHERE e.idespaciocomun=r.idespaciocomun";
+         stmt= con.prepareStatement(query);
+         rs  = stmt.executeQuery();
+         while(rs.next()){
+             Reserva vo = new Reserva();
+             vo.setIdreserva(rs.getInt("idreserva"));
+             vo.setFecha(rs.getString("fecha"));
+             vo.setHora(rs.getString("hora"));
+             vo.setTiempo(rs.getInt("tiempo"));
+             vo.setIdespaciocomun(rs.getInt("idespaciocomun"));
+             vo.setNomespacio(rs.getString("espacio"));
+             vo.setIdresidente(rs.getInt("idresidente"));
+             vo.setEstado(rs.getInt("estado"));
+             lista.add(vo);
+        }
+         
+     }catch(SQLException e){
+         System.err.println();
+     }finally{
+         this.cerrarStatement(stmt);
+         this.cerrarResultSet(rs);
+         this.cerrarConexion(con);
+     }
+     return lista;
+ }
+ 
+ public Collection<Reserva> misreservas(int cod) throws DAOExcepcion{
+     Collection<Reserva> lista = new ArrayList<Reserva>();
+     Connection con = null;
+     PreparedStatement stmt = null;
+     ResultSet rs = null;
+     try{
+         con = ConexionDAO.obtenerConexion();
+         String query = "SELECT r.idreserva,r.fecha,r.hora,r.tiempo,r.idespaciocomun,r.idresidente,e.nombre as espacio,r.estado FROM reserva r,espaciocomun e WHERE e.idespaciocomun=r.idespaciocomun AND r.idresidente=?";
+         stmt= con.prepareStatement(query);
+         stmt.setInt(1, cod);
+         rs  = stmt.executeQuery();
+         while(rs.next()){
+             Reserva vo = new Reserva();
+             vo.setIdreserva(rs.getInt("idreserva"));
+             vo.setFecha(rs.getString("fecha"));
+             vo.setHora(rs.getString("hora"));
+             vo.setTiempo(rs.getInt("tiempo"));
+             vo.setIdespaciocomun(rs.getInt("idespaciocomun"));
+             vo.setNomespacio(rs.getString("espacio"));
+             vo.setIdresidente(rs.getInt("idresidente"));
+             vo.setEstado(rs.getInt("estado"));
+             lista.add(vo);
+        }
+         
+     }catch(SQLException e){
+         System.err.println();
+     }finally{
+         this.cerrarStatement(stmt);
+         this.cerrarResultSet(rs);
+         this.cerrarConexion(con);
+     }
+     return lista;
+ }
+ 
 
 
 }

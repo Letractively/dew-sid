@@ -82,12 +82,12 @@
             %>
                 <tr id="row_<% out.println(x.getIdresidente()); %>" class="letratablita">
                   <td><% out.println(x.getIdresidente()); %></td>
-                  <td><% out.println(x.getNombres() + "," + x.getApellidos()); %></td>
+                  <td><% out.println(x.getNombre() + "," + x.getApellidos()); %></td>
                   <td><% out.println(x.getEmail()); %></td>
                   <td><% out.println(x.getNro()); %></td>
                   <td><% out.println(x.getFech_nac()); %></td>
                   <td class="">
-                    <a data-original-title="Editar" data-placement="left" rel="tooltip" class="actualizar"  code="<% out.println(x.getIdresidente()); %>" pwd="<% out.println(x.getPassword()); %>" nom="<% out.println(x.getNombres()); %>" ape="<% out.println(x.getApellidos()); %>" mail="<% out.println(x.getEmail()); %>"   tipid="<% out.println(x.getTipodoc()); %>" nrodoc="<% out.println(x.getNro()); %>"   fech="<% out.println(x.getFech_nac()); %>" pwd="<% out.println(x.getPassword()); %>" href="#">
+                    <a data-original-title="Editar" data-placement="left" rel="tooltip" class="actualizar"  code="<% out.println(x.getIdresidente()); %>" pwd="<% out.println(x.getPassword()); %>" nom="<% out.println(x.getNombre()); %>" ape="<% out.println(x.getApellidos()); %>" mail="<% out.println(x.getEmail()); %>"   tipid="<% out.println(x.getTipodoc()); %>" nrodoc="<% out.println(x.getNro()); %>"   fech="<% out.println(x.getFech_nac()); %>" pwd="<% out.println(x.getPassword()); %>" href="#">
                     <i class="icon-edit icon-large"></i>
                     </a>
                     <a href="#" onclick="eliminar(<% out.println(x.getIdresidente()); %>);" class="delete" rel="tooltip" data-placement="right" data-original-title="Eliminar"><i class="icon-remove icon-large"></i></a>
@@ -141,7 +141,7 @@
             </div>
             <div>
             <label for="nombre">Nro Documento</label>
-            <input type="password" required placeholder="Nro documento" id="direccion" name="numdoc">
+            <input type="text" required placeholder="Nro documento" id="direccion" name="numdoc">
             </div>
             <div>
             <label for="nombre">Password (*)</label>
@@ -213,7 +213,6 @@
 
 </body>
 </html>
-
 <script type="text/javascript">
     
     $('.actualizar').on('click',function(){
@@ -254,7 +253,7 @@
     });
 
     $('#fechanac').keypress(function(){ return false;});
-    $('#fechanac').click(function(){ return false;});*/   
+    $('#fechanac').click(function(){ return false;}); */
         
         $("#btn-save").click(function(){
             

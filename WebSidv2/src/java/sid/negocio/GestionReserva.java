@@ -26,10 +26,16 @@ public class GestionReserva {
       }else{
         return dao.insertar(vo);
       }
-      
+  }
+  
+  public Collection<Reserva> listar() throws DAOExcepcion{
+      ReservaDAO dao = new ReservaDAO();
+      return dao.listareservas();
+  }
+  
+  public Collection<Reserva> misreservas(int cod) throws DAOExcepcion{
+      ReservaDAO dao = new ReservaDAO();
+      return dao.misreservas(cod);
   }
     
-
-
-
 }

@@ -68,8 +68,9 @@ public class ActualizarResidenteServlet extends javax.servlet.http.HttpServlet i
         PrintWriter ou = response.getWriter();
         
         String codigo   = request.getParameter("codeupdate"); //Aqui esta el problema, que nose porq no me esta convirtiendo la data
-        ou.print(codigo);
-        int     code = Integer.parseInt(codigo);                     
+        String cod      = codigo.replace("\r\n", "");
+        //ou.print(codigo);
+        int code = Integer.parseInt(cod);
         String nom   = request.getParameter("nomupdate");
         String ape   = request.getParameter("apeupdate");
         String pwd   = request.getParameter("pwdupdate");
