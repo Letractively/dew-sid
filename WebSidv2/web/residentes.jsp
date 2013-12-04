@@ -240,7 +240,7 @@
     
     $(document).ready(function(){
         
-     /*var dates = $("#fechanac").datepicker({
+     var dates = $("#fechanac").datepicker({
             //dateFormat: 'yy-mm-dd', //dd-mm-yy
             showOn: "both",
             buttonImage: "images/calendar.gif",
@@ -253,7 +253,22 @@
     });
 
     $('#fechanac').keypress(function(){ return false;});
-    $('#fechanac').click(function(){ return false;}); */
+    $('#fechanac').click(function(){ return false;});
+    
+    var datin = $("#fecupdate").datepicker({
+            //dateFormat: 'yy-mm-dd', //dd-mm-yy
+            showOn: "both",
+            buttonImage: "images/calendar.gif",
+            buttonImageOnly: true,
+            monthNamesShort: ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:-18",	
+            numberOfMonths: 1
+    });
+
+    $('#fecupdate').keypress(function(){ return false;});
+    $('#fecupdate').click(function(){ return false;});
         
         $("#btn-save").click(function(){
             

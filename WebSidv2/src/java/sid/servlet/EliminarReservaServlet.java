@@ -2,24 +2,18 @@ package sid.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sid.modelo.Reserva;
 
 import sid.negocio.GestionReserva;
 import sid.persistencia.DAOExcepcion;
 
-/**
- *
- * @author vladimir
- */
-@WebServlet(name = "RealizarReservaServlet", urlPatterns = {"/RealizarReservaServlet"})
-public class RealizarReservaServlet extends HttpServlet {
+@WebServlet(name = "EliminarReservaServlet", urlPatterns = {"/EliminarReservaServlet"})
+public class EliminarReservaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -32,7 +26,22 @@ public class RealizarReservaServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        /*response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+           
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EliminarReservaServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EliminarReservaServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {            
+            out.close();
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,34 +72,18 @@ public class RealizarReservaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //processRequest(request, response);
-        String fecha  = request.getParameter("fechar");
-        String hora   = request.getParameter("horar");
-        String tpo    = request.getParameter("nhoras");     //int
-        int tiempo  = Integer.parseInt(tpo);
-        String idesp  = request.getParameter("espaciocomun");//int
-        String id_esp = idesp.replace("\r\n", "");
-        int codesp    = Integer.parseInt(id_esp);
-        String idres  = request.getParameter("codresidente");
-        int codres    = Integer.parseInt(idres);
-        int state = 1;
-        
-        GestionReserva reserva = new GestionReserva();
         PrintWriter out = response.getWriter();
+        String cod = request.getParameter("id");
+        int id = Integer.parseInt(cod);
+        GestionReserva obj = new GestionReserva();
         try{
-            Collection<Reserva> arr = reserva.buscaxfecha(fecha, hora);
-            if(arr.size()>0){
-                out.print("err");
-            }else{
-                reserva.insertar(fecha, hora, tiempo, codesp, codres, state);
-                out.print("ok");
-            }
-            
+            obj.eliminar(id);
+            out.print("okis");
         }catch(DAOExcepcion e){
             RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
             rd.forward(request, response);
-            out.print("errores");
         }
-         
+        
     }
 
     /**

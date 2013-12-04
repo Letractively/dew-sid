@@ -20,7 +20,7 @@ public class GestionReserva {
       vo.setIdresidente(idresidente);
       vo.setEstado(estado);
       //
-      Collection<Reserva> re = dao.buscarxfecha(fecha);
+      Collection<Reserva> re = dao.buscarxfecha(fecha, hora);   //dao.buscarxfecha(fecha);
       if(re.size()>0){
           throw new DAOExcepcion("Reserva no disponible");
       }else{
@@ -36,6 +36,16 @@ public class GestionReserva {
   public Collection<Reserva> misreservas(int cod) throws DAOExcepcion{
       ReservaDAO dao = new ReservaDAO();
       return dao.misreservas(cod);
+  }
+  
+  public Collection<Reserva> buscaxfecha(String fecha,String hora) throws DAOExcepcion{
+      ReservaDAO dao = new ReservaDAO();
+      return dao.buscarxfecha(fecha, hora);
+  }
+  
+  public void eliminar(int idReserva) throws DAOExcepcion{
+      ReservaDAO del = new ReservaDAO();
+      del.eliminar(idReserva);
   }
     
 }

@@ -50,8 +50,8 @@ public class ReservaDAO extends BaseDAO {
      return vo;
  }
  
- public Collection<Reserva> buscarxfecha(String fecha) throws DAOExcepcion{
-     String query = "SELECT idreserva,fecha,idespaciocomun,idresidente FROM reserva WHERE fecha=?";
+ public Collection<Reserva> buscarxfecha(String fecha,String hora) throws DAOExcepcion{
+     String query = "SELECT idreserva,fecha,idespaciocomun,idresidente FROM reserva WHERE fecha=? AND hora=? AND estado=1";
      Collection<Reserva> listado = new ArrayList<Reserva>();    //creamos un arreglo
      Connection con = null;
      PreparedStatement stmt = null;
@@ -59,7 +59,8 @@ public class ReservaDAO extends BaseDAO {
      try{
          con = ConexionDAO.obtenerConexion();
          stmt= con.prepareStatement(query);
-         stmt.setString(1, fecha);
+         stmt.setString(1,fecha);
+         stmt.setString(2,hora);
          rs  = stmt.executeQuery();
          while(rs.next()){
              Reserva vo = new Reserva();
@@ -154,6 +155,29 @@ public class ReservaDAO extends BaseDAO {
      return lista;
  }
  
-
-
+ public void eliminar(int idreserva) throws DAOExcepcion{
+     String query = "DELETE FROM reserva WHERE idreserva=?";
+     Connection con = null;
+     PreparedStatement stmt = null;
+     try{
+         con = ConexionDAO.obtenerConexion();
+         stmt= con.prepareStatement(query);
+         stmt.setInt(1, idreserva);
+         int i = stmt.executeUpdate();
+         if(i!=1){
+             throw new SQLException("No se pudo eliminar");
+         }
+     }catch(SQLException e){
+         System.err.println(e.getMessage());
+         throw new DAOExcepcion(e.getMessage());
+     }finally{
+         this.cerrarStatement(stmt);
+         this.cerrarConexion(con);
+     }
+     
+ }
+ 
+ 
+ 
+ 
 }
