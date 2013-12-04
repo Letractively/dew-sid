@@ -16,8 +16,8 @@ import sid.persistencia.DAOExcepcion;
 import javax.security.auth.login.LoginException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
-import sid.modelo.Administrador;
-import sid.negocio.GestionAdministrador;
+import sid.modelo.Residente;
+import sid.negocio.GestionResidente;
 
 /**
  *
@@ -73,9 +73,9 @@ public class LoginServlet extends HttpServlet {
         String pass   = request.getParameter("password");
         String perfl= request.getParameter("perfil");
         
-        GestionAdministrador negocio = new GestionAdministrador();
+        GestionResidente negocio = new GestionResidente();  
         try{
-            Administrador vo = negocio.validar(correo, pass, perfl);
+            Residente vo = negocio.validar(correo, pass, perfl);
             HttpSession session = request.getSession();
             session.setAttribute("USUARIO_ACTUAL", vo);
             

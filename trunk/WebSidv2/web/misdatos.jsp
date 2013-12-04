@@ -24,7 +24,16 @@
                                 Mis datos
                             </h3>
                             <h5>
-                               Datos del administrador
+                                <% 
+                                /*String msg;
+                                if(tipo.equals("A")){
+                                     msg = "Administrador";
+                                }else{
+                                     msg = "Residente";
+                                }*/
+                                //ou.print(msg);
+                                %>
+                                Datos del Administrador
                             </h5>
                         </div>
 
@@ -65,7 +74,7 @@
                                         <div class="control-group">
                                             <label class="control-label">Apellido</label>
                                             <div class="controls">
-                                                <input type="text" class="validate[required]" data-prompt-position="topLeft" value="${sessionScope.USUARIO_ACTUAL.apellido}" id="apellido" name="apellido" />
+                                                <input type="text" class="validate[required]" data-prompt-position="topLeft" value="${sessionScope.USUARIO_ACTUAL.apellidos}" id="apellido" name="apellido" />
                                             </div>
                                         </div>
 

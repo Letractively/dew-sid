@@ -11,11 +11,11 @@ import static org.junit.Assert.*;
 
 public class GestionResidenteTest {
     
-    //@Test
+    @Test
     public void insertarTest() throws DAOExcepcion{
         GestionResidente negocio = new GestionResidente();
         try{
-            negocio.insertar("Maria", "Delgado", "D", "08965784", "1980-10-15", "mariadelpa@gmail.com", "369258");
+            negocio.insertar("Jesus", "Castro", "P", "654987845", "1980-11-08", "jesus20@gmail.com", "147258");
            
           }catch(DAOExcepcion e){
             Assert.assertTrue("Email registrado", true); 
@@ -23,7 +23,7 @@ public class GestionResidenteTest {
     
     }
     
-    @Test
+    //@Test
     public void actualizarTest() throws DAOExcepcion{
         GestionResidente negocio = new GestionResidente();
         try{
@@ -51,7 +51,7 @@ public class GestionResidenteTest {
             Collection<Residente> listado = negocio.listar();
             //System.out.println(listado.size());
             for(Residente r:listado){
-                System.out.println(r.getNombres());
+                System.out.println(r.getNombre());
                 System.out.println(r.getApellidos());
             }
             Assert.assertTrue(listado.size()>0);

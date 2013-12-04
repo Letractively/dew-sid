@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import sid.modelo.Administrador;
+import sid.modelo.Residente;
 
 @WebServlet(name = "PortadaServlet", urlPatterns = {"/PortadaServlet"})
 
@@ -29,7 +29,7 @@ public class PortadaServlet extends javax.servlet.http.HttpServlet implements ja
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
        HttpSession session = request.getSession();
-       Administrador admin_actual = (Administrador)session.getAttribute("USUARIO_ACTUAL");
+       Residente admin_actual  = (Residente)session.getAttribute("USUARIO_ACTUAL");
        
 	if (admin_actual == null){
             request.getRequestDispatcher("error.jsp").forward(request, response);

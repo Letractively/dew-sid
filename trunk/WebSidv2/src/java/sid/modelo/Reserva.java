@@ -6,6 +6,7 @@ public class Reserva{
   private String hora;  
   private int tiempo;
   private int idespaciocomun;
+  private String nomespacio;
   private int idresidente;
   private int estado;
   
@@ -78,5 +79,15 @@ public class Reserva{
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    public String getNomespacio() {
+        return nomespacio;
+    }
+
+    public void setNomespacio(String nomespacio) {
+        this.nomespacio = nomespacio;
+    }
+    
+    
   
 }

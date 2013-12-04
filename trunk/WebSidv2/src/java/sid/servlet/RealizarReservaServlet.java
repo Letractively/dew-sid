@@ -8,16 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sid.modelo.Reserva;
 
-import sid.negocio.GestionResidente;
+import sid.negocio.GestionReserva;
 import sid.persistencia.DAOExcepcion;
 
 /**
  *
- * @author Vladimir HttpServlet
+ * @author vladimir
  */
-@WebServlet(name = "EliminarResidenteServlet", urlPatterns = {"/EliminarResidenteServlet"})
-public class EliminarResidenteServlet extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
+@WebServlet(name = "RealizarReservaServlet", urlPatterns = {"/RealizarReservaServlet"})
+public class RealizarReservaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -46,7 +47,7 @@ public class EliminarResidenteServlet extends javax.servlet.http.HttpServlet imp
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -61,25 +62,31 @@ public class EliminarResidenteServlet extends javax.servlet.http.HttpServlet imp
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //processRequest(request, response);
-        PrintWriter out = response.getWriter();
+        String fecha  = request.getParameter("fechar");
+        String hora   = request.getParameter("horar");
+        String tpo    = request.getParameter("nhoras");     //int
+        int tiempo  = Integer.parseInt(tpo);
+        String idesp  = request.getParameter("espaciocomun");//int
+        String id_esp = idesp.replace("\r\n", "");
+        int codesp    = Integer.parseInt(id_esp);
+        String idres  = request.getParameter("codresidente");
+        int codres    = Integer.parseInt(idres);
+        int state = 1;
         
-        String id = request.getParameter("id"); //String cod      = codigo.replace("\r\n", "");
-        String code=id.replace("\r\n", "");
-        int cod  = Integer.parseInt(code);
-        //out.print(cod);
-        GestionResidente residente = new GestionResidente();
+        GestionReserva reserva = new GestionReserva();
+        PrintWriter out = response.getWriter();
         try{
-            residente.eliminar(cod);
-            out.print("okis");
+            reserva.insertar(fecha, hora, tiempo, codesp, codres, state);
+            out.print("ok");
         }catch(DAOExcepcion e){
             RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
             rd.forward(request, response);
+            out.print("errores");
         }
-        
-        
+         
     }
 
-    /*****
+    /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description

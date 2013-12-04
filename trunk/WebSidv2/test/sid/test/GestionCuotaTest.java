@@ -75,7 +75,7 @@ public class GestionCuotaTest {
                 System.out.println("idcuota: " + String.valueOf(r.getIdCuotas()) +
                         " año: " + String.valueOf(r.getanio()) +
                         " periodo: " + String.valueOf(r.getperiodo()) +
-                        " nombre: " + String.valueOf(r.getResidente().getNombres()) +
+                        " nombre: " + String.valueOf(r.getResidente().getNombre()) +
                         " Nro Doc : " + String.valueOf(r.getResidente().getNro()) +
                         " importe: " + String.valueOf(r.getimporte())     +                     
 //                        " direccion: " + r.getVivienda().getDireccion() +
@@ -99,7 +99,7 @@ public class GestionCuotaTest {
                 System.out.println("idcuota: " + String.valueOf(r.getIdCuotas()) +
                         " año: " + String.valueOf(r.getanio()) +
                         " periodo: " + String.valueOf(r.getperiodo()) +
-                        " nombre: " + String.valueOf(r.getResidente().getNombres()) +
+                        " nombre: " + String.valueOf(r.getResidente().getNombre()) +
                         " Nro Doc : " + String.valueOf(r.getResidente().getNro()) +
                         " importe: " + String.valueOf(r.getimporte())     +                     
 //                        " direccion: " + r.getVivienda().getDireccion() +

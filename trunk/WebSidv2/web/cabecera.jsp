@@ -28,7 +28,7 @@
                                         <div class="avatar">
                                             <img src="images/avatars/avatar4.jpg" />
                                         </div>
-                                        <span>Ricardo</span>
+                                        <span>${sessionScope.USUARIO_ACTUAL.nombre}</span>
                                     </li>
 
                                     <li class="divider"></li>
@@ -43,7 +43,7 @@
 
                         <ul class="nav pull-right">
                             <li class="active"><a href="misdatos.jsp" title="Go home"><i class="icon-home"></i>Home</a></li>
-                            <li><a href="residentes.jsp" title="Manage users"><i class="icon-user"></i>Residentes</a></li>
+                            <!--<li><a href="residentes.jsp" title="Manage users"><i class="icon-user"></i>Residentes</a></li>-->
                         </ul>
 
                     </div>

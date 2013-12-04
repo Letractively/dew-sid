@@ -225,7 +225,7 @@ public class CuotaDAO extends BaseDAO{
                    vo.setanio(rs.getInt("anio"));
                    vo.setperiodo(rs.getString("periodo"));
                    Residente residente = new Residente();
-                   residente.setNombres(rs.getString("nombre"));
+                   residente.setNombre(rs.getString("nombre"));
                    residente.setTipodoc(rs.getString("tipodoc"));
                    vo.setResidente(residente);
                    vo.setimporte(rs.getDouble("importe"));
@@ -268,7 +268,7 @@ public class CuotaDAO extends BaseDAO{
                    vo.setanio(rs.getInt("anio"));
                    vo.setperiodo(rs.getString("periodo"));
                    Residente residente = new Residente();
-                   residente.setNombres(rs.getString("nombre"));
+                   residente.setNombre(rs.getString("nombre"));
                    residente.setTipodoc(rs.getString("tipodoc"));
                    vo.setResidente(residente);
                    vo.setimporte(rs.getDouble("importe"));
