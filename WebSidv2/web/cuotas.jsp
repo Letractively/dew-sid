@@ -73,7 +73,7 @@
                   <td><% out.println(x.getIdCuotas()); %></td>
                   <td><% out.println(x.getperiodo()); %></td>
                   <td><% out.println(x.getanio()); %></td>
-                  <td><% out.println(x.getResidente().getNombres()); %></td>
+                  <td><% out.println(x.getResidente().getApellidos() + ", " + x.getResidente().getNombre()); %></td>
                   <td><% out.println(x.getResidente().getNro()); %></td>
                   <td><% out.println(x.getimporte()); %></td>
                   <td><% out.println(x.getfech_venc()); %></td>
