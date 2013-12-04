@@ -140,11 +140,11 @@
             %>
                 <tr id="row_<% out.println(x.getIdresidente()); %>" class="letratablita">
                   <td><% out.println(x.getIdresidente()); %></td>
-                  <td><% out.println(x.getNombres() + "," + x.getApellidos()); %></td>
+                  <td><% out.println(x.getNombre()+ "," + x.getApellidos()); %></td>
                   <td><% out.println(x.getEmail()); %></td>
                   <td><% out.println(docu); %></td>
                   <td class="">
-                    <a data-original-title="Seleccionar" data-placement="left" rel="tooltip" class="Seleccionarresidente"  code="<% out.println(x.getIdresidente()); %>" nombres="<% out.println(x.getNombres() + " " + x.getApellidos()); %>" href="#">
+                    <a data-original-title="Seleccionar" data-placement="left" rel="tooltip" class="Seleccionarresidente"  code="<% out.println(x.getIdresidente()); %>" nombres="<% out.println(x.getNombre() + " " + x.getApellidos()); %>" href="#">
                     <i class="icon-edit icon-large"></i>
                     </a>
                  </td>
