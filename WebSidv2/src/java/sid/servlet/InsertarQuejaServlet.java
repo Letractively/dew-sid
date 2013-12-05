@@ -82,6 +82,7 @@ public class InsertarQuejaServlet extends HttpServlet {
             throws ServletException, IOException {
          //processRequest(request, response);
        
+        String idresidente = request.getParameter("txtIdResidente");
         String tipoqueja = request.getParameter("cmbTipoQueja");
         String fecha = request.getParameter("datFechaOcurrencia");
         String motivo = request.getParameter("txtMotivo");
@@ -89,7 +90,7 @@ public class InsertarQuejaServlet extends HttpServlet {
         GestionQueja queja = new GestionQueja();
         
         try{
-            queja.insertQueja(tipoqueja, motivo, fecha, 1, "G");
+            queja.insertQueja(tipoqueja, motivo, fecha, Integer.parseInt(idresidente), "G");
             //response.sendRedirect(request.getContextPath() + "/PortadaServlet");
             PrintWriter ou = response.getWriter();
             ou.print("ok");
