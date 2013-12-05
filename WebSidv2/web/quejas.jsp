@@ -75,7 +75,28 @@
                 <tr id="" class="letratablita">
                   <td><% out.println(x.getIdqueja()); %></td>
                   <td>
-                      <% out.println(x.getTipo_queja()); %></td>
+                      <%  
+                  int tipoqueja = Integer.parseInt(x.getTipo_queja());
+                  switch (tipoqueja) {
+            case 1:  out.println("Atención");
+                     break;
+            case 2:  out.println("Limpieza");
+                     break;
+            case 3:  out.println("Mantenimiento");
+                     break;
+            case 4:  out.println("Seguridad");
+                     break;
+            case 5:  out.println("Separación de Ambientes");
+                     break;
+            case 6:  out.println("Vigilancia");
+                     break;
+            case 7:  out.println("Vecinos");
+                     break;
+            default: out.println("General");
+                     break;
+                      }
+                  
+%></td>
                   <td><% out.println(x.getMotivo()); %></td>
                   <td><% out.println(x.getFech_queja()); %></td>
                   <td><% out.println(x.getIdresidente()); %></td>
@@ -85,6 +106,7 @@
             %>
             </tbody>
             </table>
+            
             </div>
             </div>
             </div>
@@ -103,6 +125,7 @@
             
             <form id="frmnuevoqueja" style="" class="form-horizontal fill-up separate-sections">
             <div>
+                <input type="hidden" name="txtIdResidente" id="txtIdResidente" value="${sessionScope.USUARIO_ACTUAL.idresidente}">
                 <label for="nombre">Tipo de Queja</label>
                 <select name="cmbTipoQueja"  id="tipoQueja">
                     <option value="1">Atención</option>
