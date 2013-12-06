@@ -74,7 +74,7 @@
                   <td><% out.println(x.getTipoVivienda()); %></td>
                   <td><% out.println(x.getUbicacion()); %></td>
                   <td class="">
-                      <a data-original-title="Seleccionar" data-placement="left" rel="tooltip" class="seleccionarvivienda"  idviviendav="<% out.println(String.valueOf( x.getIdvivienda())); %>" direccionv="<% out.println(x.getDireccion()); %>" href="#">
+                      <a data-original-title="Seleccionar" data-placement="left" rel="tooltip" class="seleccionarvivienda"  idviviendav="<% out.println(String.valueOf( x.getIdvivienda())); %>" direccionv="<% out.println(x.getUbicacion()); %>" href="#">
                     <i class="icon-edit icon-large"></i>
                     </a>
                  </td>
