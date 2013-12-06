@@ -2,38 +2,28 @@ package sid.modelo;
 
 public class Vivienda {
     int idvivienda;
-    String zona;
-    String edificio;
+    String tipoVivienda;
+    String tipoUbicacion;
+    String ubicacion;
     String numero;
     double metraje;
-    String tipo;
-    String direccion;
     int idresidente;
-    String descripciontipo;
+    
     
     public Vivienda(){
     
     }
 
-
-     public Vivienda(int idvivienda,
-    String zona,
-    String edificio,
-    String numero,
-    double metraje,
-    String tipo,
-    String direccion,
-    int idresidente){
-         this.idvivienda = idvivienda;
-           this.zona = zona;
-           this.edificio = edificio;
-           this.numero = numero;
-           this.metraje = metraje;
-           this.tipo = tipo;
-           this.direccion = direccion;
-           this.idresidente = idresidente;
+    public Vivienda(int idvivienda, String tipoVivienda, String tipoUbicacion, String numero, double metraje, int idresidente) {
+        this.idvivienda = idvivienda;
+        this.tipoVivienda = tipoVivienda;
+        this.tipoUbicacion = tipoUbicacion;
+        this.numero = numero;
+        this.metraje = metraje;
+        this.idresidente = idresidente;
     }
-    
+
+ 
     public int getIdvivienda() {
         return idvivienda;
     }
@@ -42,23 +32,15 @@ public class Vivienda {
         this.idvivienda = idvivienda;
     }
 
-    public String getZona() {
-        return zona;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
-    public void setZona(String zona) {
-        this.zona = zona;
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
-    public String getEdificio() {
-        return edificio;
-    }
-
-    public void setEdificio(String edificio) {
-        this.edificio = edificio;
-    }
-
-    public String getNumero() {
+   public String getNumero() {
         return numero;
     }
 
@@ -74,23 +56,7 @@ public class Vivienda {
         this.metraje = metraje;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public int getIdresidente() {
+   public int getIdresidente() {
         return idresidente;
     }
 
@@ -98,12 +64,21 @@ public class Vivienda {
         this.idresidente = idresidente;
     }
     
-    public String getDescripciontipo() {
-        return descripciontipo;
+    public String getTipoVivienda() {
+        return tipoVivienda;
     }
 
-    public void setDescripciontipo(String descripciontipo) {
-        this.descripciontipo = descripciontipo;
+    public void setTipoVivienda(String tipoVivienda) {
+        this.tipoVivienda = tipoVivienda;
+    }
+
+    public String getTipoUbicacion() {
+        return tipoUbicacion;
+    }
+
+    public void setTipoUbicacion(String tipoUbicacion) {
+        this.tipoUbicacion = tipoUbicacion;
     }
    
+    
 }
