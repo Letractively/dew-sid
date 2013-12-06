@@ -4,8 +4,7 @@
     Author     : pmurrugarras
 --%>
 
-<%@page import="sid.modelo.Vivienda"%>
-<%@page import="sid.negocio.GestionVivienda"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -78,7 +77,8 @@
             </thead>
             <%@page import="java.util.*, sid.negocio.GestionVivienda, sid.modelo.Vivienda" %>
             <tbody>
-            <% 
+            <%
+                
                 GestionVivienda negocio = new GestionVivienda();
                 Collection<Vivienda> listado = negocio.listarViviendas();
                 for(Vivienda x: listado){
@@ -111,7 +111,9 @@
                   <td><% out.println(x.getMetraje()); %></td>
                   <td><% out.println(x.getIdresidente()); %></td>
                 </tr>
-            
+                <%
+                }
+                %>
             </tbody>
             </table>
             
@@ -225,8 +227,8 @@
                     success:function(data){
                         if(data=="ok"){
                             alert("datos grabados con éxito");
-                $("#modalvivienda").modal("hide");
-                location.reload(true);    
+                            $("#modalvivienda").modal("hide");
+                            location.reload(true);    
                         }else{
                             alert("Error en la grabación");
                         }

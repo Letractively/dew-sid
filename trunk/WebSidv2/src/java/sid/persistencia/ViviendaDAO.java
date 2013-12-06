@@ -125,7 +125,7 @@ public Collection<Vivienda> listarviviendaporresidente(int idvivienda) throws DA
 }
   
 public Collection<Vivienda> listarViviendas() throws DAOExcepcion{
-    String query = "Select * from vivienda1";
+    String query = "Select * from vivienda";
     Collection<Vivienda> listav = new ArrayList<Vivienda>();
     Connection con = null;
     PreparedStatement stmt = null;

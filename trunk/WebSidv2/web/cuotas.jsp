@@ -80,10 +80,10 @@
                   <td><% out.println(x.getimporte()); %></td>
                   <td><% out.println(x.getfech_venc()); %></td>
                   <td><% out.println(x.getidvivienda()); %></td>
-                  <td><% out.println(x.getVivienda().getDireccion()); %></td>
+                  <td><% out.println(x.getVivienda().getUbicacion()); %></td>
                   
                   <td class="">
-                    <a data-original-title="Realizar Pago" data-placement="left" rel="tooltip" class="ingresar" vfechavenc="<% out.println(x.getfech_venc()); %>" vimporte="<% out.println(x.getimporte()); %>" vvivienda="<% out.println(x.getVivienda().getDireccion()); %>" vperiodo="<% out.println(x.getperiodo()); %>"  vidvivienda="<% out.println(x.getidvivienda()); %>" vidcuota="<% out.println(x.getIdCuotas()); %>"   data-toggle="modal" href="#modalpagocuota" data-original-title="Nuevo pago" >
+                    <a data-original-title="Realizar Pago" data-placement="left" rel="tooltip" class="ingresar" vfechavenc="<% out.println(x.getfech_venc()); %>" vimporte="<% out.println(x.getimporte()); %>" vvivienda="<% out.println(x.getVivienda().getUbicacion()); %>" vperiodo="<% out.println(x.getperiodo()); %>"  vidvivienda="<% out.println(x.getidvivienda()); %>" vidcuota="<% out.println(x.getIdCuotas()); %>"   data-toggle="modal" href="#modalpagocuota" data-original-title="Nuevo pago" >
                     <i class="icon-edit icon-large"></i>
                     </a>
                   </td>
