@@ -150,7 +150,5 @@
        });
     }
     
-   function Cerrar(){
-        document.close();
-   }
+ 
         </script>

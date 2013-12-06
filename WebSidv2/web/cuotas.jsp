@@ -144,7 +144,7 @@
                 
             <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
-            <button id="btn-update" class="btn btn-blue" onclick="Cerrar()">Realizar pago</button>
+            <button id="btnpagar" name="btnpagar" class="btn btn-blue" onclick="Cerrar()">Realizar pago</button>
             </div>
             </form>
             </div>
@@ -178,7 +178,7 @@
     
     $(document).ready(function(){
         
-        $("#btn-update").click(function(){
+        $("#btnpagar").click(function(){
             //alert($('#identificacion').val() + '-' + $('#idcuota').val().toString().trim());
                 //data = $("#frmactualiza").serialize();
                 $.ajax({
@@ -187,7 +187,7 @@
                     data:{accion:"3",idcuotas:$('#idcuota').val().toString().trim(),identificacions:$('#identificacion').val()},
                     success:function(datax){
                         alert(String.valueOf(datax));
-                        if(String.valueOf(datax).substring(1,2) === "ok"){
+                        if(String.valueOf(datax).substring(0,2) === "ok"){
                            alert("se resgistro el pago con exito, fecha y hora de pago: " + String.valueOf(datax).substring(3));
                            location.reload(true);
                         }
