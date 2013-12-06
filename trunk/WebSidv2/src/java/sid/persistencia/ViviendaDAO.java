@@ -8,26 +8,24 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import sid.modelo.Vivienda;
-import sid.persistencia.ConexionDAO;
-import sid.persistencia.DAOExcepcion;
+
 
 public class ViviendaDAO extends BaseDAO {
 
 public Vivienda insertar(Vivienda vo) throws DAOExcepcion{
-    String query = "INSERT INTO vivienda(zona,edificio,numero,metraje,tipo,direccion,idresidente)VALUES(?,?,?,?,?,?,?)";
+    String query = "INSERT INTO vivienda1(tipovivienda, tipoubicacion, ubicacion, numero, metraje,idresidente) VALUES(?,?,?,?,?,?)";
     Connection con = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     try{
         con = ConexionDAO.obtenerConexion();
         stmt= con.prepareStatement(query);
-        stmt.setString(1, vo.getZona());
-        stmt.setString(2, vo.getEdificio());
-        stmt.setString(3, vo.getNumero());
-        stmt.setDouble(4, vo.getMetraje());
-        stmt.setString(5, vo.getTipo());
-        stmt.setString(6, vo.getDireccion());
-        stmt.setInt(7, vo.getIdresidente());
+        stmt.setString(1, vo.getTipoVivienda());
+        stmt.setString(2, vo.getTipoUbicacion());
+        stmt.setString(3, vo.getUbicacion());
+        stmt.setString(4, vo.getNumero());
+        stmt.setDouble(5, vo.getMetraje());
+        stmt.setInt(6, vo.getIdresidente());
         int i = stmt.executeUpdate();
         if(i!=1){
             throw new SQLException("No se pudo insertar");
@@ -53,7 +51,7 @@ public Vivienda insertar(Vivienda vo) throws DAOExcepcion{
 }
 
 public Collection<Vivienda> buscarxnumero(String numero) throws DAOExcepcion{
-    String query = "SELECT idvivienda,zona,edificio,metraje FROM vivienda WHERE numero=?";
+    String query = "SELECT idvivienda,ubicacion,metraje,tipovivienda FROM vivienda1 WHERE numero=?";
     Collection<Vivienda> listav = new ArrayList<Vivienda>();
     Connection con = null;
     PreparedStatement stmt = null;
@@ -66,9 +64,9 @@ public Collection<Vivienda> buscarxnumero(String numero) throws DAOExcepcion{
         while(rs.next()){
             Vivienda vo = new Vivienda();
             vo.setIdvivienda(rs.getInt("idvivienda"));
-            vo.setZona(rs.getString("zona"));
-            vo.setEdificio(rs.getString("edificio"));
+            vo.setUbicacion(rs.getString("ubicacion"));
             vo.setMetraje(rs.getDouble("metraje"));
+            vo.setTipoVivienda(rs.getString("tipovivienda"));
             listav.add(vo);
      }
    }catch(SQLException e){
@@ -90,11 +88,7 @@ public Collection<Vivienda> buscarxnumero(String numero) throws DAOExcepcion{
 }
 
 public Collection<Vivienda> listarviviendaporresidente(int idvivienda) throws DAOExcepcion{
-    String query = "select idvivienda, zona, edificio, numero, metraje, tipo, " +
-        "case " +
-        "when tipo = 'R' then 'Rustico' " +
-        "when tipo = 'U' then 'Urbano' end as descripciontipo, " +
-        "direccion, idresidente from vivienda where idresidente =?";
+    String query = "select idvivienda, ubicacion, numero, metraje, tipovivienda, tipoubicacion, idresidente from vivienda1 where idresidente =?";
     Collection<Vivienda> listav = new ArrayList<Vivienda>();
     Connection con = null;
     PreparedStatement stmt = null;
@@ -107,14 +101,13 @@ public Collection<Vivienda> listarviviendaporresidente(int idvivienda) throws DA
         while(rs.next()){
             Vivienda vo = new Vivienda();
             vo.setIdvivienda(rs.getInt("idvivienda"));
-            vo.setZona(rs.getString("zona"));
-            vo.setEdificio(rs.getString("edificio"));
+            vo.setUbicacion(rs.getString("ubicacion"));
             vo.setNumero(rs.getString("numero"));
             vo.setMetraje(rs.getDouble("metraje"));
-            vo.setTipo(rs.getString("tipo"));
-            vo.setDescripciontipo(rs.getString("descripciontipo"));
-            vo.setDireccion(rs.getString("direccion"));
-             vo.setIdresidente(rs.getInt("idresidente"));
+            vo.setTipoVivienda(rs.getString("tipovivienda"));
+            //vo.setDescripciontipo(rs.getString("descripciontipo"));
+            vo.setTipoUbicacion(rs.getString("tipoubicacion"));
+            vo.setIdresidente(rs.getInt("idresidente"));
             listav.add(vo);
      }
    }catch(SQLException e){
@@ -129,6 +122,39 @@ public Collection<Vivienda> listarviviendaporresidente(int idvivienda) throws DA
    return listav;
 
 }
+  
+public Collection<Vivienda> listarViviendas() throws DAOExcepcion{
+    String query = "Select * from vivienda1";
+    Collection<Vivienda> listav = new ArrayList<Vivienda>();
+    Connection con = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
     
+    try{
+        con = ConexionDAO.obtenerConexion();
+        stmt = con.prepareStatement(query);
+        rs = stmt.executeQuery();
+        while(rs.next()){
+            Vivienda vo = new Vivienda();
+            vo.setIdvivienda(rs.getInt("idvivienda"));
+            vo.setTipoVivienda(rs.getString("tipovivienda"));
+            vo.setTipoUbicacion(rs.getString("tipoubicacion"));
+            vo.setUbicacion("ubicacion");
+            vo.setNumero("numero");
+            vo.setMetraje(rs.getDouble("metraje"));
+            vo.setIdresidente(rs.getInt("idresidente"));
+            listav.add(vo);
+     }
+   }catch(SQLException e){
+       System.err.println(e.getMessage());
+       throw new DAOExcepcion(e.getMessage());
+   }finally{
+        this.cerrarConexion(con);
+        this.cerrarResultSet(rs);
+        this.cerrarStatement(stmt);
+   }
+   
+   return listav;
+ }
     
 }
