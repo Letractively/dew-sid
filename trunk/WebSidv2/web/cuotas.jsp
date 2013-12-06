@@ -144,7 +144,7 @@
                 
             <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
-            <button id="btn-update" class="btn btn-blue">Realizar pago</button>
+            <button id="btn-update" class="btn btn-blue" onclick="Cerrar()">Realizar pago</button>
             </div>
             </form>
             </div>

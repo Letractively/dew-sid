@@ -98,7 +98,7 @@
             </form>
             </div>
             <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                <button data-dismiss="modal" class="btn btn-default" onclick="self.close()">Cancelar</button>
             </div>
            
             <!-- -->
@@ -121,7 +121,13 @@
                            url :'CuotaServlet',
                            data:{accion: "2", vidvivienda: idviviendax,vdireccion:direccionx},
                            success:function(data){
-
+                               if(data=="ok"){
+                                   alert("se selecciono la vivienda: " + direccionx);
+                                   mostrar();
+                                   self.close()
+                               }
+                               else
+                                   alert("ocurrio un error al seleccionar.");
                            }
 
                        });
@@ -132,15 +138,19 @@
            });
        }); 
        
-    $(window).bind("beforeunload", function() { 
-            $.ajax({
-                           type:'Get',
-                           url :'resgistrocuotas.jsp/mostrarviviendaseleccionada',
-                           data:{accion: ""},
-                           success:function(data){
+    function mostrar(){
+        $.ajax({
+           type:'Get',
+           url :'resgistrocuotas.jsp/mostrarviviendaseleccionada',
+           data:{accion: ""},
+           success:function(data){
 
-                           }
+           }
 
-                       });
-    });
+       });
+    }
+    
+   function Cerrar(){
+        document.close();
+   }
         </script>
