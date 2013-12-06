@@ -24,7 +24,7 @@
                                 Reserva de espacio común
                             </h3>
                             <h5>
-                               Listado de mis Reservas
+                                Listado de mis Reservas
                             </h5>
                         </div>
 
@@ -39,6 +39,13 @@
                    <a title="" class="tip nueva-residente" data-toggle="modal" href="#modalreserva" data-original-title="Nueva reserva">
                        <i class="icon-file-alt"></i>
                        <span>Nueva reserva</span>
+                   </a>   
+                </div>
+                    
+                <div class="span2 action-nav-button">
+                   <a title="" class="tip nueva-residente" data-toggle="modal" href="fechaslibres.jsp" data-original-title="Ver fechas libres">
+                       <i class="icon-file-alt"></i>
+                       <span>Fechas Libres</span>
                    </a>   
                 </div>
                 </div>
@@ -235,7 +242,22 @@
 </body>
 </html>
 <script type="text/javascript">
-$(document).ready(function(e){    
+$(document).ready(function(e){  
+     var dates = $("#fechar").datepicker({
+            //dateFormat: 'yy-mm-dd', //dd-mm-yy
+            showOn: "both",
+            buttonImage: "images/calendar.gif",
+            buttonImageOnly: true,
+            monthNamesShort: ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:-18",	
+            numberOfMonths: 1
+    });
+
+    $('#fechar').keypress(function(){ return false;});
+    $('#fechar').click(function(){ return false;});
+    
     $("#btn-save").click(function(){
       var idespa = $("#espaciocomun").val();
       var fechr  = $("fechar").val();
