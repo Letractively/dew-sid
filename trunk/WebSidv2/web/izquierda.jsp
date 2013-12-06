@@ -69,7 +69,7 @@
             </li>
             <li class="">
                     <span class="glow"></span>
-                    <a href="reservas.jsp">
+                    <a href="fechaslibres.jsp">
                         <i class="icon-table"></i>
                         <span>Reservas</span>
                     </a>
