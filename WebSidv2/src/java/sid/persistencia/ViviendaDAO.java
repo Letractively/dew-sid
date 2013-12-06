@@ -140,8 +140,8 @@ public Collection<Vivienda> listarViviendas() throws DAOExcepcion{
             vo.setIdvivienda(rs.getInt("idvivienda"));
             vo.setTipoVivienda(rs.getString("tipovivienda"));
             vo.setTipoUbicacion(rs.getString("tipoubicacion"));
-            vo.setUbicacion("ubicacion");
-            vo.setNumero("numero");
+            vo.setUbicacion(rs.getString("ubicacion"));
+            vo.setNumero(rs.getString("numero"));
             vo.setMetraje(rs.getDouble("metraje"));
             vo.setIdresidente(rs.getInt("idresidente"));
             listav.add(vo);
