@@ -21,7 +21,7 @@
                         <div class="pull-left header">
                             <h3 class="title">
                                 <i class="icon-user"></i>
-                                Reserva de espacio común
+                                Mis reservas
                             </h3>
                             <h5>
                                 Listado de mis Reservas
@@ -39,13 +39,6 @@
                    <a title="" class="tip nueva-residente" data-toggle="modal" href="#modalreserva" data-original-title="Nueva reserva">
                        <i class="icon-file-alt"></i>
                        <span>Nueva reserva</span>
-                   </a>   
-                </div>
-                    
-                <div class="span2 action-nav-button">
-                   <a title="" class="tip nueva-residente" data-toggle="modal" href="fechaslibres.jsp" data-original-title="Ver fechas libres">
-                       <i class="icon-file-alt"></i>
-                       <span>Fechas Libres</span>
                    </a>   
                 </div>
                 </div>
@@ -144,16 +137,10 @@
             <div>
             <label for="nombre">Hora reserva</label>
             <select name="horar" id="horar">
-            <option value="00:00">00:00</option>
-            <option value="01:00">01:00</option>							
-            <option value="02:00">02:00</option>									
-            <option value="03:00">03:00</option>
-            <option value="04:00">04:00</option>
-            <option value="05:00">05:00</option>
-            <option value="06:00">06:00</option>
-            <option value="07:00">07:00</option>
-            <option value="08:00">08:00</option>
-            <option value="09:00">09:00</option>
+            <option value="6:00">6:00</option>
+            <option value="7:00">7:00</option>
+            <option value="8:00">8:00</option>
+            <option value="9:00">9:00</option>
             <option value="10:00">10:00</option>
             <option value="11:00">11:00</option>
             <option value="12:00">12:00</option>
@@ -173,6 +160,7 @@
             <div>
             <label for="nombre">N° horas</label>
             <select name="nhoras" id="nhoras">
+              <option value="">[Seleccione]</option>
                <option value="2">2</option>
                <option value="4">4</option>
             </select>
@@ -264,8 +252,9 @@ $(document).ready(function(e){
       var horar  = $("#horar").val();
       var nhoras = $("#nhoras").val();
       var idres  = $("#codresidente").val();
-      if(idespa==''|| fechr=='' || horar==''){
+      if(idespa==''|| fechr=='' || nhoras==''){
          alert("Ingrese datos requeridos");
+         return false;
       }else{
          data = $("#frmnuevareserva").serialize();
          $.ajax({
