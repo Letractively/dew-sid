@@ -1,0 +1,11 @@
+Esta es la estructura actualizada.
+
+# Field, Type, Null, Key, Default, Extra
+'idvivienda', 'int(11)', 'NO', 'PRI', NULL, 'auto_increment'
+'tipovivienda', 'char(1)', 'YES', '', NULL, ''
+'tipoubicacion', 'char(1)', 'YES', '', NULL, ''
+'ubicacion', 'varchar(250)', 'YES', '', NULL, ''
+'numero', 'varchar(4)', 'YES', '', NULL, ''
+'metraje', 'decimal(5,2)', 'YES', '', NULL, ''
+'idresidente', 'int(11)', 'NO', 'PRI', NULL, ''
+
