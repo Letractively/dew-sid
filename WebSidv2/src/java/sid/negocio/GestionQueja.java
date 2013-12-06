@@ -28,4 +28,9 @@ public class GestionQueja { //aqui va la regla de negocio
       return dao.listarQuejas();
   }
        
+   
+   public Collection<Queja> listarQuejasxResidente(int idResidente) throws DAOExcepcion{
+      QuejaDAO dao = new QuejaDAO();
+      return dao.listarQuejasxResidente(idResidente);
+  }
 }
