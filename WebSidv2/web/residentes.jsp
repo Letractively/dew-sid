@@ -60,6 +60,7 @@
               <th><div>N°</div></th>
               <th><div>Nombre</div></th>
               <th><div>Correo</div></th>
+              <th><div>Tipo Documento</div></th>
               <th><div>Numero documento</div></th>
               <th><div>Fecha Nacimiento</div></th>
               <th><div>Opciones</div></th>
@@ -73,17 +74,18 @@
                 for(Residente x: listado){
                 String tipodoc = x.getTipodoc();
                 String docu;
-                /*if(tipodoc=="P"){
+                if(tipodoc.equals("P")){
                     docu = "Pasaporte";
                 }else{
                     docu = "DNI"; 
-                }*/
+                }
             
             %>
                 <tr id="row_<% out.println(x.getIdresidente()); %>" class="letratablita">
                   <td><% out.println(x.getIdresidente()); %></td>
                   <td><% out.println(x.getNombre() + "," + x.getApellidos()); %></td>
                   <td><% out.println(x.getEmail()); %></td>
+                  <td><% out.println(docu); %></td>
                   <td><% out.println(x.getNro()); %></td>
                   <td><% out.println(x.getFech_nac()); %></td>
                   <td class="">
@@ -118,7 +120,7 @@
             <input type="text" required placeholder="nombre" id="nombre" name="nombre">
             </div>
             <div>
-            <label for="nombre">Apellidos</label>
+            <label for="nombre">Apellidos (*)</label>
             <input type="text" required placeholder="apellido" id="apellido" name="apellido">
             </div>
             <div>
@@ -128,11 +130,11 @@
             
             <h6 id="modal-formLabel">Otros Datos</h6>
             <div>
-            <label for="nombre">Fecha nacimiento</label>
+            <label for="nombre">Fecha nacimiento (*)</label>
             <input type="text" required placeholder="fechanac" id="fechanac" name="fechanac">
             </div>
             <div>
-            <label for="nombre">Datos de identificación</label>
+            <label for="nombre">Datos de identificación (*)</label>
             <select name="identificacion" id="identificacion">
                <option value="">[Seleccione documento]</option>
                <option value="D">DNI</option>
@@ -140,12 +142,12 @@
             </select>
             </div>
             <div>
-            <label for="nombre">Nro Documento</label>
-            <input type="text" required placeholder="Nro documento" id="direccion" name="numdoc">
+            <label for="nombre">Nro Documento (*)</label>
+            <input type="text" required placeholder="Nro documento" id="numdoc" name="numdoc">
             </div>
             <div>
             <label for="nombre">Password (*)</label>
-            <input type="password" required placeholder="contrasena de cliente" id="direccion" name="contrasena">
+            <input type="password" required placeholder="contrasena de cliente" id="contrasena" name="contrasena">
             </div> 
 
             </form>
@@ -170,7 +172,7 @@
             <input type="text" required placeholder="nombre" id="nomupdate" name="nomupdate">
             </div>
             <div>
-            <label for="nombre">Apellidos</label>
+            <label for="nombre">Apellidos (*)</label>
             <input type="text" required placeholder="apellido" id="apeupdate" name="apeupdate">
             </div>
             <div>
@@ -184,7 +186,7 @@
             <input type="text" required placeholder="Fecha nacimiento" id="fecupdate" name="fecupdate">
             </div>
             <div>
-            <label for="nombre">Datos de identificación</label>
+            <label for="nombre">Datos de identificación (*)</label>
             <select name="idenupdate" id="idenupdate">
                <option value="">[Seleccione documento]</option>
                <option value="D">DNI</option>
@@ -192,7 +194,7 @@
             </select>
             </div>
             <div>
-            <label for="nombre">Nro Documento</label>
+            <label for="nombre">Nro Documento (*)</label>
             <input type="text" required placeholder="Nro documento" id="numdocupdate" name="numdocupdate">
             </div>
             <div>
@@ -224,6 +226,7 @@
 	var fecha= $(this).attr('fech');
 	var tipid= $(this).attr('tipid');
         var ndoc = $(this).attr('nrodoc');
+        var idoc = $.trim(tipid);
 	
 	//aqui le pasamos los datos al formulario modal
 	$('#codeupdate').val(id);
@@ -232,7 +235,7 @@
 	$('#mailupdate').val(mail);
         $('#pwdupdate').val(pwd);
         $('#fecupdate').val(fecha);
-	$('#idenupdate').val(tipid);
+	$('#idenupdate').val(idoc);
         $('#numdocupdate').val(ndoc);
 	$('#modalmodificar').modal();	
 	
@@ -280,8 +283,9 @@
             var mail = $("#email").val();
             var fech = $("fechanac").val();
 
-            if(name=='' || ape=='' || pwd==''){
+            if(name=='' || ape=='' || mail=='' || fech=='' ||  pwd=='' || doc=='' || ndoc==''){
                 alert('Ingrese datos requeridos');
+                return false;
             }else{
                 data = $("#frmnuevoresidente").serialize();
                 $.ajax({
@@ -294,7 +298,7 @@
 			    $("#modalresidente").modal("hide");
 			    location.reload(true);
                         }else if(data=="err"){
-                            alert("El correo ingresado ya existe");
+                            alert("¡Error!..El correo ingresado ya existe");
                         }else{
                             alert("Error en la grabación");
                         }
@@ -307,9 +311,13 @@
         
         $('#btn-update').click(function(){
 		var name = $("#nomupdate").val();
-		var ape  = $("#mailupdate").val();
+		var ape  = $("#apeupdate").val();
+                var mail = $("#mailupdate").val();
 		var pwd  = $("#pwdupdate").val();
-		if(name=='' || ape=='' || pwd==''){
+                var tdoc = $("#idenupdate").val();
+                var doc  = $("#numdocupdate").val();
+                
+		if(name=='' || ape=='' || mail=='' || pwd=='' || tdoc=="" || doc==''){
 			alert('Ingrese datos requeridos');
 		}else{
 			datin = $('#frmuseredita').serialize();

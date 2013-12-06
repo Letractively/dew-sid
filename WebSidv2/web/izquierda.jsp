@@ -67,13 +67,36 @@
                         <span>Cuotas</span>
                     </a>
             </li>
-            <li class="">
+           
+          <li class="dark-nav ">
+
                     <span class="glow"></span>
-                    <a href="fechaslibres.jsp">
-                        <i class="icon-table"></i>
-                        <span>Reservas</span>
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" href="#CF52">
+                        <i class="icon-suitcase icon-2x"></i>
+                        <span>
+                            Reservas
+                            <i class="icon-caret-down"></i>
+                        </span>
+
                     </a>
-            </li>
+
+                    <ul id="CF52" class="collapse" style="height: 0px;">
+
+                        <li class="">
+                            <a href="fechaslibres.jsp">
+                                <i class="icon-calendar"></i> Fechas libres
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a href="reservas.jsp">
+                                <i class="icon-inbox"></i> Mis reservas
+                            </a>
+                        </li>
+					</ul>
+
+                </li>
+					
             <li class="">
                     <span class="glow"></span>
                     <a href="quejas.jsp">

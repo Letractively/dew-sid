@@ -8,6 +8,7 @@ public class Reserva{
   private int idespaciocomun;
   private String nomespacio;
   private int idresidente;
+  private String nomresid;
   private int estado;
   
   public Reserva() {
@@ -87,7 +88,16 @@ public class Reserva{
     public void setNomespacio(String nomespacio) {
         this.nomespacio = nomespacio;
     }
+
+    public String getNomresid() {
+        return nomresid;
+    }
+
+    public void setNomresid(String nomresid) {
+        this.nomresid = nomresid;
+    }
     
+        
     
   
 }

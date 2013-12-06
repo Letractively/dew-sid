@@ -52,6 +52,7 @@ public class ReservaDAO extends BaseDAO {
  
  public Collection<Reserva> buscarxfecha(String fecha,String hora) throws DAOExcepcion{
      String query = "SELECT idreserva,fecha,hora,idespaciocomun,idresidente FROM reserva WHERE fecha=? AND hora=? AND estado=1";
+     //String query = "SELECT a.idreserva,a.fecha,a.hora,a.idespaciocomun,a.idresidente,b.nombre FROM reserva a,residente WHERE a.idresidente=b.idresidente AND a.fecha=? AND a.hora=? AND a.estado=1";
      Collection<Reserva> listado = new ArrayList<Reserva>();    //creamos un arreglo
      Connection con = null;
      PreparedStatement stmt = null;
@@ -69,6 +70,7 @@ public class ReservaDAO extends BaseDAO {
              vo.setHora(rs.getString("hora"));
              vo.setIdespaciocomun(rs.getInt("idespaciocomun"));
              vo.setIdresidente(rs.getInt("idresidente"));
+             //vo.setNomresid(rs.getString("nombre"));
              listado.add(vo);
          }
      }catch(SQLException e){

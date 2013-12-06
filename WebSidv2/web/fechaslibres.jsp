@@ -205,6 +205,7 @@
                                                             texto= "Nueva reserva";
                                                             fondo6= "";
                                                         }
+                                                        
                                                     %>
                                                 <td hora="<% out.println(hora);%>" fech="<% out.println(fecha6); %>" class="reser <% out.println(fondo6); %>">
                                                     <a title="" class="tip nueva-reserva <% out.println(clase); %>" data-toggle="modal" href="<% out.println(href); %>" data-original-title="<% out.println(texto); %>"><% out.println(cad6);%></a>
@@ -252,7 +253,7 @@
                     <h6 id="modal-formLabel">Datos de reserva</h6>
                     <form id="frmnuevareserva" style="" class="form-horizontal fill-up separate-sections">
                         <div>
-                            <label for="nombre">Espacio comun</label>
+                            <label for="nombre">Espacio comun(*)</label>
                             <select name="espaciocomun" id="espaciocomun">
                                 <option value="">[Seleccione]</option>
                                 <%
@@ -267,11 +268,11 @@
                             </select>
                         </div>
                         <div>
-                            <label for="nombre">Fecha reserva</label>
+                            <label for="nombre">Fecha reserva(*)</label>
                             <input type="text" required placeholder="Fecha reserva" id="fechar" name="fechar">
                         </div>
                         <div>
-                            <label for="nombre">Hora reserva</label>
+                            <label for="nombre">Hora reserva(*)</label>
                             <select name="horar" id="horar">
                                 <option value="6:00">6:00</option>
                                 <option value="7:00">7:00</option>
@@ -294,8 +295,9 @@
                             </select>
                         </div>
                         <div>
-                            <label for="nombre">N° horas</label>
+                            <label for="nombre">N° horas(*)</label>
                             <select name="nhoras" id="nhoras">
+                                <option value="">[Seleccione]</option>
                                 <option value="2">2</option>
                                 <option value="4">4</option>
                             </select>
@@ -361,8 +363,9 @@
             var horar = $("#horar").val();
             var nhoras = $("#nhoras").val();
             var idres = $("#codresidente").val();
-            if (idespa == '' || fechr == '' || horar == '') {
+            if (idespa == '' || fechr == '' || nhoras == '') {
                 alert("Ingrese datos requeridos");
+                return false;
             } else {
                 data = $("#frmnuevareserva").serialize();
                 $.ajax({
@@ -372,6 +375,8 @@
                     success: function(data) {
                         if (data == "ok") {
                             alert("Reserva realizada con exito");
+                            $("#espaciocomun").val('');
+                            $("#nhoras").val('');
                             //$obj.css('border', '1px solid red');  $("a").removeAttr("href");
                             $obj.css('background','#b6bfd2')
                             $obj.children('a').html('Reservado');
