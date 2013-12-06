@@ -16,7 +16,6 @@
 <div class="main-content">
             <div class="container-fluid">
                 <div class="row-fluid">
-
                     <div class="area-top clearfix">
                         <div class="pull-left header">
                             <h3 class="title">
@@ -27,20 +26,17 @@
                                Listado de Quejas
                             </h5>
                         </div>
-
-                        
                     </div>
                 </div>
             </div>
-    
             <div class="container-fluid padded">    
                 <div class="action-nav-normal">
-                <div class="span2 action-nav-button">
-                   <a title="" class="tip nueva-queja" data-toggle="modal" href="#modalqueja" data-original-title="Agregar Nueva Queja">
-                       <i class="icon-file-alt"></i>
-                       <span>Registrar Nueva Queja</span>
-                   </a>   
-                </div>
+                    <div class="span2 action-nav-button">
+                        <a title="" class="tip nueva-queja" data-toggle="modal" href="#modalqueja" data-original-title="Agregar Nueva Queja">
+                            <i class="icon-file-alt"></i>
+                            <span>Registrar Nueva Queja</span>
+                        </a>
+                    </div>
                 </div>
            </div>
            
@@ -51,9 +47,7 @@
             <div class="box-header"><span class="title">Listado de Quejas</span></div>
             <div class="box-content">
                     <!-- find me in partials/data_tables_custom -->
-
             <div id="dataTables">
-
             <table cellpadding="0" cellspacing="0" border="0" class="table dTable responsive">
             <thead>
             <tr>
@@ -70,12 +64,10 @@
                 GestionQueja negocio = new GestionQueja();
                 Collection<Queja> listado = negocio.listarQuejas();  
                 for(Queja x: listado){
-           
             %>
                 <tr id="" class="letratablita">
                   <td><% out.println(x.getIdqueja()); %></td>
-                  <td>
-                      <%  
+                  <td><%  
                   int tipoqueja = Integer.parseInt(x.getTipo_queja());
                   switch (tipoqueja) {
             case 1:  out.println("Atención");
