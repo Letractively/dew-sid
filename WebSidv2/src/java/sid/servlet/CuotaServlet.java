@@ -110,6 +110,9 @@ public class CuotaServlet extends javax.servlet.http.HttpServlet implements java
                  //request.getSession().removeAttribute("sidvivienda");
                  sesion.setAttribute("sidvivienda", idvivienda);
                  sesion.setAttribute("svivienda", vivienda);
+                 
+                 PrintWriter ou = response.getWriter();
+                 ou.print("ok");
              } 
        else if ("3".equals(accion)){
             int idcuota    = Integer.parseInt(request.getParameter("idcuotas"));
@@ -161,10 +164,15 @@ public class CuotaServlet extends javax.servlet.http.HttpServlet implements java
 
             try{
                 Cuota objcuota = new Cuota();
-                int x = 0;
-                for(x=Integer.parseInt(desde); x<=Integer.parseInt(hasta); x=x+1)
-                {
-                    objcuota = cuota.insertar(Integer.parseInt(idvivienda), String.format("%02d", Integer.parseInt(String.valueOf(x))), anio, Double.parseDouble(importe), fechavenc, "P", null, null, identificacion);
+                if (identificacion.equals("M")){
+                    
+                    int x = 0;
+                    for(x=Integer.parseInt(desde); x<=Integer.parseInt(hasta); x=x+1)
+                    {
+                        objcuota = cuota.insertar(Integer.parseInt(idvivienda), String.format("%02d", Integer.parseInt(String.valueOf(x))), anio, Double.parseDouble(importe), fechavenc, "P", null, null, identificacion);
+                    }
+                }else{
+                    objcuota = cuota.insertar(Integer.parseInt(idvivienda), "00", anio, Double.parseDouble(importe), fechavenc, "P", null, null, identificacion);
                 }
                 //obtenemos la fecha de pago
 

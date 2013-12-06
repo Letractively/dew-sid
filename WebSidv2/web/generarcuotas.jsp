@@ -61,14 +61,14 @@
             </div>
             <div>
             <label for="nombre">Periodo</label>
-            <select name="identificacion" id="identificacion">
+            <select name="identificacion" id="identificacion" onChange="ocultarcombos()">
                <option value="">[Seleccione periodo]</option>
                <option value="A">ANUAL</option>
                <option value="M">MENSUAL</option>
             </select>
             </div>
             <div>
-            <label for="nombre">Desde</label>
+            <label for="nombre" id="de">Desde</label>
             <select name="desde" id="desde">
                <option value="">[Seleccione periodo]</option>
                <option value="01">01</option>
@@ -86,7 +86,7 @@
             </select>
             </div>
            <div>
-            <label for="nombre">Hasta</label>
+            <label for="nombre" id="ha">Hasta</label>
             <select name="hasta" id="hasta">
                <option value="">[Seleccione periodo]</option>
                <option value="01">01</option>
@@ -129,7 +129,7 @@
                var hastax   = $("#hasta").val();
                var aniox   = $("#anio").val();
 
-               if(importex=='' || fechavencx=='' || identificacionx==''){
+               if(importex=='' || fechavencx=='' || identificacionx=='' || aniox==''){
                        alert('Ingrese todos los datos requeridos');
                    }else{
                        $.ajax({
@@ -137,11 +137,12 @@
                            url :'CuotaServlet',
                            data:{accion: "4", vimporte: importex,vfechavenc:fechavencx,videntificacion:identificacionx,vdesde:desdex,vhasta:hastax,vanio:aniox},
                            success:function(data){
-                           if (data == "ok")
+                           if (data == "ok"){
                                alert("se generaron las cuentas correctamente");
+                                self.close()
+                           }
                            else
                                alert(data.toString());
-                           
                            }
                            
 
@@ -151,17 +152,35 @@
                    }
 
            });
+           
+       var dates = $("#fechavenc").datepicker({
+            //dateFormat: 'yy-mm-dd', //dd-mm-yy
+            showOn: "both",
+            buttonImage: "images/calendar.gif",
+            buttonImageOnly: true,
+            monthNamesShort: ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:-18",	
+            numberOfMonths: 1
+    });
+
+    $('#fechavenc').keypress(function(){ return false;});
+    $('#fechavenc').click(function(){ return false;});
        }); 
        
-    $(window).bind("beforeunload", function() { 
-            $.ajax({
-                           type:'Get',
-                           url :'resgistrocuotas.jsp/mostrarviviendaseleccionada',
-                           data:{accion: ""},
-                           success:function(data){
-
-                           }
-
-                       });
-    });
+    function ocultarcombos(){
+    if($("#identificacion").val() === "A"){
+        $("#desde").hide();
+        $("#hasta").hide();
+        $("#de").hide();
+        $("#ha").hide();
+    }
+    else{
+        $("#desde").show();
+        $("#hasta").show();
+        $("#de").show();
+        $("#ha").show();
+    }
+    }
         </script>
