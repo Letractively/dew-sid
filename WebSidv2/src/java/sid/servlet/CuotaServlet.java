@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.catalina.Session;
+import org.apache.catalina.connector.Response;
 import sid.negocio.GestionCuota;
 import sid.modelo.Cuota;
 import sid.persistencia.DAOExcepcion;
@@ -52,29 +54,25 @@ public class CuotaServlet extends javax.servlet.http.HttpServlet implements java
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            String accion   = request.getParameter("accion").toString();
-            if ("1".equals(accion)){
-                 int idresidente    = Integer.parseInt(request.getParameter("idresidente"));
-                 HttpSession sesion = request.getSession();
-                 sesion.setAttribute("vidresidente", idresidente);
-                 
-                 
-              }
-             
-            
-            else if ("2".equals(accion)){
-                 int idvivienda    = Integer.parseInt(request.getParameter("idvivienda"));
-                 HttpSession sesion = request.getSession();
-                 sesion.setAttribute("vidvivienda", idvivienda);
-             } 
-            
-            
-        }
-        catch (Exception e) {
-            
-            
-         }
+//        try {
+//            String accion   = request.getParameter("accion").toString();
+//            if ("1".equals(accion)){
+//                 int idresidente    = Integer.parseInt(request.getParameter("idresidente"));
+//                 HttpSession sesion = request.getSession();
+//                 sesion.setAttribute("vidresidente", idresidente);
+//                 
+//                 
+//              }
+//             
+//            
+//         
+//            
+//            
+//        }
+//        catch (Exception e) {
+//            
+//            
+//         }
         }
     
 
@@ -96,14 +94,23 @@ public class CuotaServlet extends javax.servlet.http.HttpServlet implements java
        
        if ("1".equals(accion)){
                  int idresidente    = Integer.parseInt(request.getParameter("idresidente"));
+                 String nombre_residente    = request.getParameter("nombres");
                  HttpSession sesion = request.getSession();
-                 request.getSession().removeAttribute("vidresidente");
-                 sesion.setAttribute("vidresidente", idresidente);
+                 sesion.setAttribute("sidresidente", idresidente);
+                 sesion.setAttribute("snombre_residente", nombre_residente);
                  
                  PrintWriter ou = response.getWriter();
                  ou.print("ok");
-
-              }
+        
+       }
+       else if ("2".equals(accion)){
+                 String idvivienda    = request.getParameter("vidvivienda");
+                 String vivienda    = request.getParameter("vdireccion");
+                 HttpSession sesion = request.getSession();
+                 //request.getSession().removeAttribute("sidvivienda");
+                 sesion.setAttribute("sidvivienda", idvivienda);
+                 sesion.setAttribute("svivienda", vivienda);
+             } 
        else if ("3".equals(accion)){
             int idcuota    = Integer.parseInt(request.getParameter("idcuotas"));
             String tipopago = request.getParameter("identificacions");
@@ -120,15 +127,58 @@ public class CuotaServlet extends javax.servlet.http.HttpServlet implements java
                  sesion.setAttribute("fecha_pago", objcuota.getfech_pago());
 
                 PrintWriter ou = response.getWriter();
-                ou.print("ok" + ";" + Date.valueOf(objcuota.getfech_pago()).toLocaleString() );
-
+                ou.print("ok" + ";" + objcuota.getfech_pago() );
+                
 
             }catch(DAOExcepcion e){
-//               RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
-//               rd.forward(request, response);
+               //RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+               //rd.forward(request, response);
+                 PrintWriter ou = response.getWriter();
+                ou.print("error" );
             }
         }
-       
+       //registrar las cuotas a generar
+       else if ("4".equals(accion)){
+            int anio    = Integer.parseInt(request.getParameter("vanio"));
+            String importe = request.getParameter("vimporte");
+            String fechavenc = request.getParameter("vfechavenc");
+            String identificacion = request.getParameter("videntificacion");
+            String desde = request.getParameter("vdesde");
+            String hasta = request.getParameter("vhasta");
+            
+            String idvivienda = "";
+            HttpSession sesion = request.getSession();
+            if (sesion.getAttribute("sidvivienda") != null){
+                idvivienda = sesion.getAttribute("sidvivienda").toString().trim()  ;
+            }
+            else{
+                PrintWriter ou = response.getWriter();
+                ou.print("nose ha seleccionado el residente o la vivienda");
+                return;
+            }
+                
+            GestionCuota cuota = new GestionCuota();
+
+            try{
+                Cuota objcuota = new Cuota();
+                int x = 0;
+                for(x=Integer.parseInt(desde); x<=Integer.parseInt(hasta); x=x+1)
+                {
+                    objcuota = cuota.insertar(Integer.parseInt(idvivienda), String.format("%02d", Integer.parseInt(String.valueOf(x))), anio, Double.parseDouble(importe), fechavenc, "P", null, null, identificacion);
+                }
+                //obtenemos la fecha de pago
+
+                PrintWriter ou = response.getWriter();
+                ou.print("ok");
+                
+
+            }catch(DAOExcepcion e){
+               //RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+               //rd.forward(request, response);
+                 PrintWriter ou = response.getWriter();
+                ou.print("error al grabar" );
+            }
+        }
     
     }
     /**

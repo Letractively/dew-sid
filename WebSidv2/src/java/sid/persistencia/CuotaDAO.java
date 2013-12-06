@@ -25,7 +25,7 @@ import sid.persistencia.ConexionDAO;
 public class CuotaDAO extends BaseDAO{
     
     public Cuota insertar(Cuota vo) throws DAOExcepcion{
-		String query = "INSERT INTO cuota(idvivienda,periodo,anio  ,importe,fech_venc,estado,tipo_pago,fech_pago) VALUES (?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO cuota(idvivienda,periodo,anio  ,importe,fech_venc,estado,tipo_pago,fech_pago,tipo) VALUES (?,?,?,?,?,?,?,?,?)";
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -56,6 +56,7 @@ public class CuotaDAO extends BaseDAO{
                         stmt.setString(6, vo.getestado());
                         stmt.setString(7, vo.gettipo_pago());
                         stmt.setString(8, vo.getfech_pago());
+                        stmt.setString(9, vo.getTipo());
                         
 			int i = stmt.executeUpdate();
 			if (i != 1) {
@@ -212,7 +213,7 @@ public class CuotaDAO extends BaseDAO{
            try{
                con = ConexionDAO.obtenerConexion();
                String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
-                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.direccion, cuo.idvivienda " +
+                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.direccion, cuo.idvivienda, cuo.tipo " +
                 "FROM cuota as cuo " +
                 "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
                 "inner join residente as red on red.idresidente = viv.idresidente " +
@@ -234,6 +235,7 @@ public class CuotaDAO extends BaseDAO{
                    vivienda.setDireccion(rs.getString("direccion"));
                    vo.setVivienda(vivienda);
                    vo.setidvivienda(rs.getInt("idvivienda"));
+                   vo.setTipo(rs.getString("tipo"));
                    c.add(vo);
               }
            }catch(SQLException e){
