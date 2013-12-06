@@ -20,7 +20,7 @@
                     </a>
              </li>
              <% 
-             if(tipo.equals("A")){  //cuando es cadena es asi.
+             if(tipo.equals("A")){           //cuando es cadena es asi.
              %>
              <li class="active">
                     <span class="glow"></span>
