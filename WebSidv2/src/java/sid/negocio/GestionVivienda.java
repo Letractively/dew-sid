@@ -8,24 +8,28 @@ import sid.persistencia.DAOExcepcion;
 
 public class GestionVivienda{
     
-public Vivienda insertar(String zona,String edificio,String numero,double metraje,String tipo,String direccion,int idresidente) throws DAOExcepcion{
+public Vivienda insertar(String tipoVivienda,String tipoUbicacion, String ubicacion, String numero,double metraje,int idresidente) throws DAOExcepcion{
     ViviendaDAO dao = new ViviendaDAO();
     Vivienda     vo = new Vivienda();
-    vo.setZona(zona);
-    vo.setEdificio(edificio);
+    
+    vo.setTipoVivienda(tipoVivienda);
+    vo.setTipoUbicacion(tipoUbicacion);
+    vo.setUbicacion(ubicacion);
     vo.setNumero(numero);
     vo.setMetraje(metraje);
-    vo.setTipo(tipo);
-    vo.setDireccion(direccion);
     vo.setIdresidente(idresidente);
     Collection<Vivienda> rs = dao.buscarxnumero(numero);
     if(rs.size()>0){
-        throw new DAOExcepcion("vivienda registrada");
+        throw new DAOExcepcion("Vivienda Registrada");
     }else{       
     return dao.insertar(vo);
     }
 }    
 
+public Collection<Vivienda> listarViviendas() throws DAOExcepcion{
+    ViviendaDAO dao = new ViviendaDAO();
+    return dao.listarViviendas();
+}
  public Collection<Vivienda> listarviviendaporresidente(int idresidente) throws DAOExcepcion{
       ViviendaDAO dao = new ViviendaDAO();
       return dao.listarviviendaporresidente(idresidente);
