@@ -1,9 +1,3 @@
-<%-- 
-    Document   : viviendas
-    Created on : Dec 5, 2013, 12:05:02 PM
-    Author     : pmurrugarras
---%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -127,52 +121,48 @@
             <div class="modal hide fade" id="modalvivienda" style="display:none;" aria-hidden="true">
             <div class="modal-header">
             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h6 id="modal-formLabel">Registro de nueva Vivienda</h6>
+                <h6 id="modal-formLabel">Registro de nueva Vivienda</h6>
             </div>
-                <div style="" class="modal-body">
-            <h6 id="modal-formLabel">Ingrese la Vivienda</h6>
-            
-            
-            <form id="frmnuevovivienda" style="" class="form-horizontal fill-up separate-sections">
-            <div>
-                <input type="hidden" name="txtIdResidente" id="txtIdResidente" value="${sessionScope.USUARIO_ACTUAL.idresidente}">
-                <label for="Ubicación">Ubicación:</label>
-                <select name="cmbTipoUbicacion"  id="cmbTipoUbicacion">
-                    <option value="1">Zona</option>
-                    <option value="2">Edificio</option>
-                </select>
-            </div>
+            <div style="" class="modal-body">
+                <h6 id="modal-formLabel">Ingrese la Vivienda</h6>
+                <form id="frmnuevovivienda" style="" class="form-horizontal fill-up separate-sections">
                 <div>
-            <label for="txtNumero">Numero</label>
-            <input type="text" id="txtNumero" name="txtNumero">
-            </div>
-                
+                    
+                    <label for="tipovivienda">Tipo Vivienda</label>
+                    <select name="cmbTipoVivienda"  id="cmbTipoVivienda">
+                        <option value="1">Casa</option>
+                        <option value="2">Departamento</option>
+                    </select>
+                </div> 
                 <div>
-            <label for="txtMetraje">Metraje</label>
-            <input type="text" id="txtMetraje" name="txtMetraje">
-            </div>
-                
+                    <label for="tipoubicacion">Tipo Ubicación</label>
+                    <select name="cmbTipoUbicacion"  id="cmbTipoUbicacion">
+                        <option value="1">Zona</option>
+                        <option value="2">Edificio</option>
+                    </select>
+                </div>
                 <div>
-                <label for="nombre">Tipo vivienda</label>
-                <select name="cmbTipoVivienda"  id="cmbTipoVivienda">
-                    <option value="1">Casa</option>
-                    <option value="2">Departamento</option>
-                </select>
-            </div>
-            
-            
+                    <label for="ubicacion">Ubicación</label>
+                    <textarea name="txtUbicacion" rows="3" cols="40" id="txtUbicacion">
+                    </textarea>
+                </div>
                 <div>
-                <label for="txtDireccion">Dirección</label>
-                <textarea name="txtDireccion" rows="5" cols="40" id="Motivo">
-                </textarea>
+                    <label for="txtNumero">Número</label>
+                    <input type="text" id="txtNumero" name="txtNumero">
+                </div>
+                <div>
+                    <label for="txtMetraje">Metraje</label>
+                    <input type="text" id="txtMetraje" name="txtMetraje">
+                </div>
+                    <div>
+                        <input type="hidden" name="txtIdResidente" id="txtIdResidente" value="${sessionScope.USUARIO_ACTUAL.idresidente}">
+                    </div>
+                </form>
                 </div>
             
-                
-            </form>
-                </div>
             <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
-            <button id="btn-save" class="btn btn-blue">Guardar</button>
+                <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                <button id="btn-save" class="btn btn-blue">Guardar</button>
             </div>
             </div>
             <!-- -->
