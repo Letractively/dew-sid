@@ -84,7 +84,7 @@
                      break;
             case 7:  out.println("Vecinos");
                      break;
-            default: out.println("General");
+            default: out.println("Otros");
                      break;
                       }
                   
@@ -127,6 +127,7 @@
                     <option value="5">Separación de Ambientes</option>
                     <option value="6">Vigilancia</option>
                     <option value="7">Vecinos</option>
+                    <option value="8">Otros</option>
                 </select>
             </div>
             <div>
