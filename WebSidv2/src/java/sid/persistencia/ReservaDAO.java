@@ -51,7 +51,7 @@ public class ReservaDAO extends BaseDAO {
  }
  
  public Collection<Reserva> buscarxfecha(String fecha,String hora) throws DAOExcepcion{
-     String query = "SELECT idreserva,fecha,idespaciocomun,idresidente FROM reserva WHERE fecha=? AND hora=? AND estado=1";
+     String query = "SELECT idreserva,fecha,hora,idespaciocomun,idresidente FROM reserva WHERE fecha=? AND hora=? AND estado=1";
      Collection<Reserva> listado = new ArrayList<Reserva>();    //creamos un arreglo
      Connection con = null;
      PreparedStatement stmt = null;
@@ -66,6 +66,7 @@ public class ReservaDAO extends BaseDAO {
              Reserva vo = new Reserva();
              vo.setIdreserva(rs.getInt("idreserva"));
              vo.setFecha(rs.getString("fecha"));
+             vo.setHora(rs.getString("hora"));
              vo.setIdespaciocomun(rs.getInt("idespaciocomun"));
              vo.setIdresidente(rs.getInt("idresidente"));
              listado.add(vo);
@@ -95,7 +96,8 @@ public class ReservaDAO extends BaseDAO {
      ResultSet rs = null;
      try{
          con = ConexionDAO.obtenerConexion();
-         String query = "SELECT r.idreserva,r.fecha,r.hora,r.tiempo,r.idespaciocomun,r.idresidente,e.nombre as espacio,r.estado FROM reserva r,espaciocomun e WHERE e.idespaciocomun=r.idespaciocomun";
+         //String query = "SELECT r.idreserva,r.fecha,r.hora,r.tiempo,r.idespaciocomun,r.idresidente,e.nombre as espacio,r.estado FROM reserva r,espaciocomun e WHERE e.idespaciocomun=r.idespaciocomun";
+         String query = "SELECT idreserva,fecha,hora,tiempo,idespaciocomun,idresidente,estado FROM reserva ORDER BY fecha,hora";
          stmt= con.prepareStatement(query);
          rs  = stmt.executeQuery();
          while(rs.next()){
@@ -105,7 +107,6 @@ public class ReservaDAO extends BaseDAO {
              vo.setHora(rs.getString("hora"));
              vo.setTiempo(rs.getInt("tiempo"));
              vo.setIdespaciocomun(rs.getInt("idespaciocomun"));
-             vo.setNomespacio(rs.getString("espacio"));
              vo.setIdresidente(rs.getInt("idresidente"));
              vo.setEstado(rs.getInt("estado"));
              lista.add(vo);

@@ -77,23 +77,161 @@
                                             <td>8</td>
                                         </tr>
                                         <tbody>
-                                            <%
-                                                String hora, num;
+                                            <%  
+                                                GestionReserva objre = new GestionReserva();
+                                                String hora, num,cad1,cad2,cad3,cad4,cad5,cad6,cad7,href,clase,texto,fondo1,fondo2,fondo3,fondo4,fondo5,fondo6,fondo7;
                                                 int i;
                                                 for (i = 6; i < 24; i++) {
                                                     hora = i + ":00";
+                                                    
+                                                    //for(Reserva x:listado){     
+                                                   
                                             %>    
                                             <tr id="row_" class="letratablita">
                                                 <td><% out.println(i);%>:00</td>
-                                                <td hora="<% out.println(hora);%>" fech="2013-12-02" class="reser"><a title="" class="tip nueva-reserva" data-toggle="modal" href="#modalreserva" data-original-title="Nueva reserva">Reservar</a></td>
-                                                <td hora="<% out.println(hora);%>" fech="2013-12-03" class="reser"><a title="" class="tip nueva-reserva" data-toggle="modal" href="#modalreserva" data-original-title="Nueva reserva">Reservar</a></td>
-                                                <td hora="<% out.println(hora);%>" fech="2013-12-04" class="reser"><a title="" class="tip nueva-reserva" data-toggle="modal" href="#modalreserva" data-original-title="Nueva reserva">Reservar</a></td>
-                                                <td hora="<% out.println(hora);%>" fech="2013-12-05" class="reser"><a title="" class="tip nueva-reserva" data-toggle="modal" href="#modalreserva" data-original-title="Nueva reserva">Reservar</a></td>
-                                                <td hora="<% out.println(hora);%>" fech="2013-12-06" class="reser"><a title="" class="tip nueva-reserva" data-toggle="modal" href="#modalreserva" data-original-title="Nueva reserva">Reservar</a></td>
-                                                <td hora="<% out.println(hora);%>" fech="2013-12-07" class="reser"><a title="" class="tip nueva-reserva" data-toggle="modal" href="#modalreserva" data-original-title="Nueva reserva">Reservar</a></td>
-                                                <td hora="<% out.println(hora);%>" fech="2013-12-08" class="reser"><a title="" class="tip nueva-reserva" data-toggle="modal" href="#modalreserva" data-original-title="Nueva reserva">Reservar</a></td>
+                                                    <%  String fecha1 = "2013-12-02";
+                                                        Collection<Reserva> listado1 = objre.buscaxfecha(fecha1, hora);
+                                                        int n1 = listado1.size(); //out.println(n1);
+                                                        if(n1>0){
+                                                            cad1 = "Reservado";
+                                                            href = "";
+                                                            clase= "urlcolor";
+                                                            texto= "No disponible";
+                                                            fondo1= "fondocolumn";
+                                                        }else{
+                                                            cad1 = "Reservar";
+                                                            href = "#modalreserva";
+                                                            clase= "";
+                                                            texto= "Nueva reserva";
+                                                            fondo1= "";
+                                                        }
+                                                    %>
+                                                <td hora="<% out.println(hora);%>" fech="<% out.println(fecha1); %>" class="reser <% out.println(fondo1); %>">
+                                                    <a title="" class="tip nueva-reserva <% out.println(clase); %>" data-toggle="modal" href="<% out.println(href); %>" data-original-title="<% out.println(texto); %>"><% out.println(cad1);%></a>
+                                                </td>
+                                                <%  String fecha2 = "2013-12-03";
+                                                        Collection<Reserva> listado2 = objre.buscaxfecha(fecha2, hora);
+                                                        int n2 = listado2.size();
+                                                        if(n2>0){
+                                                            cad2 = "Reservado";
+                                                            href = "";
+                                                            clase= "urlcolor";
+                                                            texto= "No disponible";
+                                                            fondo2= "fondocolumn";
+                                                        }else{
+                                                            cad2 = "Reservar";
+                                                            href = "#modalreserva";
+                                                            clase= "";
+                                                            texto= "Nueva reserva";
+                                                            fondo2= "";
+                                                        }
+                                                    %>
+                                                <td hora="<% out.println(hora);%>" fech="<% out.println(fecha2); %>" class="reser <% out.println(fondo2); %>">
+                                                    <a title="" class="tip nueva-reserva <% out.println(clase); %>" data-toggle="modal" href="<% out.println(href); %>" data-original-title="<% out.println(texto); %>"><% out.println(cad2);%></a>
+                                                </td>
+                                                    <%  String fecha3 = "2013-12-04";
+                                                        Collection<Reserva> listado3 = objre.buscaxfecha(fecha3, hora);
+                                                        int n3 = listado3.size();
+                                                        if(n3>0){
+                                                            cad3 = "Reservado";
+                                                            href = "";
+                                                            clase= "urlcolor";
+                                                            texto= "No disponible";
+                                                            fondo3= "fondocolumn";
+                                                        }else{
+                                                            cad3 = "Reservar";
+                                                            href = "#modalreserva";
+                                                            clase= "";
+                                                            texto= "Nueva reserva";
+                                                            fondo3= "";
+                                                        }
+                                                    %>
+                                                <td hora="<% out.println(hora);%>" fech="<% out.println(fecha3); %>" class="reser <% out.println(fondo3); %>">
+                                                    <a title="" class="tip nueva-reserva <% out.println(clase); %>" data-toggle="modal" href="<% out.println(href); %>" data-original-title="<% out.println(texto); %>"><% out.println(cad3);%></a>
+                                                </td>
+                                                    <%  String fecha4 = "2013-12-05";
+                                                        Collection<Reserva> listado4 = objre.buscaxfecha(fecha4, hora);
+                                                        int n4 = listado4.size();
+                                                        if(n4>0){
+                                                            cad4 = "Reservado";
+                                                            href = "";
+                                                            clase= "urlcolor";
+                                                            texto= "No disponible";
+                                                            fondo4= "fondocolumn";
+                                                        }else{
+                                                            cad4 = "Reservar";
+                                                            href = "#modalreserva";
+                                                            clase= "";
+                                                            texto= "Nueva reserva";
+                                                            fondo4= "";
+                                                        }
+                                                    %>
+                                                <td hora="<% out.println(hora);%>" fech="<% out.println(fecha4); %>" class="reser <% out.println(fondo4); %>">
+                                                    <a title="" class="tip nueva-reserva <% out.println(clase); %>" data-toggle="modal" href="<% out.println(href); %>" data-original-title="<% out.println(texto); %>"><% out.println(cad4);%></a>
+                                                </td>
+                                                      <%  String fecha5 = "2013-12-06";
+                                                        Collection<Reserva> listado5 = objre.buscaxfecha(fecha5, hora);
+                                                        int n5 = listado5.size();
+                                                        if(n5>0){
+                                                            cad5 = "Reservado";
+                                                            href = "";
+                                                            clase= "urlcolor";
+                                                            texto= "No disponible";
+                                                            fondo5= "fondocolumn";
+                                                        }else{
+                                                            cad5 = "Reservar";
+                                                            href = "#modalreserva";
+                                                            clase= "";
+                                                            texto= "Nueva reserva";
+                                                            fondo5= "";
+                                                        }
+                                                    %>
+                                                <td hora="<% out.println(hora);%>" fech="<% out.println(fecha5); %>" class="reser <% out.println(fondo5); %>">
+                                                    <a title="" class="tip nueva-reserva <% out.println(clase); %>" data-toggle="modal" href="<% out.println(href); %>" data-original-title="<% out.println(texto); %>"><% out.println(cad5);%></a>
+                                                </td>
+                                                    <%  String fecha6 = "2013-12-07";
+                                                        Collection<Reserva> listado6 = objre.buscaxfecha(fecha6, hora);
+                                                        int n6 = listado6.size();
+                                                        if(n6>0){
+                                                            cad6 = "Reservado";
+                                                            href = "";
+                                                            clase= "urlcolor";
+                                                            texto= "No disponible";
+                                                            fondo6= "fondocolumn";
+                                                        }else{
+                                                            cad6 = "Reservar";
+                                                            href = "#modalreserva";
+                                                            clase= "";
+                                                            texto= "Nueva reserva";
+                                                            fondo6= "";
+                                                        }
+                                                    %>
+                                                <td hora="<% out.println(hora);%>" fech="<% out.println(fecha6); %>" class="reser <% out.println(fondo6); %>">
+                                                    <a title="" class="tip nueva-reserva <% out.println(clase); %>" data-toggle="modal" href="<% out.println(href); %>" data-original-title="<% out.println(texto); %>"><% out.println(cad6);%></a>
+                                                </td>
+                                                    <%  String fecha7 = "2013-12-08";
+                                                        Collection<Reserva> listado7 = objre.buscaxfecha(fecha7, hora);
+                                                        int n7 = listado7.size();
+                                                        if(n7>0){
+                                                            cad7 = "Reservado";
+                                                            href = "";
+                                                            clase= "urlcolor";
+                                                            texto= "No disponible";
+                                                            fondo7= "fondocolumn";
+                                                        }else{
+                                                            cad7 = "Reservar";
+                                                            href = "#modalreserva";
+                                                            clase= "";
+                                                            texto= "Nueva reserva";
+                                                            fondo7= "";
+                                                        }
+                                                    %>
+                                                <td hora="<% out.println(hora);%>" fech="<% out.println(fecha7); %>" class="reser <% out.println(fondo7); %>">
+                                                     <a title="" class="tip nueva-reserva <% out.println(clase); %>" data-toggle="modal" href="<% out.println(href); %>" data-original-title="<% out.println(texto); %>"><% out.println(cad7);%></a>
+                                                </td>
                                             </tr>
                                             <%
+                                                    //}
                                                 }
                                             %>   
                                         </tbody>
@@ -186,8 +324,7 @@
 
     var $obj = '';
     $(document).ready(function(e) {
-        var dates = $("#fechar").datepicker({
-            //dateFormat: 'yy-mm-dd', //dd-mm-yy
+        /*var dates = $("#fechar").datepicker({
             showOn: "both",
             buttonImage: "images/calendar.gif",
             buttonImageOnly: true,
@@ -203,15 +340,13 @@
         });
         $('#fechar').click(function() {
             return false;
-        });
+        });*/
 
         $(".reser").click(function() {
             var hora = $(this).attr("hora");
             var fech = $(this).attr("fech");
             var cad = $.trim(hora);
             //
-            //alert("----" + hora + "----");
-            //alert("--" + cad + "--");
             $("#fechar").val(fech);
             $("#horar").val(cad);
             $obj = $(this);
@@ -237,10 +372,12 @@
                     success: function(data) {
                         if (data == "ok") {
                             alert("Reserva realizada con exito");
-                            $("#modalresidente").modal("hide");
-                            
-                            $obj.css('border', '1px solid red');
-                            $obj.children('a').html('RESERVADO');
+                            //$obj.css('border', '1px solid red');  $("a").removeAttr("href");
+                            $obj.css('background','#b6bfd2')
+                            $obj.children('a').html('Reservado');
+                            $obj.children('a').removeAttr('href');
+                            //alert(url);  //      url = url.replace('#','');
+                            $obj.children('a').css('color','red');
                             $('#modalreserva').modal('hide');
                             //location.reload(true);
                         } else if (data == "err") {
