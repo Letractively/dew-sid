@@ -1,6 +1,7 @@
 <html>
 <head>
 <%@include file="tags.jsp" %>
+
 </head>
 
 <body>
@@ -58,11 +59,14 @@
               <th><div>Id. de Residente</div></th>
             </tr>
             </thead>
-            <%@page import="java.util.*, sid.negocio.GestionQueja, sid.modelo.Queja" %>
+            <%@page import="java.util.*, sid.negocio.GestionQueja, sid.modelo.Queja, sid.modelo.Residente" %>
             <tbody>
-            <% 
+                 <% 
+                    
+                    
+                //out.println("este es el numero de residente" + (String).(session.getAttribute("USUARIO_ACTUAL")));
                 GestionQueja negocio = new GestionQueja();
-                Collection<Queja> listado = negocio.listarQuejas();  
+                Collection<Queja> listado = negocio.listarQuejasxResidente(Integer.parseInt("39"));  
                 for(Queja x: listado){
             %>
                 <tr id="" class="letratablita">
@@ -201,7 +205,7 @@
                     data:data,
                     success:function(data){
                         if(data=="ok"){
-                            alert("datos grabados con éxito");
+                            alert("Datos grabados con éxito");
                 $("#modalqueja").modal("hide");
                 location.reload(true);    
                         }else{
