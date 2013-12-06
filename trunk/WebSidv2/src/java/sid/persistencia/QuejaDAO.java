@@ -23,7 +23,7 @@ public class QuejaDAO extends BaseDAO {
             con  = ConexionDAO.obtenerConexion();
             stmt = con.prepareStatement(query);
                         stmt.setString(1, vo.getTipo_queja());
-            stmt.setString(2, vo.getMotivo());
+                        stmt.setString(2, vo.getMotivo());
                         stmt.setString(3, vo.getFech_queja());
                         stmt.setInt(4, vo.getIdresidente());
                         stmt.setString(5, vo.getEstado());
@@ -90,5 +90,37 @@ public class QuejaDAO extends BaseDAO {
            return lista;
        }
                 
-       
+       public Collection<Queja> listarQuejasxResidente(int idResidente) throws DAOExcepcion{
+           String query = "SELECT idresidente, idqueja, tipo_queja, motivo, fech_queja, estado FROM queja WHERE idresidente=?";
+           Collection<Queja> lista = new ArrayList<Queja>();
+           Connection con = null;
+           PreparedStatement stmt = null;
+           ResultSet rs = null;
+           try{
+               con = ConexionDAO.obtenerConexion();
+               stmt= con.prepareStatement(query);
+               stmt.setInt(1, idResidente);
+               rs  = stmt.executeQuery();
+               while(rs.next()){
+                   Queja vo = new Queja();
+                   vo.setIdresidente(rs.getInt("idresidente"));
+                   vo.setIdqueja(rs.getInt("idqueja"));
+                   vo.setTipo_queja(rs.getString("tipo_queja"));
+                   vo.setMotivo(rs.getString("motivo"));
+                   vo.setFech_queja(rs.getString("fech_queja"));
+                   vo.setEstado(rs.getString("estado"));
+                   lista.add(vo);
+               }
+           }catch(SQLException e){
+               System.err.println(e.getMessage());
+               throw new DAOExcepcion(e.getMessage());
+           }finally{
+               this.cerrarStatement(stmt);
+               this.cerrarResultSet(rs);
+               this.cerrarConexion(con);
+           }
+           
+           System.out.println(lista.size());
+           return lista;
+       }
 }
