@@ -8,7 +8,7 @@ import sid.modelo.Cuota;
 
 public class GestionCuota { //aqui va la regla de negocio
     
-    public Cuota insertar(int idvivienda,String periodo,int anio,double importe,String fech_venc,String estado, String tipo_pago,String fech_pago)throws DAOExcepcion
+    public Cuota insertar(int idvivienda,String periodo,int anio,double importe,String fech_venc,String estado, String tipo_pago,String fech_pago, String tipo)throws DAOExcepcion
     {
         CuotaDAO dao = new CuotaDAO();
         Cuota    vo  = new Cuota();
@@ -21,6 +21,7 @@ public class GestionCuota { //aqui va la regla de negocio
         vo.setestado(estado);
         vo.settipo_pago(tipo_pago);
         vo.setfech_pago(fech_pago);
+        vo.setTipo(tipo);
         return dao.insertar(vo);//aqui es donde me retorna el objeto
    }
     

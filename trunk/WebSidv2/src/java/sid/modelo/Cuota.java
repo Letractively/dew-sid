@@ -21,6 +21,7 @@ public class Cuota {
     String fech_pago;
     private Residente residente;
     private Vivienda vivienda;
+    private String tipo;
 
     public Vivienda getVivienda() {
         return vivienda;
@@ -110,4 +111,13 @@ public class Cuota {
     public void setfech_pago(String fech_pago) {
         this.fech_pago = fech_pago;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
 }

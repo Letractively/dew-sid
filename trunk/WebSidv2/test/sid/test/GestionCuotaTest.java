@@ -26,10 +26,10 @@ public class GestionCuotaTest {
                        
 //            negocio.insertar(2, "03", 2013, 245.32, "2013-10-11", "P", null, null);
             
-             negocio.insertar(1, "01", 2013, 245.32, "2013-10-11", "P", null, null);
-            negocio.insertar(2, "02", 2013, 245.32, "2013-11-11", "c", null, null);
-            negocio.insertar(3, "03", 2013, 245.32, "2013-10-11", "P", null, null);
-            negocio.insertar(4, "04", 2013, 245.32, "2013-10-11", "c", null, null);
+             negocio.insertar(1, "01", 2013, 245.32, "2013-10-11", "P", null, null,"");
+            negocio.insertar(2, "02", 2013, 245.32, "2013-11-11", "c", null, null,"");
+            negocio.insertar(3, "03", 2013, 245.32, "2013-10-11", "P", null, null,"");
+            negocio.insertar(4, "04", 2013, 245.32, "2013-10-11", "c", null, null,"");
             
         }catch(DAOExcepcion e){
            Assert.fail("Fallo la insercion: " + e.getMessage());

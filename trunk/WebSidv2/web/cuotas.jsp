@@ -61,12 +61,14 @@
                 <th><div>Opciones</div></th>
             </tr>
             </thead>
-            <%@page import="java.util.*, sid.negocio.GestionCuota, sid.modelo.Cuota" %>
+            <%@page import="java.util.*, sid.negocio.GestionCuota, sid.modelo.Cuota, sid.modelo.Residente" %>
             <tbody>
 
                  <% 
                 GestionCuota negocio = new GestionCuota();
-                Collection<Cuota> listado = negocio.listarpendientes(1);
+                Residente objresidente = new Residente();
+                objresidente = (Residente)session.getAttribute("USUARIO_ACTUAL");
+                Collection<Cuota> listado = negocio.listarpendientes(objresidente.getIdresidente());
                 for(Cuota x: listado){
             %>
                 <tr id="" class="letratablita">
@@ -142,7 +144,7 @@
                 
             <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
-            <button id="btn-bla" class="btn btn-blue">Realizar pago</button>
+            <button id="btn-update" class="btn btn-blue">Realizar pago</button>
             </div>
             </form>
             </div>
@@ -176,15 +178,19 @@
     
     $(document).ready(function(){
         
-        $("#btn-bla").click(function(){
-            alert($('#identificacion').val() + '-' + $('#idcuota').val().toString().trim());
+        $("#btn-update").click(function(){
+            //alert($('#identificacion').val() + '-' + $('#idcuota').val().toString().trim());
                 //data = $("#frmactualiza").serialize();
                 $.ajax({
                     type:'post',
                     url :'CuotaServlet',
                     data:{accion:"3",idcuotas:$('#idcuota').val().toString().trim(),identificacions:$('#identificacion').val()},
-                    success:function(data){
-                        alert(data);
+                    success:function(datax){
+                        alert(String.valueOf(datax));
+                        if(String.valueOf(datax).substring(1,2) === "ok"){
+                           alert("se resgistro el pago con exito, fecha y hora de pago: " + String.valueOf(datax).substring(3));
+                           location.reload(true);
+                        }
                         
                     }
 
