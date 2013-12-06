@@ -213,7 +213,7 @@ public class CuotaDAO extends BaseDAO{
            try{
                con = ConexionDAO.obtenerConexion();
                String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
-                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.direccion, cuo.idvivienda, cuo.tipo " +
+                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.ubicacion, cuo.idvivienda, cuo.tipovivienda " +
                 "FROM cuota as cuo " +
                 "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
                 "inner join residente as red on red.idresidente = viv.idresidente " +
@@ -232,7 +232,7 @@ public class CuotaDAO extends BaseDAO{
                    vo.setimporte(rs.getDouble("importe"));
                    vo.setfech_venc(rs.getString("fech_venc"));
                    Vivienda vivienda = new Vivienda();
-                   vivienda.setDireccion(rs.getString("direccion"));
+                   vivienda.setUbicacion(rs.getString("ubicacion"));
                    vo.setVivienda(vivienda);
                    vo.setidvivienda(rs.getInt("idvivienda"));
                    vo.setTipo(rs.getString("tipo"));
@@ -257,7 +257,7 @@ public class CuotaDAO extends BaseDAO{
            try{
                con = ConexionDAO.obtenerConexion();
                String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
-                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.direccion " +
+                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.ubicacion " +
                 "FROM cuota as cuo " +
                 "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
                 "inner join residente as red on red.idresidente = viv.idresidente " +
@@ -276,7 +276,7 @@ public class CuotaDAO extends BaseDAO{
                    vo.setimporte(rs.getDouble("importe"));
                    vo.setfech_venc(rs.getString("fech_venc"));
                    Vivienda vivienda = new Vivienda();
-                   vivienda.setDireccion(rs.getString("direccion"));
+                   vivienda.setUbicacion(rs.getString("ubicacion"));
                    vo.setVivienda(vivienda);
                    c.add(vo);
               }
