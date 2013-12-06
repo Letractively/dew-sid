@@ -8,6 +8,7 @@ public class Vivienda {
     String numero;
     double metraje;
     int idresidente;
+    String descripciontipo;
     
     
     public Vivienda(){
@@ -78,6 +79,14 @@ public class Vivienda {
 
     public void setTipoUbicacion(String tipoUbicacion) {
         this.tipoUbicacion = tipoUbicacion;
+    }
+
+    public String getDescripciontipo() {
+        return descripciontipo;
+    }
+
+    public void setDescripciontipo(String descripciontipo) {
+        this.descripciontipo = descripciontipo;
     }
    
     
