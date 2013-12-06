@@ -53,8 +53,6 @@
             <thead>
             <tr>
               <th><div>N°</div></th>
-              <th><div>Zona</div></th>
-              <th><div>Edificio</div></th>
               <th><div>Numero</div></th>
               <th><div>Tipo</div></th>
               <th><div>Dirección</div></th>
@@ -72,11 +70,9 @@
             %>
                 <tr id="row_<% out.println(x.getIdvivienda()); %>" class="letratablita">
                   <td><% out.println(x.getIdvivienda()); %></td>
-                  <td><% out.println(x.getZona()); %></td>
-                  <td><% out.println(x.getEdificio()); %></td>
                   <td><% out.println(x.getNumero()); %></td>
-                  <td><% out.println(x.getTipo()); %></td>
-                  <td><% out.println(x.getDireccion()); %></td>
+                  <td><% out.println(x.getTipoVivienda()); %></td>
+                  <td><% out.println(x.getUbicacion()); %></td>
                   <td class="">
                       <a data-original-title="Seleccionar" data-placement="left" rel="tooltip" class="seleccionarvivienda"  idviviendav="<% out.println(String.valueOf( x.getIdvivienda())); %>" direccionv="<% out.println(x.getDireccion()); %>" href="#">
                     <i class="icon-edit icon-large"></i>
