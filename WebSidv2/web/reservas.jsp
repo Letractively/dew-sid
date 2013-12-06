@@ -224,7 +224,7 @@
             </select>
             </div>
             <div>
-            <label for="nombre">Password (*)</label>
+            <label for="nombre">Password(*)</label>
             <input type="password" required placeholder="contrasena de cliente" id="pwdupdate" name="pwdupdate">
             </div> 
             <input type="hidden" id="codeupdate" name="codeupdate" value=""> 
