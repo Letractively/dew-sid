@@ -88,7 +88,8 @@ public Collection<Vivienda> buscarxnumero(String numero) throws DAOExcepcion{
 }
 
 public Collection<Vivienda> listarviviendaporresidente(int idvivienda) throws DAOExcepcion{
-    String query = "select idvivienda, ubicacion, numero, metraje, tipovivienda, tipoubicacion, idresidente from vivienda1 where idresidente =?";
+    String query = "select idvivienda, ubicacion, numero, metraje, tipovivienda, tipoubicacion, " + 
+            "case tipovivienda when '1' then 'Casa' when '2' then 'Departamento' end as descripciontipo, idresidente from vivienda where idresidente =?";
     Collection<Vivienda> listav = new ArrayList<Vivienda>();
     Connection con = null;
     PreparedStatement stmt = null;
@@ -105,7 +106,7 @@ public Collection<Vivienda> listarviviendaporresidente(int idvivienda) throws DA
             vo.setNumero(rs.getString("numero"));
             vo.setMetraje(rs.getDouble("metraje"));
             vo.setTipoVivienda(rs.getString("tipovivienda"));
-            //vo.setDescripciontipo(rs.getString("descripciontipo"));
+            vo.setDescripciontipo(rs.getString("descripciontipo"));
             vo.setTipoUbicacion(rs.getString("tipoubicacion"));
             vo.setIdresidente(rs.getInt("idresidente"));
             listav.add(vo);
