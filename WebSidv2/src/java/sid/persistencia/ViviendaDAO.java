@@ -13,7 +13,7 @@ import sid.modelo.Vivienda;
 public class ViviendaDAO extends BaseDAO {
 
 public Vivienda insertar(Vivienda vo) throws DAOExcepcion{
-    String query = "INSERT INTO vivienda1(tipovivienda, tipoubicacion, ubicacion, numero, metraje,idresidente) VALUES(?,?,?,?,?,?)";
+    String query = "INSERT INTO vivienda(tipovivienda, tipoubicacion, ubicacion, numero, metraje,idresidente) VALUES(?,?,?,?,?,?)";
     Connection con = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
@@ -51,7 +51,7 @@ public Vivienda insertar(Vivienda vo) throws DAOExcepcion{
 }
 
 public Collection<Vivienda> buscarxnumero(String numero) throws DAOExcepcion{
-    String query = "SELECT idvivienda,ubicacion,metraje,tipovivienda FROM vivienda1 WHERE numero=?";
+    String query = "SELECT idvivienda,ubicacion,metraje,tipovivienda FROM vivienda WHERE numero=?";
     Collection<Vivienda> listav = new ArrayList<Vivienda>();
     Connection con = null;
     PreparedStatement stmt = null;
