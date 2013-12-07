@@ -51,7 +51,7 @@ public class VisitaDAO extends BaseDAO{
 				id = rs.getInt(1);
 			}
                             vo.setIdvisita(id);
-                        System.out.println("Se registró correctamente");
+                        System.out.println("Se registró correctamente - visitaDAO");
 			
                 } catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -90,7 +90,7 @@ public class VisitaDAO extends BaseDAO{
            return vo;
        }
     
-             public void eliminar(int idvisita) throws DAOExcepcion {
+        public void eliminar(int idvisita) throws DAOExcepcion {
 		String query = "DELETE FROM Visita WHERE idvisita=?";
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -111,16 +111,16 @@ public class VisitaDAO extends BaseDAO{
 		}
       }
              
-        public Collection<Visita> listar(int idresidente) throws DAOExcepcion{
+        public Collection<Visita> listar() throws DAOExcepcion{
            Collection<Visita> c = new ArrayList<Visita>();
            Connection con = null;
            PreparedStatement stmt = null;
            ResultSet rs = null;           
            try{
                con = ConexionDAO.obtenerConexion();
-               String query = "SELECT idvisita,dni_visita,nombre,fech_visita,idresidente FROM visita WHERE idresidente=?";
+               String query = "SELECT idvisita,dni_visita,nombre,fech_visita,idresidente FROM visita";
                stmt = con.prepareStatement(query);
-               stmt.setInt(1, idresidente);
+               //stmt.setInt(1, idresidente);
                rs   = stmt.executeQuery();
                while(rs.next()){
                    Visita vo = new Visita();
