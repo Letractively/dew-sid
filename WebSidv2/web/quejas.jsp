@@ -56,7 +56,7 @@
               <th><div>Tipo de Queja</div></th>
               <th><div>Motivo</div></th>
               <th><div>Fecha de Queja</div></th>
-              <th><div>Id. de Residente</div></th>
+              
             </tr>
             </thead>
             <%@page import="java.util.*, sid.negocio.GestionQueja, sid.modelo.Queja, sid.modelo.Residente" %>
@@ -65,17 +65,11 @@
                  obj1 = (Residente)session.getAttribute("USUARIO_ACTUAL");
                  PrintWriter ou1 = response.getWriter();
                  int idResidente = obj1.getIdresidente();
-    
-%>
-                
-                <% 
-                    
-                    
                 //out.println("este es el numero de residente" + (String).(session.getAttribute("USUARIO_ACTUAL")));
                 GestionQueja negocio = new GestionQueja();
                 Collection<Queja> listado = negocio.listarQuejasxResidente(idResidente);  
                 for(Queja x: listado){
-            %>
+                %>
                 <tr id="" class="letratablita">
                   <td><% out.println(x.getIdqueja()); %></td>
                   <td><%  
@@ -102,7 +96,7 @@
 %></td>
                   <td><% out.println(x.getMotivo()); %></td>
                   <td><% out.println(x.getFech_queja()); %></td>
-                  <td><% out.println(x.getIdresidente()); %></td>
+                  
                 </tr>
             <%
             }            
