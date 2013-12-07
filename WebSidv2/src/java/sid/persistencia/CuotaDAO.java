@@ -254,6 +254,13 @@ public class CuotaDAO extends BaseDAO{
            Connection con = null;
            PreparedStatement stmt = null;
            ResultSet rs = null;
+           
+           PreparedStatement stmt2 = null;
+           ResultSet rs2 = null;
+           
+           PreparedStatement stmt3 = null;
+           ResultSet rs3 = null;
+           
            try{
                con = ConexionDAO.obtenerConexion();
                String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
@@ -262,8 +269,30 @@ public class CuotaDAO extends BaseDAO{
                 "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
                 "inner join residente as red on red.idresidente = viv.idresidente " +
                 "where fech_venc<now() ";
+               
+               String query2 = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
+                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.direccion " +
+                "FROM cuota as cuo " +
+                "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
+                "inner join residente as red on red.idresidente = viv.idresidente " +
+                "where estado='C' ";
+               
+               String query3 = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
+                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.direccion " +
+                "FROM cuota as cuo " +
+                "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
+                "inner join residente as red on red.idresidente = viv.idresidente " +
+                "where fech_venc>now() ";
+               
                stmt = con.prepareStatement(query);
                rs   = stmt.executeQuery();
+               
+               stmt2 = con.prepareStatement(query2);
+               rs2   = stmt2.executeQuery();
+               
+               stmt3 = con.prepareStatement(query3);
+               rs3   = stmt3.executeQuery();
+               
                while(rs.next()){
                    Cuota vo = new Cuota();
                    vo.setIdCuotas(rs.getInt("idcuota"));
