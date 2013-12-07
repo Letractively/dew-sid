@@ -61,12 +61,19 @@
             </thead>
             <%@page import="java.util.*, sid.negocio.GestionQueja, sid.modelo.Queja, sid.modelo.Residente" %>
             <tbody>
-                 <% 
+                 <%    Residente obj1 = new Residente();
+                 obj1 = (Residente)session.getAttribute("USUARIO_ACTUAL");
+                 PrintWriter ou1 = response.getWriter();
+                 int idResidente = obj1.getIdresidente();
+    
+%>
+                
+                <% 
                     
                     
                 //out.println("este es el numero de residente" + (String).(session.getAttribute("USUARIO_ACTUAL")));
                 GestionQueja negocio = new GestionQueja();
-                Collection<Queja> listado = negocio.listarQuejasxResidente(Integer.parseInt("39"));  
+                Collection<Queja> listado = negocio.listarQuejasxResidente(idResidente);  
                 for(Queja x: listado){
             %>
                 <tr id="" class="letratablita">
