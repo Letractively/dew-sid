@@ -186,7 +186,7 @@
                     url :'CuotaServlet',
                     data:{accion:"3",idcuotas:$('#idcuota').val().toString().trim(),identificacions:$('#identificacion').val()},
                     success:function(datax){
-                        alert(String.valueOf(datax));
+                        //alert(String.valueOf(datax));
                         if(String.valueOf(datax).substring(0,2) === "ok"){
                            alert("se resgistro el pago con exito, fecha y hora de pago: " + String.valueOf(datax).substring(3));
                            location.reload(true);
