@@ -35,4 +35,9 @@ public Collection<Vivienda> listarViviendas() throws DAOExcepcion{
       return dao.listarviviendaporresidente(idresidente);
   }
     
+ public void eliminarVivienda(int idresidente, int idvivienda) throws DAOExcepcion{
+     ViviendaDAO dao = new ViviendaDAO();
+     dao.eliminarVivienda(idresidente, idvivienda);
+ }
+ 
 }
