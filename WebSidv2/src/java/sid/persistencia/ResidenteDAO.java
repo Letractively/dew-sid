@@ -125,29 +125,7 @@ public class ResidenteDAO extends BaseDAO {
            return vo;
        }
        
-       /*public Residente eliminar(Residente vo) throws DAOExcepcion{
-           String query = "DELETE FROM Residente WHERE idResidente=?";
-           Connection con = null;
-           PreparedStatement stmt = null;
-           try{
-               con = ConexionDAO.obtenerConexion();
-               stmt=con.prepareStatement(query);
-               stmt.setInt(1, vo.getIdresidente()); //Aqui obtengo el valor (GET)
-               int i = stmt.executeUpdate();
-               if(i!=1){
-                   throw new SQLException("No se pudo eliminar,que pena");
-               }
-           }catch(SQLException e){
-               System.err.println(e.getMessage());
-               throw new DAOExcepcion(e.getMessage());
-           }finally{
-               this.cerrarStatement(stmt);
-               this.cerrarConexion(con);
-           }
-           return vo;
-       }*/
-       
-       public void eliminar(int idResidente) throws DAOExcepcion {
+      public void eliminar(int idResidente) throws DAOExcepcion {
 		String query = "DELETE FROM Residente WHERE idresidente=?";
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -207,36 +185,7 @@ public class ResidenteDAO extends BaseDAO {
            return lista; 
        }
        
-       /*public Residente obtener(String correo) throws DAOExcepcion {
-		Residente vo = new Residente();
-		Connection con = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		try {
-			String query = "SELECT idresidente,nombre,apellidos,email FROM residente WHERE email=?";
-			con = ConexionDAO.obtenerConexion();
-			stmt = con.prepareStatement(query);
-			//stmt.setInt(1, correo);
-                        stmt.setString(1, correo);
-			rs = stmt.executeQuery();
-			if (rs.next()) {
-				vo.setIdresidente(rs.getInt(1));
-				vo.setNombres(rs.getString(2));
-				vo.setApellidos(rs.getString(3));
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			throw new DAOExcepcion(e.getMessage());
-		} finally {
-			this.cerrarResultSet(rs);
-			this.cerrarStatement(stmt);
-			this.cerrarConexion(con);
-		}
-		return vo;
-	}*/
-
-       
-       public Collection<Residente> listar() throws DAOExcepcion{
+     public Collection<Residente> listar() throws DAOExcepcion{
            Collection<Residente> c = new ArrayList<Residente>();
            Connection con = null;
            PreparedStatement stmt = null;
@@ -261,9 +210,9 @@ public class ResidenteDAO extends BaseDAO {
            }catch(SQLException e){
                System.err.println(e.getMessage());
            }finally{
-               this.cerrarStatement(stmt);  //que es esto?
-               this.cerrarResultSet(rs);    //Este es el recordset (pero porq lo cierra?)
-               this.cerrarConexion(con);    //Esta es la conexion
+               this.cerrarStatement(stmt);  
+               this.cerrarResultSet(rs);    
+               this.cerrarConexion(con);    
            }
            return c;
        }
