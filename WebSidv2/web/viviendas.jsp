@@ -98,7 +98,7 @@
                   <td>
                       <a href="#" data-original-title="Editar" data-placement="left" rel="tooltip" class="actualizar"  code="<% out.println(x.getIdresidente()); %>" >
                       <i class="icon-edit icon-large"></i></a>
-                      <a href="#" onclick="eliminar(<% out.println(x.getIdresidente()); %>);" class="delete" rel="tooltip" data-placement="right" data-original-title="Eliminar">
+                      <a href="#" onclick="eliminar(<% out.println(x.getIdresidente()); %>,<% out.println(x.getIdvivienda());%> );" class="delete" rel="tooltip" data-placement="right" data-original-title="Eliminar">
                       <i class="icon-remove icon-large"></i></a>
                   </td>
                 </tr>
@@ -348,4 +348,25 @@ $(document).ready(function(){
    //fin     
    //***********************************************************
    });
+   
+   
+      function eliminar(codResidente,codVivienda){
+	if(confirm("¿Desea eliminar la vivienda?")){
+		$.ajax({
+			type:'post',
+			url:'EliminarViviendaServlet',
+                        data: { codResidente: codResidente, codVivienda: codVivienda },
+			//data:':' + code + '',
+			success: function(data){
+                            if(data=="okis"){
+                                location.reload(true);
+                               //$("#row_" + code).remove();
+                               //alert('Se elimino cliente');	
+                            }else{
+                               alert("error al eliminar");	
+                            } 
+			}
+		});
+	}
+   }
 </script>
