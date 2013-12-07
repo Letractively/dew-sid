@@ -158,4 +158,28 @@ public Collection<Vivienda> listarViviendas() throws DAOExcepcion{
    return listav;
  }
     
+public void eliminarVivienda(int idresidente, int idvivienda) throws DAOExcepcion {
+    String query = "DELETE FROM vivienda WHERE idresidente=? and idvivienda=?";
+    Connection con = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    try{
+        con = ConexionDAO.obtenerConexion();
+        stmt= con.prepareStatement(query);
+        stmt.setInt(1, idresidente);
+        stmt.setInt(2, idvivienda);
+        int i = stmt.executeUpdate();
+        if (i !=1 ){
+            throw new SQLException("No se pudo eliminar");
+        }
+ 
+    }catch(SQLException e){
+        System.err.println(e.getMessage());
+        throw new DAOExcepcion(e.getMessage());
+    } finally {
+        this.cerrarConexion(con);
+        this.cerrarStatement(stmt);
+    }
+}
+
 }
