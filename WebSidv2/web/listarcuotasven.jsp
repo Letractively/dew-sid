@@ -80,7 +80,7 @@
                   <td><% out.println(x.getanio()); %></td>
                   <td><% out.println(x.getimporte()); %></td>
                   <td><% out.println(x.getfech_venc()); %></td>
-                  <td><% out.println(x.getVivienda().getDireccion()); %></td>
+                  <td><% out.println(x.getVivienda().getUbicacion()); %></td>
                   <td class="">
                     <a data-original-title="Editar Mensaje" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
                     <i class="icon-edit icon-large"></i>
