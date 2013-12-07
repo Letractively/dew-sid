@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sid.modelo.Junta;
 import sid.negocio.GestionJunta;
 import sid.persistencia.DAOExcepcion;
 
@@ -92,10 +93,16 @@ public class InsertarJuntaServlet extends HttpServlet {
         
         PrintWriter ou = response.getWriter();       
         GestionJunta negocio = new GestionJunta();
+        Junta vo  = new Junta();
 		
         try {
-		negocio.insertar(idresidente, expositor, tema, fecha_ini, fecha_fin, acuerdo);                
-                ou.print("ok");
+		negocio.insertar(idresidente, expositor, tema, fecha_ini, fecha_fin, acuerdo); 
+                if (vo.getExpositor()== null){
+                    ou.print("failed");
+                }else{
+                    ou.print("ok");
+                }
+                
 				
         } catch (DAOExcepcion e) {
 		RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
