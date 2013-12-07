@@ -73,7 +73,6 @@
                 for(Cuota x: listado){
             %>
                 <tr id="" class="letratablita">
-                  <td><% //out.println(); %></td>
                   <td><% out.println(x.getResidente().getApellidos() + ", " + x.getResidente().getNombre()); %></td>
                   <td><% out.println(x.getResidente().getNro()); %></td>
                   <td><% out.println(x.getperiodo()); %></td>
@@ -82,9 +81,7 @@
                   <td><% out.println(x.getfech_venc()); %></td>
                   <td><% out.println(x.getVivienda().getUbicacion()); %></td>
                   <td class="">
-                    <a data-original-title="Editar Mensaje" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
-                    <i class="icon-edit icon-large"></i>
-                    </a>
+                    
                   </td>
                 </tr>
             <%
