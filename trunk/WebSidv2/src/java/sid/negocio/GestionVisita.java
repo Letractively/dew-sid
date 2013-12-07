@@ -43,14 +43,14 @@ public class GestionVisita {
      return re.actualizar(vo);
    }
      
-     public void eliminar(int idvisita) throws DAOExcepcion {
+   public void eliminar(int idvisita) throws DAOExcepcion {
      VisitaDAO eli = new VisitaDAO();
      eli.eliminar(idvisita);
    }
      
-  public Collection<Visita> listar(int idresidente) throws DAOExcepcion{
+  public Collection<Visita> listar() throws DAOExcepcion{
       VisitaDAO dao = new VisitaDAO();
-      return dao.listar(idresidente);
+      return dao.listar();
   }
          
 }
