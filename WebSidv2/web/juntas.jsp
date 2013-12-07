@@ -191,7 +191,7 @@
 			    $("#modaljunta").modal("hide");
 			    location.reload(true);
                         }else{
-                            alert("Favor verifique fecha");
+                            alert("La sala se encuentra separada - probar otra fecha y/o hora");
                         }
                     }
 
