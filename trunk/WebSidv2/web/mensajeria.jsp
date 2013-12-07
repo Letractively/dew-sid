@@ -52,32 +52,32 @@
                                                 <th><div>Titulo</div></th>
                                         <th><div>Contenido</div></th>
                                         <th><div>Fecha de Publicación</div></th>
-                                        <th><div>Estado</div></th>
+
 
                                         </tr>
                                         </thead>
                                         <%@page import="java.util.*, sid.negocio.GestionMensajeria, sid.modelo.Mensajeria" %>
-            <tbody>
-            <% 
-                GestionMensajeria negocio = new GestionMensajeria();
-                Collection<Mensajeria> listado = negocio.listar();
-                for(Mensajeria x: listado){
-            %>
-                <tr id="" class="letratablita">
-                  <td><% //out.println(); %></td>
-                  <td><% out.println(x.getTitulo()); %></td>
-                  <td><% out.println(x.getContenido()); %></td>
-                  <td><% out.println(x.getFech_public()); %></td>
-                  <td><% out.println(x.getEstado()); %></td>
-                  <td class="">
-                    <a data-original-title="Editar Mensaje" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
-                    <i class="icon-edit icon-large"></i>
-                    </a>
-                  </td>
-                </tr>
-            <%
-                
-            }            %>
+                                        <tbody>
+                                            <%
+                                                GestionMensajeria negocio = new GestionMensajeria();
+                                                Collection<Mensajeria> listado = negocio.listar();
+                                                for (Mensajeria x : listado) {
+                                            %>
+                                            <tr id="" class="letratablita">
+                                                
+                                                <td><% out.println(x.getTitulo());%></td>
+                                                <td><% out.println(x.getContenido());%></td>
+                                                <td><% out.println(x.getFech_public());%></td>
+
+                                                <td class="">
+                                                    <a data-original-title="Editar Mensaje" data-placement="left" rel="tooltip" class="actualizar"  fono="" tipid="" direc="" href="#" >
+                                                        <i class="icon-edit icon-large"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <%
+
+                }%>
 
                                         </tbody>
                                     </table>
