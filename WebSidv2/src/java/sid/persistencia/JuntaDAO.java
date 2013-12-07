@@ -25,7 +25,7 @@ public class JuntaDAO extends BaseDAO{
         public Junta insertar(Junta vo) throws DAOExcepcion{
                 String reserva = vo.getFecha_ini();
                 if(this.buscar(reserva).size()>0){
-                         System.out.println("La sala se encuentra separada - probar otra fecha y/o hora");
+                         System.out.println("La sala se encuentra separada - probar otra fecha y/o hora");                       
                 } else{
                 String query = "INSERT INTO junta(idresidente, expositor, tema, fecha_ini, fecha_fin, acuerdo) VALUES (?,?,?,?,?,?)";
 		Connection con = null;
@@ -96,4 +96,57 @@ public class JuntaDAO extends BaseDAO{
 		}
 		return lista;
 	}
+        
+        public Collection<Junta> listar() throws DAOExcepcion{
+           Collection<Junta> c = new ArrayList<Junta>();
+           Connection con = null;
+           PreparedStatement stmt = null;
+           ResultSet rs = null;           
+           try{
+               con = ConexionDAO.obtenerConexion();
+               String query = "SELECT idjunta,idresidente,expositor,tema, fecha_ini, fecha_fin,acuerdo FROM junta";
+               stmt = con.prepareStatement(query);
+               //stmt.setInt(1, idresidente);
+               rs   = stmt.executeQuery();
+               while(rs.next()){
+                   Junta vo = new Junta();
+                   vo.setIdjunta(rs.getInt("idjunta"));
+                   vo.setIdresidente(rs.getInt("idresidente"));
+                   vo.setExpositor(rs.getString("expositor"));
+                   vo.setTema(rs.getString("tema"));
+                   vo.setFecha_ini(rs.getString("fecha_ini"));
+                   vo.setFecha_fin(rs.getString("fecha_fin"));
+                   vo.setAcuerdo(rs.getString("acuerdo"));
+                   c.add(vo);
+              }
+           }catch(SQLException e){
+               System.err.println(e.getMessage());
+           }finally{
+               this.cerrarStatement(stmt); 
+               this.cerrarResultSet(rs);   
+               this.cerrarConexion(con);    
+           }
+           return c;
+       }
+        
+          public void eliminar(int idjunta) throws DAOExcepcion {
+		String query = "DELETE FROM Junta WHERE idjunta=?";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = ConexionDAO.obtenerConexion();
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, idjunta);
+			int i = stmt.executeUpdate();
+			if (i != 1) {
+				throw new SQLException("No se pudo eliminar");
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		} finally {
+			this.cerrarStatement(stmt);
+			this.cerrarConexion(con);
+		}
+      }
 }
