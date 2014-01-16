@@ -57,6 +57,13 @@
                         <span>Juntas</span>
                     </a>
             </li>
+            <li class="">
+                    <span class="glow"></span>
+                    <a href="listarcuotasven.jsp">
+                        <i class="icon-envelope"></i>
+                        <span>Morosos</span>
+                    </a>
+            </li>
            <% 
             }else{
            %> 

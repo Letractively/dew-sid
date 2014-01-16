@@ -259,12 +259,7 @@ public class CuotaDAO extends BaseDAO{
            
            try{
                con = ConexionDAO.obtenerConexion();
-               String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, " +
-                "red.tipodoc, cuo.importe, cuo.fech_venc, viv.direccion " +
-                "FROM cuota as cuo " +
-                "inner join vivienda as viv on viv.idvivienda = cuo.idvivienda " +
-                "inner join residente as red on red.idresidente = viv.idresidente " +
-                "where fech_venc>now() ";
+               String query = "SELECT cuo.idcuota,cuo.periodo, cuo.anio, concat(red.apellidos,', ',red.nombre) as nombre, red.tipodoc, cuo.importe, cuo.fech_venc, viv.ubicacion FROM cuota as cuo inner join vivienda as viv on viv.idvivienda = cuo.idvivienda inner join residente as red on red.idresidente = viv.idresidente where now() > cuo.fech_venc";
                
                           
                stmt = con.prepareStatement(query);
